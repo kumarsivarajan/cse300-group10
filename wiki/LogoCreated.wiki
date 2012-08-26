@@ -1,9 +1,7 @@
-#summary One-sentence summary of this page.
+#summary Logo for the project.
 
 = Logo Creation =
 
 Logo has been created by *Manik*. One can see it on the *top left* of this page. 
 
 Suggestions welcome
-
-
