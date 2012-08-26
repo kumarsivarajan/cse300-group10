@@ -1,0 +1,15 @@
+#summary Introduction to the system
+
+= Introduction =
+
+This project is created with the intention to help institutes in the process of hostel allocation to students using distance as the primary measurement.
+
+
+= Details =
+
+When ready this software will facilitate:
+  * Registration form : Students can apply remotely through www.
+  * Allocation : Software will try to allocate students based on distance.
+  * Administration : An authorised administrator can approve or disapprove the allotment.
+  * Status : A status report visible on the front-end.
+  * Anonymous Reporting : Anybody can report false data entered by some student anonymously .
