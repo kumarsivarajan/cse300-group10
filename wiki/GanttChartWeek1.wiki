@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary First two-week gantt chart
 
 = Gantt Chart for week 1 and 2 =
 
