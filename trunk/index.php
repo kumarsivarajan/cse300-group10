@@ -1,6 +1,7 @@
 <?php
 
 /*
+ * PHPeclipse successfully installed and connected with codeignter - Sushant Mehta, 2010088
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
  *---------------------------------------------------------------
