@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to Hostel Allocation System - <?php echo $ins_name ?></title>
+	<title>Welcome to Hostel Allocation System - <?php echo $institutename ?></title>
 
 	<style type="text/css">
 
@@ -67,13 +67,13 @@
 <body>
 
 <div id="container">
-	<h1>Welcome to Hostel Allocation System - <?php echo $ins_name ?>!</h1>
+	<h1><center>Welcome to Hostel Allocation System - <?php echo $ins_name ?>!<center></h1>
 	<div id="nav"> <?php echo $content_navigation?> </div>
 	<div id="body">		
-		<?php if(isset($cust_msg)):?>
+		<!-- <?php if(isset($cust_msg)):?>
 		
 		<p> <?php echo $cust_msg ?>
-		<?php endif?>
+		<?php endif?> -->
 		<p>Todays is <?php echo $date?></p>
 
 		
