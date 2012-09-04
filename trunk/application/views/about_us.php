@@ -72,7 +72,7 @@
 <body>
 
 <div id="container">
-	<h1><center>Welcome to Hostel Allocation System - IIIT-D!<center></h1>
+	<h1><img src="http://img138.imageshack.us/img138/5863/hostel.png" height="50" width="50"><center>Welcome to Hostel Allocation System - IIIT-D!<center></h1>
 	<div><h2>About Us</h2></div>
 	<div id="text">
 		This site created under the Software Enginnering Project. The project members are - praneet, kunal, mayank, sushant, manik, aditya, anirudh, karan, raghav
