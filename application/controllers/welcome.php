@@ -40,6 +40,10 @@ class Welcome extends CI_Controller {
 		
 
 	}
+	function about()
+	{
+		$this->load->view('about_us');
+	}
 }
 
 /* End of file welcome.php */
