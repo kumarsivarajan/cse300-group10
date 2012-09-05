@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to Hostel Allocation System - <?php echo $institutename ?></title>
+	<title>Welcome to Hostel Allocation System - <?php echo $ins_name ?></title>
 
 	<style type="text/css">
 
