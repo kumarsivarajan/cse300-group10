@@ -17,6 +17,7 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+	 
 	public function index()
 	{
 		$this->load->helper('url');
@@ -24,7 +25,6 @@ class Welcome extends CI_Controller {
 		$this->load->helper('date');
 		$time = time();
 		$base_url = base_url();
-
 		date_default_timezone_set('Asia/Calcutta');
 		$institutename='IIIT-D';
 		$cust_message='Bookings are open now'; 
@@ -35,6 +35,8 @@ class Welcome extends CI_Controller {
 		$data['cust_msg']=$cust_message;
 		$navigation_data['navTab']='home';
 		$navigation_data['base_url']=$base_url;
+		$cssfiles[]="styles.css";
+		$data['css']=$cssfiles;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		$this->load->view('welcome_message',$data);
 		
@@ -44,28 +46,35 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->helper('url');
 		$base_url = base_url();
-		
+		$cssfiles[]="styles.css";
+		$data['css']=$cssfiles;
+		$institutename='IIIT-D';
+		$data['ins_name']=$institutename;
 		$navigation_data['navTab']='about';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		
-		$this->load->view('about_us');
+		$this->load->view('about_us',$data);
 	}
 	function name_rollno()
 	{
 		$this->load->helper('url');
 		$base_url = base_url();
+		$cssfiles[]="styles.css";
+		$data['css']=$cssfiles;
 		
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		
-		$this->load->view('name_rollno');
+		$this->load->view('name_rollno',$data);
 	}
 	function display_details()	
 	{	
 		$this->load->helper('url');
 		$base_url = base_url();
+		$cssfiles[]="styles.css";
+		$data['css']=$cssfiles;
 		
 		$name = $_POST['name'];
 		//Process $name
@@ -73,6 +82,10 @@ class Welcome extends CI_Controller {
 		//Process $age
 		$data['name']=$name;
 		$data['roll']=$roll;
+		$navigation_data['navTab']='apply';
+		$navigation_data['base_url']=$base_url;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+
 		$this->load->view('display_details',$data);
 	}
 	
