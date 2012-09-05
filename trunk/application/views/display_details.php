@@ -1,7 +1,7 @@
 <html>
 <body>
 Hi <?php echo $name; ?>.
-You are <?php echo $roll; ?> years old. 
+Your roll number is <?php echo $roll; ?> . 
 </body>
 </html>
 
