@@ -70,7 +70,7 @@
 	
 	<h1><img src="http://img138.imageshack.us/img138/5863/hostel.png" height="50" width="50"><center>Welcome to Hostel Allocation System - <?php echo $ins_name ?>!<center></h1>
 	<div id="nav"> <?php echo $content_navigation?> </div>
-	<div id="body">		
+	<div id="body">
 		<!-- <?php if(isset($cust_msg)):?>
 		
 		<p> <?php echo $cust_msg ?>
