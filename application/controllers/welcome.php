@@ -42,8 +42,40 @@ class Welcome extends CI_Controller {
 	}
 	function about()
 	{
+		$this->load->helper('url');
+		$base_url = base_url();
+		
+		$navigation_data['navTab']='about';
+		$navigation_data['base_url']=$base_url;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		
 		$this->load->view('about_us');
 	}
+	function name_rollno()
+	{
+		$this->load->helper('url');
+		$base_url = base_url();
+		
+		$navigation_data['navTab']='apply';
+		$navigation_data['base_url']=$base_url;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		
+		$this->load->view('name_rollno');
+	}
+	function display_details()	
+	{	
+		$this->load->helper('url');
+		$base_url = base_url();
+		
+		$name = $_POST['name'];
+		//Process $name
+		$roll = $_POST['roll'];
+		//Process $age
+		$data['name']=$name;
+		$data['roll']=$roll;
+		$this->load->view('display_details',$data);
+	}
+	
 }
 
 /* End of file welcome.php */
