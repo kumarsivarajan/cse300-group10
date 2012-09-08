@@ -17,10 +17,9 @@
 		<div id="text">
 		<p>This project is created with the intention to help institutes in the process of hostel allocation to students using distance as the primary measurement.
 		The team aims at building a highly scalable and generic software which will allow custom data entry and custom allotment parameters.
-		The project members are - praneet, kunal, mayank, sushant, manik, aditya, anirudh, karan, raghav</p>
-		</div>
-		<div id="text"><h3>About The System</h3>
-		<div>
+		</p>
+		
+		
 		<p>       When ready this software will facilitate: </p>
 		<ul>
 		<li>Registration form : Students can apply remotely through www.</li>
@@ -28,7 +27,23 @@
 		<li>Administration : An authorised administrator can approve or disapprove the allotment.</li>
 		<li>Status : A status report visible on the front-end.</li>
 		<li>Anonymous Reporting : Anybody can report false data entered by some student anonymously .</li>
-	
+		</div>
+		
+		<div id="text">
+		<h3>Team Members</h3>
+		<ul>
+		<li>Mayank Verma</li>
+		<li>Praneet Sharma</li>
+		<li>Aditya Gulati</li>
+		<li>Manik Malhotra</li>
+		<li>Kunal Kataria</li>
+		<li>Sushant Mehta</li>
+		<li>Karan Gupta</li>
+		<li>Raghav Anand</li>
+		<li>Anirudh Chakravorty</li>
+			
+		
+		
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 	</div>
 </div>
