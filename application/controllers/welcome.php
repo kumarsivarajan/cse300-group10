@@ -58,19 +58,25 @@ class Welcome extends CI_Controller {
 	}
 	function name_rollno()
 	{
+		$this->load->helper('form');
+		$form_elem=Array('Name'=>Array('input'=>'text','name'=>'name','id'=>'name','type'=>'text','label'=>'Your name'),'Roll'=>Array('input'=>'text','name'=>'roll','id'=>'roll','type'=>'text','label'=>'Your roll no'),'Course'=>Array('input'=>'select','name'=>Array('name'=>'course','label'=>'Course:'),'values'=>Array('M.Tech','B.Tech','Phd')),'room_pref'=>Array('input'=>'select','name'=>Array('name'=>'room_preference','label'=>'Room Preference:'),'values'=>Array('Single','Double','Triple')),'Submit'=>Array('input'=>'submit','value'=>'Apply!','type'=>'submit'));
+		$form_attr=array('onsubmit'=>'return checkInput()');
 		$this->load->helper('url');
 		$base_url = base_url();
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
-		
+		$data['form_elem']=$form_elem;
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
+				$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+		$data['form_attr']=$form_attr;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		
 		$this->load->view('name_rollno',$data);
 	}
 	function display_details()	
 	{	
+		
 		$this->load->helper('url');
 		$base_url = base_url();
 		$cssfiles[]="styles.css";

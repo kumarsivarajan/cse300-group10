@@ -21,7 +21,7 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$this->load->helper('form');
-		$form_elem=Array('User Name'=>Array('name'=>'UserName','id'=>'uid','type'=>'text','label'=>'User Name:'),'Password'=>Array('name'=>'Password','id'=>'pass','type'=>'password','label'=>'Password:'),'Submit'=>Array('value'=>'Log In','type'=>'submit'));
+		$form_elem=Array('User Name'=>Array('input'=>'text','name'=>'UserName','id'=>'uid','type'=>'text','label'=>'User Name'),'Password'=>Array('input'=>'text','name'=>'Password','id'=>'pass','type'=>'password','label'=>'Password'),'Submit'=>Array('input'=>'submit','value'=>'Log In','type'=>'submit'));
 		$this->load->helper('url');
 		
 		$this->load->helper('date');
@@ -36,6 +36,7 @@ class Admin extends CI_Controller {
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
 		$data['form_elem']=$form_elem;
+		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
 		$this->load->view('admin_login',$data);
 		
 

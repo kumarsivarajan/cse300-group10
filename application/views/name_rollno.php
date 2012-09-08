@@ -1,9 +1,24 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+	<meta charset="utf-8">
+
 <?php foreach($css as $cssfile):?>
 	    <link rel="stylesheet" type="text/css" href="<?php echo base_url("/application/css/".$cssfile)?>"/>
 	    <?php endforeach; ?>
+<?php foreach($scripts as $script):?>
+	    <script type="text/javascript" src="<?php echo base_url("/application/js/".$script)?>"></script>
+	    <?php endforeach; ?>
+
+	<script type="text/javascript">
+	var j = jQuery.noConflict();
+
+		 j(document).ready(function(){
+			 j("label").inFieldLabels();
+			 });
+	</script>
 	<script>
+
 		function checkInput()
 		{
 			if(document.getElementById("name").value=="")
@@ -28,28 +43,11 @@
 	
 	<div class="col2" >
 	<h1><center>Hostel Application Form</center></h1>
-		<form action="display_details" method="post" style="padding-left: 28px;padding-top: 6px" onsubmit="return checkInput()">
-			<p> Your name: <input type="text" name="name" id="name"/></p>
-			<p>Your course: 
-				<select name="course" size = "1" onclick="">
-					<option selected> B. tech</option>
-					<option> M. tech</option>
-					<option> P.hd</option>
-				</select>
-			</p>
-			<p>Your roll no: <input type="text" name="roll" id="roll"/></p>
-			<p>Room Preference:
-			<select name="room_preference" size = "1" onclick="">
-					<option selected> Single Room</option>
-					<option> Double Room</option>
-					<option> Triple Room</option>
-				</select>
-			</p>
-			<p><input type="submit"  /></p>
-			
-			<div hidden="true" id="error1" ><font color="red">* Name field should not be empty</font></div>
+		<?php echo generate_form('Welcome/display_details',$form_elem,$form_attr);?>
+		<div hidden="true" id="error1" ><font color="red">* Name field should not be empty</font></div>
 			<div hidden="true" id="error2" ><font color="red">* Roll Number field should not be empty</font></div>
 		</form>
+		
 	</div>
 </body>
 </html>
