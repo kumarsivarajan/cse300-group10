@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to Hostel Allocation System - <?php echo $ins_name ?></title>
+	<!--<title>Welcome to Hostel Allocation System - <?php echo $ins_name ?></title>-->
 	<?php foreach($css as $cssfile):?>
 	    <link rel="stylesheet" type="text/css" href="<?php echo base_url("/application/css/".$cssfile) ?>"/>
 	    <?php endforeach;?>
+		
 </head>
 <body>
 
