@@ -20,7 +20,10 @@
 <div class="login_bar">
 		<div id="body">
 			<?php echo generate_form('Admin/validate',$form_elem);?>
-			</div>
+		</div>
+		<div class="wlcm-msg">Admin Portal</br>Hostel Allocation</br>
+		<img src="<?php echo base_url('/application/images/ins_logo.png');?>" />
+		</div>
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 </div>
 
