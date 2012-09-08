@@ -76,6 +76,7 @@ class Welcome extends CI_Controller {
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
 		$course = $_POST['course'];  // student course as in(mtech,btech)
+		$room_preference = $_POST['room_preference']; // room preferesnce (as in type of room single,double ..)
 		$name = $_POST['name'];
 		//Process $name
 		$roll = $_POST['roll'];
@@ -83,6 +84,7 @@ class Welcome extends CI_Controller {
 		$data['name']=$name;
 		$data['roll']=$roll;
 		$data['course']=$course;
+		$data['room_preference']=$room_preference;
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
