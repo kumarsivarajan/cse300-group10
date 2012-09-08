@@ -9,8 +9,9 @@
 <div class="container">
 	<div class="col1"> <?php echo $content_navigation?> </div>
 	<div class="col2">
-		Hi <?php echo $name; ?>.
-		You are roll no. <?php echo $roll; ?>.
+		Hi <?php echo $name; ?>.<br />
+		You are roll no. <?php echo $roll; ?>.<br />
+		your course is <?php echo $course; ?>.<br />
 	</div>
 	</div>
 </body>
