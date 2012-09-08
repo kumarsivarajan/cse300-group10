@@ -75,13 +75,14 @@ class Welcome extends CI_Controller {
 		$base_url = base_url();
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
-		
+		$course = $_POST['course'];  // student course as in(mtech,btech)
 		$name = $_POST['name'];
 		//Process $name
 		$roll = $_POST['roll'];
 		//Process $age
 		$data['name']=$name;
 		$data['roll']=$roll;
+		$data['course']=$course;
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
