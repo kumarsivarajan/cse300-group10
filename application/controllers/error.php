@@ -27,12 +27,9 @@ class Error extends CI_Controller {
 		$base_url = base_url();
 		date_default_timezone_set('Asia/Calcutta');
 		$institutename='IIIT-D';
-		$cust_message='Bookings are open now'; 
 		$format = 'DATE_RFC822';
 		$datestring = standard_date($format,$time);
 		$data['date']=$datestring;
-		$data['ins_name']=$institutename;
-		$data['cust_msg']=$cust_message;
 		$navigation_data['navTab']='home';
 		$navigation_data['base_url']=$base_url;
 		$cssfiles[]="styles.css";
