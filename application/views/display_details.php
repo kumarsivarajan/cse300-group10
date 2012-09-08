@@ -12,6 +12,7 @@
 		Hi <?php echo $name; ?>.<br />
 		You are roll no. <?php echo $roll; ?>.<br />
 		your course is <?php echo $course; ?>.<br />
+		Your Prefer <?php echo $room_preference; ?>.<br />
 	</div>
 	</div>
 </body>

@@ -38,8 +38,13 @@
 				</select>
 			</p>
 			<p>Your roll no: <input type="text" name="roll" id="roll"/></p>
-			<p>
-			
+			<p>Room Preference:
+			<select name="room_preference" size = "1" onclick="">
+					<option selected> Single Room</option>
+					<option> Double Room</option>
+					<option> Triple Room</option>
+				</select>
+			</p>
 			<p><input type="submit"  /></p>
 			
 			<div hidden="true" id="error1" ><font color="red">* Name field should not be empty</font></div>
