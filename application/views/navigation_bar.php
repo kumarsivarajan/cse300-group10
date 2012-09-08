@@ -1,6 +1,6 @@
 <div id="nav-bar">
 <h1><a href="<?php echo base_url() ?>"> <img src="<?php echo base_url("/application/images/logo.png")?>" height="50" width="70"/></a>
-<a href="<?php echo "http://www.iiitd.ac.in" ?>"> <img src="<?php echo base_url("/application/images/ins_logo.gif")?>" height="50" /></a>
+<a href="<?php echo "http://www.iiitd.ac.in" ?>"> <img src="<?php echo base_url("/application/images/ins_logo.png")?>" height="50" /></a>
 </h1>
 <h1 title="institute logo">Site Navigator:</h1>
 <ul title="navigation">
