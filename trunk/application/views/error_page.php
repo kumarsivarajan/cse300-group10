@@ -17,10 +17,10 @@
 			<p> Try again !!</p>
 		</div>
 		
-		
+			<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+
 	</div>
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 </div>
 
 </body>
