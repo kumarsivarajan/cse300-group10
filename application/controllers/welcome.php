@@ -103,6 +103,8 @@ class Welcome extends CI_Controller {
 		$this->load->view('display_details',$data);
 	}
 	
+
+	
 }
 
 /* End of file welcome.php */
