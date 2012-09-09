@@ -17,7 +17,9 @@
 		Course: <b><?php if ($course == 0) {echo "M. Tech";}
 						 elseif ($course == 1){echo "B. Tech";}
 						 else {echo "Phd";}?></b><br />
-		Room Preference: <b><?php echo $room_preference + 1; ?></b><br />
+		Room Preference: <b><?php if ($room_preference == 0) {echo "Single";}
+						 elseif ($course == 1){echo "Double";}
+						 else {echo "Triple";} ?></b><br />
 		Address: [will be taken from db] <br /><br />
 		
 		<button>Proceed</button>
