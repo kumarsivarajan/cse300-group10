@@ -24,7 +24,7 @@
 		<div class="wlcm-msg">Admin Portal</br>Hostel Allocation</br>
 		<img src="<?php echo base_url('/application/images/ins_logo.png');?>" />
 		</div>
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+	<p class="footer"><a href="#">Forgot Password?</a></p>
 </div>
 
 </body>

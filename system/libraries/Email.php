@@ -1379,7 +1379,6 @@ class CI_Email {
 		}
 
 		$this->_build_message();
-
 		if ( ! $this->_spool_email())
 		{
 			return FALSE;
@@ -1510,7 +1509,7 @@ class CI_Email {
 					}
 			break;
 			case 'smtp'	:
-
+					//return;
 					if ( ! $this->_send_with_smtp())
 					{
 						$this->_set_error_message('lang:email_send_failure_smtp');
@@ -1616,7 +1615,9 @@ class CI_Email {
 		}
 
 		$this->_smtp_connect();
+		//return;
 		$this->_smtp_authenticate();
+		
 
 		$this->_send_command('from', $this->clean_email($this->_headers['From']));
 
@@ -1682,6 +1683,7 @@ class CI_Email {
 		$ssl = NULL;
 		if ($this->smtp_crypto == 'ssl')
 			$ssl = 'ssl://';
+
 		$this->_smtp_connect = fsockopen($ssl.$this->smtp_host,
 										$this->smtp_port,
 										$errno,
@@ -1701,6 +1703,7 @@ class CI_Email {
 			$this->_send_command('hello');
 			$this->_send_command('starttls');
 			stream_socket_enable_crypto($this->_smtp_connect, TRUE, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+
 		}
 
 		return $this->_send_command('hello');
@@ -1868,6 +1871,7 @@ class CI_Email {
 
 		while ($str = fgets($this->_smtp_connect, 512))
 		{
+			
 			$data .= $str;
 
 			if (substr($str, 3, 1) == " ")
