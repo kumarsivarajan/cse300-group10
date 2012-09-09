@@ -59,7 +59,12 @@ class Welcome extends CI_Controller {
 	function name_rollno()
 	{
 		$this->load->helper('form');
-		$form_elem=Array('Name'=>Array('input'=>'text','name'=>'name','id'=>'name','type'=>'text','label'=>'Your name'),'Roll'=>Array('input'=>'text','name'=>'roll','id'=>'roll','type'=>'text','label'=>'Your roll no'),'Course'=>Array('input'=>'select','name'=>Array('name'=>'course','label'=>'Course:'),'values'=>Array('M.Tech','B.Tech','Phd')),'room_pref'=>Array('input'=>'select','name'=>Array('name'=>'room_preference','label'=>'Room Preference:'),'values'=>Array('Single','Double','Triple')),'Submit'=>Array('input'=>'submit','value'=>'Apply!','type'=>'submit'));
+		$form_elem=Array('Name'=>Array('input'=>'text','name'=>'name','id'=>'name','type'=>'text','label'=>'Your name'),
+						'Roll'=>Array('input'=>'text','name'=>'roll','id'=>'roll','type'=>'text','label'=>'Your roll no'),
+						'Course'=>Array('input'=>'select','name'=>Array('name'=>'course','label'=>'Course:'),
+						'values'=>Array('M.Tech','B.Tech','Phd')),
+						'room_pref'=>Array('input'=>'select','name'=>Array('name'=>'room_preference','label'=>'Room Preference:'),'values'=>Array('Single','Double','Triple')),
+						'Submit'=>Array('input'=>'submit','value'=>'Apply!','type'=>'submit'));
 		$form_attr=array('onsubmit'=>'return checkInput()');
 		$this->load->helper('url');
 		$base_url = base_url();

@@ -14,8 +14,10 @@
 		<h1><center>Database Info Verification</center></h1>
 		Name: <b><?php echo $name; ?></b><br />
 		Roll No.: <b><?php echo $roll; ?></b><br />
-		Course: <b><?php echo $course; ?></b><br />
-		Room Preference: <b><?php echo $room_preference; ?></b><br />
+		Course: <b><?php if ($course == 0) {echo "M. Tech";}
+						 elseif ($course == 1){echo "B. Tech";}
+						 else {echo "Phd";}?></b><br />
+		Room Preference: <b><?php echo $room_preference + 1; ?></b><br />
 		Address: [will be taken from db] <br /><br />
 		
 		<button>Proceed</button>
