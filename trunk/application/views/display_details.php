@@ -11,7 +11,7 @@
 
 	<div class="col1"> <?php echo $content_navigation?> </div>
 	<div class="col2" style="padding-left: 20px;padding-bottom: 10px">
-		<h1><center>Database Info Verification</center></h1>
+		<h1><center>Application Form Verification</center></h1>
 		Name: <b><?php echo $name; ?></b><br />
 		Roll No.: <b><?php echo $roll; ?></b><br />
 		Course: <b><?php if ($course == 0) {echo "M. Tech";}
@@ -19,11 +19,11 @@
 						 else {echo "Phd";}?></b><br />
 		Room Preference: <b><?php if ($room_preference == 0) {echo "Single";}
 						 elseif ($course == 1){echo "Double";}
-						 else {echo "Triple";} ?></b><br />
-		Address: [will be taken from db] <br /><br />
+						 else {echo "Triple";} ?></b><br /><br />
+		
 		
 		<button>Proceed</button>
-		&nbsp<button>Report</button>
+		&nbsp<button>Go back</button>
 		
 		
 	</div>
