@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Error extends CI_Controller {
+class Maps extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -35,7 +35,7 @@ class Error extends CI_Controller {
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
-		$this->load->view('error_page',$data);
+		$this->load->view('maps_page',$data);
 		
 		
 
