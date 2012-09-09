@@ -15,8 +15,7 @@
 		You have successfully applied for the hostel
 		
 		
-		<button>Proceed</button>
-		&nbsp<button>Report</button>
+		
 		
 		
 	</div>
