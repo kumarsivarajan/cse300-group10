@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '01051992';
-$db['default']['database'] = '';
+$db['default']['username'] = 'hosteladmin';
+$db['default']['password'] = 'hostel@123';
+$db['default']['database'] = 'iiithostel';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
