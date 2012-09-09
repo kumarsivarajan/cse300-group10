@@ -11,10 +11,10 @@
 <div class="container">
 	<div class="col1"> <?php echo $content_navigation?> </div>
 	<div class="col2">
-	<h1><center>OOPs Some Thing is Wrong !!<center></h1>
+	<h1><center>oops something is Wrong !!<center></h1>
 		<div id="body">		
-			<p> <b><center>Invalid UserName Or Password<center> <b></p>
-			<p> Try again !!</p>
+			<p> <b><center>Invalid Name or Roll Number<center> <b></p>
+			<a href="<?php echo site_url('Welcome/name_rollno'); ?>"><p>Go back and Try again !!</p></a>
 		</div>
 		
 			<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
