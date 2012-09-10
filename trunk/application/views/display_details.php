@@ -22,10 +22,10 @@
 						 else {echo "Triple";} ?></b><br /><br />
 		
 		<button>Proceed</button>
-		&nbsp<button>Go back</button>
+		&nbsp<button onclick="parent.location='<?php echo site_url('Welcome/name_rollno'); ?>'">Go back</button>
 		</br>
 		
-		<b> NOTE : </b>If there is any (change of address/Transfer Case) .Please contact the administrator for updations in erp forthe same
+
 		
 		
 		
