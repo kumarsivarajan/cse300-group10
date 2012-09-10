@@ -22,7 +22,7 @@
 						 else {echo "Triple";} ?></b><br /><br />
 		
 		<button>Proceed</button>
-		&nbsp<button onclick="parent.location='<?php echo site_url('Welcome/name_rollno'); ?>'">Go back</button>
+		&nbsp<button onClick="history.go(-1);return true;">Go back</button>
 		</br>
 		
 

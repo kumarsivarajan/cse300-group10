@@ -46,4 +46,54 @@ class Admin extends CI_Controller {
 		echo "User:".$_POST['UserName'].";Password:".$_POST['Password'];
 		
 	}
+	public function modify(){
+			$this->load->helper('url');
+			$top_bar['curTab']='modify';
+			$base_url=base_url();
+			$top_bar['base_url']=$base_url;
+			$cssfiles[]="styles.css";
+			$data['css']=$cssfiles;
+			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
+		
+			$cssfiles[]="styles.css";
+			$data['css']=$cssfiles;
+//			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+			$this->load->view('admin_manage',$data);
+
+	}
+	public function showlistmain(){
+			$this->load->helper('url');
+			$base_url=base_url();
+			$top_bar['curTab']='modify';
+			$top_bar['base_url']=$base_url;
+			$cssfiles[]="styles.css";
+			$data['css']=$cssfiles;
+			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
+		
+			$cssfiles[]="styles.css";
+			$data['css']=$cssfiles;
+			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+		
+			$this->load->view('showlist_main',$data);
+
+		
+	}
+	public function showlist(){
+			$this->load->helper('url');
+			$top_bar['curTab']='modify';
+			$base_url=base_url();
+			$top_bar['base_url']=$base_url;
+			$cssfiles[]="styles.css";
+			$data['css']=$cssfiles;
+			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
+		
+			$cssfiles[]="styles.css";
+			$data['css']=$cssfiles;
+//			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+		
+			$this->load->view('showlist',$data);
+
+		
+	}
+	
 }

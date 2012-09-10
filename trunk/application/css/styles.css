@@ -14,6 +14,10 @@
 		background-color: transparent;
 		font-weight: normal;
 	}
+	a.menu_item {
+		margin: 10px 10px 10px 10px;
+	}
+	
 
 	h1, h2 {
 		color: #444;
@@ -100,8 +104,10 @@
 			display: inline;
 			height:auto;
 			width: 74%;
-		border: 0.5px solid #ffffff;
-		-webkit-box-shadow: 0 0 8px #D0D0D0;
+			border: 0.5px solid #ffffff;
+			-webkit-box-shadow: 0 0 8px #D0D0D0;
+			box-shadow: 0 0 8px #D0D0D0;
+
 		}
 		.container .col1{
 			float:left;
@@ -109,7 +115,9 @@
 			height:auto;
 			width: 24%;
 			border: 0.5px solid #D0D0D0;
-		-webkit-box-shadow: 0 0 8px #D0D0D0;
+			-webkit-box-shadow: 0 0 8px #D0D0D0;
+			box-shadow: 0 0 8px #D0D0D0;
+
 		}
 		
 	/*	Admin Block - Transfer to a new file in future */
@@ -135,3 +143,23 @@ div.login_bar{
 		top:0px;
 		right: 5%;
 }
+.admin-container{
+		margin: 10px;
+	}
+		.admin-container .admin-contentbar{
+			display: inline;
+			height:auto;
+			border: 0.5px solid #ffffff;
+			-webkit-box-shadow: 0 0 8px #D0D0D0;
+			box-shadow: 0 0 8px #D0D0D0;
+
+		}
+		.admin-container .admin-topbar{
+			display: inline;
+			height:100px;
+			border: 0.5px solid #D0D0D0;
+			-webkit-box-shadow: 0 0 8px #D0D0D0;
+			box-shadow: 0 0 8px #D0D0D0;
+
+		}
+		
