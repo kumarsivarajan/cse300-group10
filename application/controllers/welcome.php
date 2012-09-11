@@ -61,8 +61,9 @@ class Welcome extends CI_Controller {
 		$this->load->helper('form');
 		$form_elem=Array('Name'=>Array('input'=>'text','name'=>'name','id'=>'name','type'=>'text','label'=>'Your name'),
 						'Roll'=>Array('input'=>'text','name'=>'roll','id'=>'roll','type'=>'text','label'=>'Your roll no'),
-						'Course'=>Array('input'=>'select','name'=>Array('name'=>'course','label'=>'Course:'),
-						'values'=>Array('M.Tech','B.Tech','Phd')),
+						'Location'=>Array('input'=>'text','name'=>'location','id'=>'location','type'=>'text','label'=>'Your Location'),
+						'Gender'=>Array('input'=>'select','name'=>Array('name'=>'gender','label'=>'Gender: '),'values'=>Array('Male', 'Female')),
+						'Program'=>Array('input'=>'select','name'=>Array('name'=>'program1','label'=>'Program: '),'values'=>Array('B. Tech', 'M. Tech','Phd')),
 						'room_pref'=>Array('input'=>'select','name'=>Array('name'=>'room_preference','label'=>'Room Preference:'),'values'=>Array('Single','Double','Triple')),
 						'Submit'=>Array('input'=>'submit','value'=>'Apply!','type'=>'submit'));
 		$form_attr=array('onsubmit'=>'return checkInput()');
@@ -86,15 +87,19 @@ class Welcome extends CI_Controller {
 		$base_url = base_url();
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
-		$course = $_POST['course'];  // student course as in(mtech,btech)
+		$program = $_POST['program1'];  // student course as in(mtech,btech)
 		$room_preference = $_POST['room_preference']; // room preferesnce (as in type of room single,double ..)
 		$name = $_POST['name'];
 		//Process $name
 		$roll = $_POST['roll'];
+		$location=$_POST['location'];
+		$gender=$_POST['gender'];
 		//Process $age
 		$data['name']=$name;
 		$data['roll']=$roll;
-		$data['course']=$course;
+		$data['location']=$location;
+		$data['program']=$program;
+		$data['gender']=$gender;
 		$data['room_preference']=$room_preference;
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
