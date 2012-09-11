@@ -35,7 +35,7 @@ class FinalM extends CI_Controller {
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
-		$this->load->view('final_message',$data);
+		$this->load->view('allocation_list',$data);
 		
 		
 
