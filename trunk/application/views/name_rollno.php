@@ -33,6 +33,14 @@
 				error2.hidden=false;
 				return false;
 			}
+			
+			if(document.getElementById("location").value=="")
+			{
+				error1.hidden=true;
+				error2.hidden=true;				
+				error3.hidden=false;
+				return false;
+			}
 		}
 			
 	</script>
@@ -47,6 +55,7 @@
 		<br />
 		<div hidden="true" id="error1" ><font color="red">* Name field should not be empty</font></div>
 			<div hidden="true" id="error2" ><font color="red">* Roll Number field should not be empty</font></div>
+			<div hidden="true" id="error3" ><font color="red">* Location field should not be empty</font></div>
 		</form>
 		
 	</div>
