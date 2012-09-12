@@ -46,12 +46,16 @@
 		<th width="25%" align="center">Name</th>
 		<th width="25%" align="center">Locality</th>
 		<th width="25%" align="center">Distance</th>
+		<th width="25%" align="center">Status</th>
+		
 	</tr>
 	<tr style="height:10" align="center">
 		<td width="25%" align="center">20xxxxxx</td>
 		<td width="25%" align="center">xyz</td>
 		<td width="25%" align="center">abc</td>
 		<td width="25%" align="center">Z kms</td>
+		<td width="25%" align="center">Given</td>
+		
 	</tr>
 	<?php
 	for ($i = 1; $i <= 25; $i++)
@@ -59,7 +63,9 @@
      	echo "<TR><TD>&nbsp;</TD>","\n";
      	echo "<TD>&nbsp;</TD>","\n";
      	echo "<TD>&nbsp;</TD>","\n";
-     	echo "<TD>&nbsp;</TD></TR>","\n";
+     	echo "<TD>&nbsp;</TD>","\n";
+		echo "<TD>&nbsp;</TD></TR>","\n";
+		
   	}
 	?>
 	</table>
