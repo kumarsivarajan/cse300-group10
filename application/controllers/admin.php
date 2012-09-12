@@ -52,6 +52,11 @@ class Admin extends CI_Controller {
 		$this->load->model('backend_login');
         // Validate the user can login
         $this->load->helper('url');
+        		$this->load->library('session');
+
+		if($this->session->userdata('validated')){
+            redirect('admin_view');
+        }
         $result = $this->backend_login->validate();
         // Now we verify the result
         if(! $result){
