@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
-
+	 
 	/**
 	 * Index Page for this controller.
 	 *
@@ -18,11 +18,17 @@ class Admin extends CI_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	 
-	public function index()
+	public function index($message="")
 	{
 		$this->load->helper('form');
-		$form_elem=Array('User Name'=>Array('input'=>'text','name'=>'UserName','id'=>'uid','type'=>'text','label'=>'User Name'),'Password'=>Array('input'=>'text','name'=>'Password','id'=>'pass','type'=>'password','label'=>'Password'),'Submit'=>Array('input'=>'submit','value'=>'Log In','type'=>'submit'));
+		$this->load->library('session');
 		$this->load->helper('url');
+
+		if($this->session->userdata('validated')){
+            redirect('admin_view');
+        }
+    
+		$form_elem=Array('User Name'=>Array('input'=>'text','name'=>'UserName','id'=>'uid','type'=>'text','label'=>'User Name'),'Password'=>Array('input'=>'text','name'=>'Password','id'=>'pass','type'=>'password','label'=>'Password'),'Submit'=>Array('input'=>'submit','value'=>'Log In','type'=>'submit'));
 		
 		$this->load->helper('date');
 		$time = time();
@@ -36,6 +42,7 @@ class Admin extends CI_Controller {
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
 		$data['form_elem']=$form_elem;
+		$data['msg']=$message;
 		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
 		$this->load->view('admin_login',$data);
 		
@@ -49,7 +56,8 @@ class Admin extends CI_Controller {
         // Now we verify the result
         if(! $result){
             // If user did not validate, then show them login page again
-            $this->index();
+            $alert="Invalid Login!! Please Try Again!";
+            $this->index($alert);
         }else{
             // If user did validate, 
             // Send them to members area

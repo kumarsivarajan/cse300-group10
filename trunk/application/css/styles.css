@@ -118,19 +118,28 @@
 		}
 		
 	/*	Admin Block - Transfer to a new file in future */
-div.login_bar{
-			background-image:url('../images/logo.png');
-			background-repeat:no-repeat;
-			background-size:cover;
+div.login_bar_wrapper{
 			height:auto;
 			width: 400px;
 			position: absolute;
 			top: 30%;
 			left: 30%;
-			-webkit-box-shadow: 0 0 8px #D0D0D0;
-			box-shadow: 0 0 8px #D0D0D0;
 	
 }
+.login_bar_wrapper .error{
+			color: red;
+			text-align: center;
+}
+	.login_bar_wrapper .login_bar{
+		background-image:url('../images/logo.png');
+			background-repeat:no-repeat;
+			background-size:cover;
+			position: relative;
+			bottom: 0;
+			-webkit-box-shadow: 0 0 8px #D0D0D0;
+			box-shadow: 0 0 8px #D0D0D0;
+
+	}
 	.login_bar .wlcm-msg{
 		color: #ffffff;
 		font-size: medium;

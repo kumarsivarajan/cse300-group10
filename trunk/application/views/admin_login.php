@@ -16,7 +16,8 @@
 	 </script>
 </head>
 <body>
-
+<div class="login_bar_wrapper">
+<div class="error"><?php echo $msg;?></div>
 <div class="login_bar">
 		<div id="body">
 			<?php echo generate_form('Admin/validate',$form_elem);?>
@@ -26,6 +27,6 @@
 		</div>
 	<p class="footer"><a href="#">Forgot Password?</a></p>
 </div>
-
+</div>
 </body>
 </html>
