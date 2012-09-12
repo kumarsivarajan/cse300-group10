@@ -14,9 +14,6 @@
 		background-color: transparent;
 		font-weight: normal;
 	}
-	a.menu_item {
-		margin: 10px 10px 10px 10px;
-	}
 	
 
 	h1, h2 {
@@ -147,7 +144,6 @@ div.login_bar{
 		margin: 10px;
 	}
 		.admin-container .admin-contentbar{
-			display: inline;
 			height:auto;
 			border: 0.5px solid #ffffff;
 			-webkit-box-shadow: 0 0 8px #D0D0D0;
@@ -155,11 +151,17 @@ div.login_bar{
 
 		}
 		.admin-container .admin-topbar{
-			display: inline;
-			height:100px;
+			height:auto;
+			width: auto;
 			border: 0.5px solid #D0D0D0;
 			-webkit-box-shadow: 0 0 8px #D0D0D0;
 			box-shadow: 0 0 8px #D0D0D0;
 
 		}
+	a.menu_item {
+		margin: 10px 10px 10px 10px;
+	}
+	a.logout_link{
+		float: right;
+	}
 		
