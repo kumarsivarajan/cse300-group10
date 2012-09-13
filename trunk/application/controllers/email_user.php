@@ -4,17 +4,17 @@ class Email_user extends CI_Controller {
 	public function index(){
 		$this->load->library('email');
 		$this->email->from('hosteliiitd@gmail.com'); // change it to yours
-		$this->email->to('cse300-group10@googlegroups.com'); // change it to yours
-		$this->email->subject('Test Mail');
-		$this->email->message('Code Igniter Mail Works.This is a system generated mail');
+		$this->email->to('praneet10061@iiitd.ac.in'); // change it to yours
+		$this->email->subject('Hostel Application Form Verification');
+		$this->email->message('Verify your hostel application by clicking on this link\n');
  
 		if($this->email->send())
 		{
 			echo 'Email sent.';
-			}
-			else
-			{
-				show_error($this->email->print_debugger());
-				}
+		}
+		else
+		{
+			show_error($this->email->print_debugger());
+		}
 	}
 }
