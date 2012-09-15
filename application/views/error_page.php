@@ -13,7 +13,7 @@
 	<div class="col2">
 	<h1><center>oops something is Wrong !!<center></h1>
 		<div id="body">		
-			<p> <b><center>Invalid Name or Roll Number<center> <b></p>
+			<p> <b><center>Name or Roll Number doesn't exist<center> <b></p>
 			<a href="<?php echo site_url('Welcome/name_rollno'); ?>"><p>Go back and Try again !!</p></a>
 		</div>
 		

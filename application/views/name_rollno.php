@@ -51,7 +51,7 @@
 	
 	<div class="col2" >
 	<h1><center>Hostel Application Form</center></h1>
-		<?php echo generate_form('Welcome/display_details',$form_elem,$form_attr);?>
+		<?php echo generate_form('Welcome/validate_student',$form_elem,$form_attr);?>
 		<br />
 		<div hidden="true" id="error1" ><font color="red">* Name field should not be empty</font></div>
 			<div hidden="true" id="error2" ><font color="red">* Roll Number field should not be empty</font></div>
