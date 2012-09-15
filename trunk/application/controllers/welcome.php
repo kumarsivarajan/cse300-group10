@@ -108,6 +108,46 @@ class Welcome extends CI_Controller {
 		$this->load->view('display_details',$data);
 	}
 	
+	function validate_student()
+	{
+		$this->load->model('student_verification');
+		$this->load->helper('url');
+		$base_url = base_url();
+		$cssfiles[]="styles.css";
+		$data['css']=$cssfiles;
+		
+		$name = $_POST['name'];
+		$roll = $_POST['roll'];
+		$location=$_POST['location'];
+		$gender=$_POST['gender'];
+		$program = $_POST['program1'];  // student course as in(mtech,btech)
+		$room_preference = $_POST['room_preference']; // room preferesnce (as in type of room single,double ..)
+		
+		$data1=Array();
+		$data1=$this->student_verification->getinfo($name, $roll);
+		
+		$data['firstname']=$data1['first_name'];
+		$data['roll']=$data1['roll_no'];
+		$data['address']=$data1['address'];
+		$data['location']=$location;
+		$data['program']=$program;
+		$data['gender']=$gender;
+		$data['room_preference']=$room_preference;		
+		
+		$navigation_data['navTab']='apply';
+		$navigation_data['base_url']=$base_url;
+				$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+
+		if($data['firstname']=="xxx")
+		{
+			$this->load->view('error_page');
+		}
+		else
+		{
+			$this->load->view('db_info',$data);
+		}
+	}
+	
 
 	
 }

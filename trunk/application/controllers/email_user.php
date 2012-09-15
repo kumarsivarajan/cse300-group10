@@ -10,7 +10,7 @@ class Email_user extends CI_Controller {
  
 		if($this->email->send())
 		{
-			echo 'Email sent.';
+			echo '<html> <body><h1>Email sent. Follow the link in the email to proceed</h1></body> </html>';
 		}
 		else
 		{
