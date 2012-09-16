@@ -12,15 +12,20 @@
 	 <script type="text/javascript">
 	 $(document).ready(function(){
 	 $("label").inFieldLabels();
+	  $("#loginForm").validate({
+				 	errorPlacement: function(error,element) {
+					 					return true;
+                                        }
+                    });
 	 });
 	 </script>
 </head>
 <body>
 <div class="login_bar_wrapper">
-<div class="error"><?php echo $msg;?></div>
+<div class="invalid"><?php echo $msg;?></div>
 <div class="login_bar">
 		<div id="body">
-			<?php echo generate_form('Admin/validate',$form_elem);?>
+			<?php echo generate_form('Admin/validate',$form_elem,$form_attr);?>
 		</div>
 		<div class="wlcm-msg">Admin Portal</br>Hostel Allocation</br>
 		<img src="<?php echo base_url('/application/images/ins_logo.png');?>" />

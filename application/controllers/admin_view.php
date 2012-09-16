@@ -59,13 +59,15 @@ class Admin_view extends CI_Controller {
 			
 			
 			//by Mayank
-			$form_elem = Array('Current_Password'=>Array('input'=>'text','name'=>'current_Password','id'=>'pass','type'=>'password','label'=>'Current Password'), 'New_Password'=>Array('input'=>'text','name'=>'new_Password','id'=>'n_pass','type'=>'password','label'=>'New Password'), 'Confirm_New_Password'=>Array('input'=>'text','name'=>'confirm_new_Password','id'=>'cn_pass','type'=>'password','label'=>'Confirm New Password'), 'Change'=>Array('input'=>'submit','value'=>'Change Password','type'=>'submit'));
+			$form_elem = Array('Current_Password'=>Array('input'=>'text','name'=>'current_Password','id'=>'pass','type'=>'password','label'=>'Current Password','class'=>'required'), 'New_Password'=>Array('input'=>'text','name'=>'new_Password','id'=>'n_pass','type'=>'password','label'=>'New Password','class'=>'required'), 'Confirm_New_Password'=>Array('input'=>'text','name'=>'confirm_new_Password','id'=>'cn_pass','type'=>'password','label'=>'Confirm New Password','class'=>'required'), 'Change'=>Array('input'=>'submit','value'=>'Change Password','type'=>'submit'));
 			$data['form_elem']=$form_elem;
+			$form_attr=array('id'=>'modifyForm');
+			$data['form_attr']=$form_attr;
 			
 			
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
-//			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
 			$this->load->view('admin_manage',$data);
 
 	}

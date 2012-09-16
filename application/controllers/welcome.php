@@ -59,14 +59,14 @@ class Welcome extends CI_Controller {
 	function name_rollno()
 	{
 		$this->load->helper('form');
-		$form_elem=Array('Name'=>Array('input'=>'text','name'=>'name','id'=>'name','type'=>'text','label'=>'Your name'),
-						'Roll'=>Array('input'=>'text','name'=>'roll','id'=>'roll','type'=>'text','label'=>'Your roll no'),
-						'Location'=>Array('input'=>'text','name'=>'location','id'=>'location','type'=>'text','label'=>'Your Location'),
+		$form_elem=Array('Name'=>Array('input'=>'text','name'=>'name','id'=>'name','type'=>'text','label'=>'Your name','class'=>'required'),
+						'Roll'=>Array('input'=>'text','name'=>'roll','id'=>'roll','type'=>'text','label'=>'Your roll no','class'=>'required'),
+						'Location'=>Array('input'=>'text','name'=>'location','id'=>'location','type'=>'text','label'=>'Your Location','class'=>'required'),
 						'Gender'=>Array('input'=>'select','name'=>Array('name'=>'gender','label'=>'Gender: '),'values'=>Array('Male', 'Female')),
 						'Program'=>Array('input'=>'select','name'=>Array('name'=>'program1','label'=>'Program: '),'values'=>Array('B. Tech', 'M. Tech','Phd')),
 						'room_pref'=>Array('input'=>'select','name'=>Array('name'=>'room_preference','label'=>'Room Preference:'),'values'=>Array('Single','Double','Triple')),
 						'Submit'=>Array('input'=>'submit','value'=>'Apply!','type'=>'submit'));
-		$form_attr=array('onsubmit'=>'return checkInput()');
+		$form_attr=array('id'=>'applyForm');
 		$this->load->helper('url');
 		$base_url = base_url();
 		$cssfiles[]="styles.css";
@@ -74,7 +74,7 @@ class Welcome extends CI_Controller {
 		$data['form_elem']=$form_elem;
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
-				$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+				$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
 		$data['form_attr']=$form_attr;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		
