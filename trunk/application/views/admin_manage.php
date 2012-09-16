@@ -5,7 +5,24 @@
 	<?php foreach($css as $cssfile):?>
 	    <link rel="stylesheet" type="text/css" href="<?php echo base_url("/application/css/".$cssfile);?>"/>
 	<?php endforeach; ?>
+<?php foreach($scripts as $script):?>
+	    <script type="text/javascript" src="<?php echo base_url("/application/js/".$script)?>"></script>
+	 <?php endforeach; ?>
+
 	<title>Hostel Allocation - Backend</title>
+	<script type="text/javascript">
+	var j = jQuery.noConflict();
+
+		 j(document).ready(function(){
+			 j("label").inFieldLabels();
+			 j("#modifyForm").validate({
+				 	errorPlacement: function(error,element) {
+					 					j('#errorPanel').show();
+					 					return true;
+                                        }
+                    });
+			 });
+	</script>
 </head>
 <body>
 
@@ -16,7 +33,7 @@
 	<!--USING HELPER TO generate a FORM and passing "Admin/modify" as action, with Current, New
 		and Confirm New PASSWORD PLUS CHANGE PASSWORD BUTTON as form elements aka $form_elem-->
 	<div >
-			<?php echo generate_form('Admin/pass_change', $form_elem);?>
+			<?php echo generate_form('Admin/pass_change', $form_elem,$form_attr);?>
 		</div>
 	
 	

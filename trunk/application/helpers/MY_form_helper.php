@@ -19,7 +19,8 @@ function form_input_infield($data = '', $value = '', $extra = '')
 		return $prefix."<input "._parse_form_attributes($data, $defaults).$extra." />".$suffix;
 }
 function generate_form($action='',$elements='',$attr=''){
-	$html='';
+		$html='<div id="errorPanel">Fields Marked In Red Must Be Filled!</div>';
+
 	if(!isset($action))
 		return '';
 	if(is_array($attr))
@@ -44,6 +45,7 @@ function generate_form($action='',$elements='',$attr=''){
 	
 	}
 	$html.=form_close();
+
 	return $html;
 }
 	function form_dropdown_formatted($name = '', $options = array(), $selected = array(), $extra = '')

@@ -28,8 +28,8 @@ class Admin extends CI_Controller {
             redirect('admin_view');
         }
     
-		$form_elem=Array('User Name'=>Array('input'=>'text','name'=>'UserName','id'=>'uid','type'=>'text','label'=>'User Name'),'Password'=>Array('input'=>'text','name'=>'Password','id'=>'pass','type'=>'password','label'=>'Password'),'Submit'=>Array('input'=>'submit','value'=>'Log In','type'=>'submit'));
-		
+		$form_elem=Array('User Name'=>Array('input'=>'text','name'=>'UserName','id'=>'uid','type'=>'text','label'=>'User Name','class'=>'required'),'Password'=>Array('input'=>'text','name'=>'Password','id'=>'pass','type'=>'password','label'=>'Password','class'=>'required'),'Submit'=>Array('input'=>'submit','value'=>'Log In','type'=>'submit'));
+		$form_attr=array('id'=>'loginForm');
 		$this->load->helper('date');
 		$time = time();
 		$base_url = base_url();
@@ -42,8 +42,10 @@ class Admin extends CI_Controller {
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
 		$data['form_elem']=$form_elem;
+		$data['form_attr']=$form_attr;
+		
 		$data['msg']=$message;
-		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
 		$this->load->view('admin_login',$data);
 		
 	}

@@ -15,34 +15,12 @@
 
 		 j(document).ready(function(){
 			 j("label").inFieldLabels();
+			 j("#applyForm").validate({
+				 	errorPlacement: function(error,element) {
+					 					j('#errorPanel').show();
+                                        }
+                    });
 			 });
-	</script>
-	<script>
-
-		function checkInput()
-		{
-			if(document.getElementById("name").value=="")
-			{
-				error1.hidden=false;
-				return false;
-			}
-			
-			if(document.getElementById("roll").value=="")
-			{
-				error1.hidden=true;
-				error2.hidden=false;
-				return false;
-			}
-			
-			if(document.getElementById("location").value=="")
-			{
-				error1.hidden=true;
-				error2.hidden=true;				
-				error3.hidden=false;
-				return false;
-			}
-		}
-			
 	</script>
 </head>
 <body>
@@ -53,9 +31,6 @@
 	<h1><center>Hostel Application Form</center></h1>
 		<?php echo generate_form('Welcome/validate_student',$form_elem,$form_attr);?>
 		<br />
-		<div hidden="true" id="error1" ><font color="red">* Name field should not be empty</font></div>
-			<div hidden="true" id="error2" ><font color="red">* Roll Number field should not be empty</font></div>
-			<div hidden="true" id="error3" ><font color="red">* Location field should not be empty</font></div>
 		</form>
 		
 	</div>
