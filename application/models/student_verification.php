@@ -13,6 +13,8 @@ class Student_verification extends CI_Model{
 		$this->db->select('first_name, roll_no, address, email');
 		$this->db->from('student_info');
 		$this->db->where('first_name',$name);
+		$this->db->where('roll_no',$roll);
+		
 		
 		$query=$this->db->get();
 		

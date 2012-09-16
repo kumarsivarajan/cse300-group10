@@ -140,7 +140,7 @@ class Welcome extends CI_Controller {
 
 		if($data['firstname']=="xxx")
 		{
-			$this->load->view('error_page');
+			$this->load->view('error_page',$data);
 		}
 		else
 		{
