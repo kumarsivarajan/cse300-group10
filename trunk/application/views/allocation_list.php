@@ -10,6 +10,7 @@
 <div class="container">
 
 	<div class="col1"> <?php echo $content_navigation?> </div>
+	
 	<div class="col2">
 		<h1><center>Allocation List</center></h1>
 		<style type="text/css">
@@ -39,40 +40,12 @@
 		-moz-border-radius: ;
 	}
 	</style>
-	<?php echo $student_table;?>
-	<table class="allocation_list" width="80%" height="80%" align="center">
-	<tr style="height:40" align="center">
-		<th width="25%" align="center">Roll Number</th>
-		<th width="25%" align="center">Name</th>
-		<th width="25%" align="center">Locality</th>
-		<th width="25%" align="center">Distance</th>
-		<th width="25%" align="center">Status</th>
-		
-	</tr>
-	<tr style="height:10" align="center">
-		<td width="25%" align="center">20xxxxxx</td>
-		<td width="25%" align="center">xyz</td>
-		<td width="25%" align="center">abc</td>
-		<td width="25%" align="center">Z kms</td>
-		<td width="25%" align="center">Given</td>
-		
-	</tr>
-	<?php
-	foreach ($student_array as $student)
-	{
-     	echo "<TR><TD>&nbsp;".$student->first_name."</TD>","\n";
-     	echo "<TD>&nbsp;</TD>","\n";
-     	echo "<TD>&nbsp;</TD>","\n";
-     	echo "<TD>&nbsp;</TD>","\n";
-		echo "<TD>&nbsp;</TD>","\n";
-		echo "<TD>&nbsp;</TD></TR>","\n";
-		
-  	}
-	?>
-	</table>
+	
+
+	<div class="col3" style="padding-left:164px;padding-bottom:20px"> <?php echo $table?> </div>
 		
 		
-		
+
 		
 		
 		
@@ -80,4 +53,3 @@
 	</div>
 </body>
 </html>
-
