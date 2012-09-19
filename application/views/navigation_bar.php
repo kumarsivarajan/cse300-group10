@@ -2,8 +2,8 @@
 <h1><a href="<?php echo base_url() ?>"> <img src="<?php echo base_url("/application/images/logo.png")?>" height="50" width="70"/></a>
 <a href="<?php echo "http://www.iiitd.ac.in" ?>"> <img src="<?php echo base_url("/application/images/ins_logo.png")?>" height="50" /></a>
 </h1>
-<h1 title="institute logo">Site Navigator:</h1>
-<ul title="navigation">
+<h2 id="navigation"title="institute logo">Site Navigator:</h2>
+<ul class="nav_bar" title="navigation">
  <li <? if($navTab == "about"){echo " id=\"active\"";}?>><a href="<?php echo site_url('Welcome/about'); ?>" title="About Page">About the System</a></li>
  <li <? if($navTab == "add"){echo " id=\"active\"";}?>><a href="<?php echo site_url('Welcome/name_rollno'); ?>" title="Apply">Apply For Hostel Room</a></li>
  <li <? if($navTab == "list"){echo " id=\"active\"";}?>><a href="<?php echo site_url('Welcome/alloc_list'); ?>" title="Apply">Allocation List</a></li>

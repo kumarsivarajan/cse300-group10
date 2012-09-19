@@ -81,6 +81,13 @@ $(function () {
 	<div class="admin-topbar"> <?php echo $top_menu?> </div>
 	<div class="admin-contentbar">
 	<!-- This where you write you code-->
+	<div class="info">
+	<h2> Applications</h2>
+		Total:300<br>
+		<div class="phd">Phd:30</div>
+		<div class="btech">Btech:100</div>
+		<div class="mtech">Mtech:90</div>
+	</div>
 	<div id="container"></div>
 	
 	
