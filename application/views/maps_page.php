@@ -14,7 +14,7 @@
 	<div class="col2" style="padding-left: 20px;padding-bottom: 10px">
 		<h1><center>Find your House !!</center></h1>
 		<b><center> WE WERE NOT ABLE TO FIND YOUR RESIDENCE, PLEASE POINT IT OUT ON THE MAP </center><b> <br />
-		<?php echo $map['html', ]; ?>
+		<?php echo $map['html']; ?>
 		
 		
 		<br />
