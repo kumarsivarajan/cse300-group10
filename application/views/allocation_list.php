@@ -16,7 +16,7 @@
 		
 	table.allocation_list {
 		border-width: thin;
-		border-spacing: 2px;
+		border-spacing: 1px;
 		border-style: outset;
 		border-color: black;
 		border-collapse: collapse;
@@ -58,12 +58,13 @@
 		
 	</tr>
 	<?php
-	for ($i = 1; $i <= 25; $i++)
+	for ($i = 0; $i <= 24; $i++)
 	{
-     	echo "<TR><TD>&nbsp;</TD>","\n";
+     	echo "<TR><TD>&nbsp;".$data[i]->first_name."</TD>","\n";
      	echo "<TD>&nbsp;</TD>","\n";
      	echo "<TD>&nbsp;</TD>","\n";
      	echo "<TD>&nbsp;</TD>","\n";
+		echo "<TD>&nbsp;</TD>","\n";
 		echo "<TD>&nbsp;</TD></TR>","\n";
 		
   	}
