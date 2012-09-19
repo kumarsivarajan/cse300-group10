@@ -157,11 +157,9 @@ class Welcome extends CI_Controller {
 		$this->load->library('table');
 		$base_url = base_url();
 		$cssfiles[]="styles.css";
-		$data['css']=$cssfiles;
-		
 
-		
-		
+		$data['css']=$cssfiles;		
+
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
