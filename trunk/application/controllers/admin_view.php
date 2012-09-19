@@ -93,13 +93,25 @@ class Admin_view extends CI_Controller {
 			$top_bar['curTab']='modify';
 			$base_url=base_url();
 			$top_bar['base_url']=$base_url;
-			$cssfiles[]="styles.css";
+			$cssfiles=Array('styles.css','demo_table.css');
 			$data['css']=$cssfiles;
 			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
+			$this->load->library('table');
+			$this->load->database();
+
+			$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="admin_list">' );
+
+			$this->table->set_template($tmpl);
+			$this->table->set_heading('First name', 'Last name', 'Roll No.', 'Address', 'email id', 'Distance','Status');
 		
-			$cssfiles[]="styles.css";
+			$query = $this->db->query("SELECT first_name,last_name,roll_no,address,email,distance,status FROM alloc_list");
+
+		
+		
+			$data['table']=$this->table->generate($query);
+		
 			$data['css']=$cssfiles;
-//			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+			$data['scripts']=Array('jquery.js','jquery.dataTables.js');
 		
 			$this->load->view('showlist',$data);
 

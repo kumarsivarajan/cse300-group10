@@ -172,9 +172,9 @@ class Welcome extends CI_Controller {
 		$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="allocation_list">' );
 
 		$this->table->set_template($tmpl);
-		$this->table->set_heading('First name', 'Last name', 'Roll No.', 'Address', 'email id', 'Distance','Status');
+		$this->table->set_heading('First name', 'Last name', 'Roll No.', 'Location', 'email id', 'Distance','Status');
 		
-		$query = $this->db->query("SELECT * FROM alloc_list");
+		$query = $this->db->query("SELECT first_name,last_name,roll_no,location,email,distance,status FROM alloc_list");
 
 		
 		
