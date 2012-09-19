@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Maps extends CI_Controller {
+class Address_Maps extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -47,12 +47,13 @@ class Maps extends CI_Controller {
 		//$this->load->view('maps_page',$data);
 		// Load the library
 		$this->load->library('googlemaps');
-		$config['center'] = '26.0167,77.3833';
-		$this->googlemaps->initialize($config);
-		
+		// Initialize our map. Here you can also pass in additional parameters for customising the map (see below)
+		$this->googlemaps->initialize();
+		// Create the map. This will return the Javascript to be included in our pages <head></head> section and the HTML code to be
+		// placed where we want the map to appear.
 		$data['map'] = $this->googlemaps->create_map();
-		
-		$this->load->view('maps_page', $data);
+		// Load our view, passing the map data that has just been created
+		$this->load->view('address_maps_page', $data);
 		
 
 	}
