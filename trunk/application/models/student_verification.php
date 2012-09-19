@@ -53,8 +53,8 @@ class Student_verification extends CI_Model{
 	public function get_alloc_info()
 	{
 			$this->load->database();
-			$this->db->select('first_name, roll_no, address, email');
-			$this->db->from('student_info');
+			$this->db->select('first_name, roll_no, address, email, distance, status');
+			$this->db->from('alloc_list');
 			$query=$this->db->get();
 			
 			foreach ($query->result() as $row)
