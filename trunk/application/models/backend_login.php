@@ -26,10 +26,10 @@ class Backend_login extends CI_Model{
             // If there is a user, then create session data
             $row = $query->row();
             $data = array(
-                    'userid' => $row->uid,
-                    'fname' => $row->name,
+                    'uid' => $row->uid,
+                    'name' => $row->name,
                     'lname' => $row->lname,
-                    'e-mail' => $row->mail,
+                    'mail' => $row->mail,
                     'validated' => true
                     );
             $this->session->set_userdata($data);
