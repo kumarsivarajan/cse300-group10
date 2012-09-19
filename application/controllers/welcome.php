@@ -67,6 +67,7 @@ class Welcome extends CI_Controller {
 						'Program'=>Array('input'=>'select','name'=>Array('name'=>'program1','label'=>'Program: '),'values'=>Array('B. Tech', 'M. Tech','Phd')),
 						'room_pref'=>Array('input'=>'select','name'=>Array('name'=>'room_preference','label'=>'Room Preference:'),'values'=>Array('Single','Double','Triple')),
 						'Submit'=>Array('input'=>'submit','value'=>'Apply!','type'=>'submit'));
+
 		$form_attr=array('id'=>'applyForm');
 		$this->load->helper('url');
 		$base_url = base_url();
@@ -151,48 +152,35 @@ class Welcome extends CI_Controller {
 	
 	function alloc_list()
 	{
-		$this->load->model('student_verification');
+		//$this->load->model('student_verification');
 		$this->load->helper('url');
 		$this->load->library('table');
 		$base_url = base_url();
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
-		$data1=array();
-		$data1=$this->student_verification->get_alloc_info();
-		$tmpl = array (
-                    'table_open'          => '<table class="allocation_list" border="0" cellpadding="4" cellspacing="0">',
-
-                    'heading_row_start'   => '<tr>',
-                    'heading_row_end'     => '</tr>',
-                    'heading_cell_start'  => '<th>',
-                    'heading_cell_end'    => '</th>',
-
-                    'row_start'           => '<tr>',
-                    'row_end'             => '</tr>',
-                    'cell_start'          => '<td>',
-                    'cell_end'            => '</td>',
-
-                    'row_alt_start'       => '<tr>',
-                    'row_alt_end'         => '</tr>',
-                    'cell_alt_start'      => '<td>',
-                    'cell_alt_end'        => '</td>',
-
-                    'table_close'         => '</table>'
-              );
-
-$this->table->set_template($tmpl);
-		$this->table->set_heading('Roll No', 'Name', 'Locality','Distance','Status');
 		
-		$this->table->add_row('John', 'Green', 'Medium');
-		foreach($data1 as $student){
-			$this->table->add_row($student['roll_no'],$student['first_name'], 'changethis',$student['distance'],$student['status']);
+
 		
-			}
-		//or
-		$data['student_table']=$this->table->generate();
+		
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		
+		$this->load->database();
+		$this->load->library('table');
+		
+		$tmpl = array ( 'table_open'  => '<table border="1" cellpadding="4" cellspacing="2" class="mytable">' );
+
+		$this->table->set_template($tmpl);
+		$this->table->set_heading('First name', 'Last name', 'Roll No.', 'Address', 'email id', 'Distance','Status');
+		
+		$query = $this->db->query("SELECT * FROM alloc_list");
+
+		
+		
+		$data['table']=$this->table->generate($query);
+		
+		
 		
 		$this->load->view('allocation_list',$data);
 			
