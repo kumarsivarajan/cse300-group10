@@ -47,12 +47,19 @@ class Address_Maps extends CI_Controller {
 		//$this->load->view('maps_page',$data);
 		
 		$this->load->library('googlemaps');
-		$config['center'] = 'Delhi, India';
+		$config['center'] = 'Indraprastha Institute of Information Technology, Delhi';
+		$config['zoom']=10;
 		$this->googlemaps->initialize($config);
 		
 		$marker = array();
-		$marker['position'] = 'sector 10 , dwarka ,new delhi ,india';
+		$marker['position'] = 'Indraprastha Institute of Information Technology, Delhi';
 		$this->googlemaps->add_marker($marker);
+		
+		// 30km radius
+		$circle = array();
+		$circle['center'] = 'Indraprastha Institute of Information Technology, Delhi';
+		$circle['radius'] = '30000';
+		$this->googlemaps->add_circle($circle);
 		
 		
 		
