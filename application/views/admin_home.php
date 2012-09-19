@@ -18,7 +18,7 @@ $(function () {
                 renderTo: 'container',
                 type: 'line',
                 marginRight: 130,
-                marginBottom: 25
+                marginBottom: 35
             },
             title: {
                 text: 'Applications Data',
