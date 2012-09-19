@@ -187,9 +187,21 @@ div.login_bar_wrapper{
 
 		}
 	a.menu_item {
+		
 		margin: 10px 10px 10px 10px;
+		color: white;
+		
 	}
 	a.logout_link{
 		float: right;
+		font-size: 24;
+		color: silver;
 	}
+	a.logout_link:hover{
+		color: red;
+	}
+#navigation{
+	text-align: center;
+	background-color: silver;
+}
 		
