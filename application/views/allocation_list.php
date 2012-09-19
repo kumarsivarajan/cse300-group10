@@ -4,6 +4,14 @@
 <?php foreach($css as $cssfile):?>
 	    <link rel="stylesheet" type="text/css" href="<?php echo base_url("/application/css/".$cssfile)?>"/>
 	    <?php endforeach;?>
+	    <?php foreach($scripts as $script):?>
+	    <script type="text/javascript" src="<?php echo base_url("/application/js/".$script)?>"></script>
+	    <?php endforeach; ?>
+	    <script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				$('#allocation_list').dataTable();
+			} );
+		</script>
 </head>
 <body>
 
@@ -13,36 +21,10 @@
 	
 	<div class="col2">
 		<h1><center>Allocation List</center></h1>
-		<style type="text/css">
 		
-	table.allocation_list {
-		border-width: thin;
-		border-spacing: 1px;
-		border-style: outset;
-		border-color: black;
-		border-collapse: collapse;
-		background-color: rgb(255, 250, 250);
-	}
-	table.allocation_list th {
-		border-width: 1px;
-		padding: 1px;
-		border-style: solid;
-		border-color: gray;
-		background-color: white;
-		-moz-border-radius: ;
-	}
-	table.allocation_list td {
-		border-width: 1px;
-		padding: 1px;
-		border-style: solid;
-		border-color: gray;
-		background-color: white;
-		-moz-border-radius: ;
-	}
-	</style>
 	
 
-	<div class="col3" style="padding-left:164px;padding-bottom:20px"> <?php echo $table?> </div>
+	<?php echo $table?>
 		
 		
 
