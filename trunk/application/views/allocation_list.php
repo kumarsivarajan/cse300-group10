@@ -39,7 +39,7 @@
 		-moz-border-radius: ;
 	}
 	</style>
-
+	<?php echo $student_table;?>
 	<table class="allocation_list" width="80%" height="80%" align="center">
 	<tr style="height:40" align="center">
 		<th width="25%" align="center">Roll Number</th>
@@ -58,9 +58,9 @@
 		
 	</tr>
 	<?php
-	for ($i = 0; $i <= 24; $i++)
+	foreach ($student_array as $student)
 	{
-     	echo "<TR><TD>&nbsp;".$data[i]->first_name."</TD>","\n";
+     	echo "<TR><TD>&nbsp;".$student->first_name."</TD>","\n";
      	echo "<TD>&nbsp;</TD>","\n";
      	echo "<TD>&nbsp;</TD>","\n";
      	echo "<TD>&nbsp;</TD>","\n";

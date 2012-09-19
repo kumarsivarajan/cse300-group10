@@ -36,6 +36,7 @@ class Welcome extends CI_Controller {
 		$navigation_data['navTab']='home';
 		$navigation_data['base_url']=$base_url;
 		$cssfiles[]="styles.css";
+		$data['scripts']=Array('jquery.js','graphs/highcharts.js','graphs/modules/exporting.js');
 		$data['css']=$cssfiles;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		$this->load->view('welcome_message',$data);
@@ -152,23 +153,43 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->model('student_verification');
 		$this->load->helper('url');
+		$this->load->library('table');
 		$base_url = base_url();
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
 		$data1=array();
 		$data1=$this->student_verification->get_alloc_info();
+		$tmpl = array (
+                    'table_open'          => '<table class="allocation_list" border="0" cellpadding="4" cellspacing="0">',
+
+                    'heading_row_start'   => '<tr>',
+                    'heading_row_end'     => '</tr>',
+                    'heading_cell_start'  => '<th>',
+                    'heading_cell_end'    => '</th>',
+
+                    'row_start'           => '<tr>',
+                    'row_end'             => '</tr>',
+                    'cell_start'          => '<td>',
+                    'cell_end'            => '</td>',
+
+                    'row_alt_start'       => '<tr>',
+                    'row_alt_end'         => '</tr>',
+                    'cell_alt_start'      => '<td>',
+                    'cell_alt_end'        => '</td>',
+
+                    'table_close'         => '</table>'
+              );
+
+$this->table->set_template($tmpl);
+		$this->table->set_heading('Roll No', 'Name', 'Locality','Distance','Status');
 		
+		$this->table->add_row('John', 'Green', 'Medium');
 		foreach($data1 as $student){
-			$data[]=Array('first_name'=>$student['first_name'],
-							'roll_no'=>$student['roll_no'],
-							'address'=>$student['address'],
-							'email'=>$student['email'],
-							'distance'=>$student['distance'],
-							'status'=>$student['status']
-							);
+			$this->table->add_row($student['roll_no'],$student['first_name'], 'changethis',$student['distance'],$student['status']);
+		
 			}
 		//or
-		$data['student_array']=$data1;
+		$data['student_table']=$this->table->generate();
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
