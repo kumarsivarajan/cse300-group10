@@ -25,6 +25,10 @@
 	
 
 	<?php echo $table?>
+	<br />
+	<div style="padding-left:20px;padding-bottom:10px">
+	<br /><button onclick="location.href='<?php echo site_url('Welcome/report_person');?>'" >Report</button></div>
+	
 		
 		
 
