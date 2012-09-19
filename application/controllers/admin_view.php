@@ -88,6 +88,34 @@ class Admin_view extends CI_Controller {
 
 		
 	}
+	public function getreports()
+	{
+			$this->load->helper('url');
+			$base_url=base_url();
+			$top_bar['curTab']='modify';
+			$top_bar['base_url']=$base_url;
+			$cssfiles[]="styles.css";
+			$data['css']=$cssfiles;
+			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
+			
+			$cssfiles[]="styles.css";
+			$data['css']=$cssfiles;
+			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+			
+			$this->load->library('table');
+
+			$this->table->set_heading('Person Reported', 'Reason');
+
+			$this->table->add_row('2010061', 'Wrong distance calculated');
+			$this->table->add_row('2010044', 'Wrong address submitted to erp');
+			
+
+			$data['table']=$this->table->generate();
+			
+			$this->load->view('show_report_page',$data);
+	}
+			
+	
 	public function showlist(){
 			$this->load->helper('url');
 			$top_bar['curTab']='modify';
