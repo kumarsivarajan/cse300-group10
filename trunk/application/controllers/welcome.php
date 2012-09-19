@@ -76,7 +76,7 @@ class Welcome extends CI_Controller {
 		$data['form_elem']=$form_elem;
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
-				$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
+		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
 		$data['form_attr']=$form_attr;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		
@@ -156,7 +156,9 @@ class Welcome extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->library('table');
 		$base_url = base_url();
-		$cssfiles[]="styles.css";
+		$cssfiles=Array('styles.css','demo_table.css');
+		$data['scripts']=Array('jquery.js','jquery.dataTables.js');
+		
 
 		$data['css']=$cssfiles;		
 
@@ -167,7 +169,7 @@ class Welcome extends CI_Controller {
 		$this->load->database();
 		$this->load->library('table');
 		
-		$tmpl = array ( 'table_open'  => '<table border="1" cellpadding="4" cellspacing="2" class="mytable">' );
+		$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="allocation_list">' );
 
 		$this->table->set_template($tmpl);
 		$this->table->set_heading('First name', 'Last name', 'Roll No.', 'Address', 'email id', 'Distance','Status');
