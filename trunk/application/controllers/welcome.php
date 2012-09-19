@@ -155,21 +155,20 @@ class Welcome extends CI_Controller {
 		$base_url = base_url();
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
-		
+		$data1=array();
 		$data1=$this->student_verification->get_alloc_info();
-		$size_of=sizeof($data1);
 		
-		for ($i=0; $i<$sizeof_arr; $i++) 
-		{
-			$data[i]['first_name']=$data1[i]['first_name'];
-			$data[i]['roll_no']=$data1[i]['roll_no'];
-			$data[i]['address']=$data1[i]['address'];
-			$data[i]['email']=$data1[i]['email'];
-			$data[i]['distance']=$data1[i]['distance'];
-			$data[i]['status']=$data1[i]['status'];
-			
-		}
-		
+		foreach($data1 as $student){
+			$data[]=Array('first_name'=>$student['first_name'],
+							'roll_no'=>$student['roll_no'],
+							'address'=>$student['address'],
+							'email'=>$student['email'],
+							'distance'=>$student['distance'],
+							'status'=>$student['status']
+							);
+			}
+		//or
+		$data['student_array']=$data1;
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);

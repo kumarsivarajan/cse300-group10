@@ -40,7 +40,7 @@ class Admin_view extends CI_Controller {
 		
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
-//			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+			$data['scripts']=Array('jquery.js','graphs/highcharts.js','graphs/modules/exporting.js');
 			$this->load->view('admin_home',$data);
 
 		
