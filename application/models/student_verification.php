@@ -8,6 +8,8 @@ class Student_verification extends CI_Model{
 	public function getinfo($name,$roll)
 	{
 		$this->load->database();
+		$this->load->library('session');
+
 		//$query = $this->db->query('SELECT first_name, roll_no, address, email FROM student_info WHERE first_name='.$name);
 		
 		$this->db->select('first_name, roll_no, address, email');
@@ -26,9 +28,10 @@ class Student_verification extends CI_Model{
 				'first_name'=> $row->first_name,
 				'roll_no'=> $row->roll_no,
 				'address'=> $row->address,
-				'email'=>$row->email
+				'email'=>$row->email,
+				'isvalidated'=>true
 				);
-				
+				$this->session->set_userdata($data1);
 				return $data1;
 				
 			}
@@ -43,6 +46,7 @@ class Student_verification extends CI_Model{
 				
 				return $data1;
 		}
+		
 		
 	}
 	
