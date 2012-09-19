@@ -13,8 +13,9 @@
 	<div class="admin-topbar"> <?php echo $top_menu?> </div>
 	<div class="admin-contentbar">
 	<!-- This where you write you code-->
-	Test123
-		
+	
+	
+	
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 	</div>
 </div>
