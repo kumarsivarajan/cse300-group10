@@ -27,13 +27,13 @@
 	<option value="Male">Male</option>
 	<option value="Female">Female</option>
 	</select>
-	<br><br>Program:
+	Program:
 	<select name="Program">
 	<option value="B.Tech">B.Tech</option>
 	<option value="M.Tech">M.Tech</option>
 	<option value="PhD">PhD</option>
 	</select>
-	<br><br><form name="input" action="showlist" method="get">
+	<form name="input" action="showlist" method="get">
 	<input type="submit" value="Submit" />
 	</form>
 	<h1><center>Show List</center></h1>
