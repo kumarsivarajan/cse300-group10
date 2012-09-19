@@ -54,13 +54,12 @@ class Student_verification extends CI_Model{
 	{
 			$this->load->database();
 			$this->db->select('first_name, roll_no, address, email');
-			$this->db->from('alloc_list');
+			$this->db->from('student_info');
 			$query=$this->db->get();
 			
-			$count=0;
 			foreach ($query->result() as $row)
 			{
-				$data1[$count]=array(
+				$data1[]=array(
 				'first_name'=> $row->first_name,
 				'roll_no'=> $row->roll_no,
 				'address'=> $row->address,
@@ -68,10 +67,9 @@ class Student_verification extends CI_Model{
 				'distance'=>$row->distance,
 				'status'=>$row->status
 				);
-				$count=$count+1;
 			}
-			
-			return data1;
+		
+			return $data1;
 	}
 			
 			
