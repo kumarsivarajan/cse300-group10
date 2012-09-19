@@ -25,7 +25,14 @@
 		margin: 0 0 14px 0;
 		padding: 14px 15px 10px 15px;
 	}
+	ul.nav_bar li a{
+		color:#359ab2;
+	}
 
+	ul.nav_bar li a:hover{
+		color:blue;
+	}
+	
 	code {
 		font-family: Consolas, Monaco, Courier New, Courier, monospace;
 		font-size: 12px;
@@ -176,6 +183,30 @@ div.login_bar_wrapper{
 			border: 0.5px solid #ffffff;
 			-webkit-box-shadow: 0 0 8px #D0D0D0;
 			box-shadow: 0 0 8px #D0D0D0;
+
+		}
+		.admin-container .admin-contentbar .info{
+			font-size: 42;
+			color: teal;
+			text-align: center;
+
+		}
+		.admin-container .admin-contentbar .info .phd{
+			font-size: 42;
+			color: green;
+			text-align: center;
+
+		}
+		.admin-container .admin-contentbar .info .btech{
+			font-size: 42;
+			color: blue;
+			text-align: center;
+
+		}
+		.admin-container .admin-contentbar .info .mtech{
+			font-size: 42;
+			color: red;
+			text-align: center;
 
 		}
 		.admin-container .admin-topbar{
