@@ -29,7 +29,7 @@
 <div class="admin-container">
 	<div class="admin-topbar"> <?php echo $top_menu?> </div>
 	<div class="admin-contentbar">
-	
+	<h2 style="text-align:center">Manage Account</h2>
 	<!--USING HELPER TO generate a FORM and passing "Admin/modify" as action, with Current, New
 		and Confirm New PASSWORD PLUS CHANGE PASSWORD BUTTON as form elements aka $form_elem-->
 	<div >

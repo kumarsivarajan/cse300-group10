@@ -98,18 +98,22 @@ class Admin_view extends CI_Controller {
 			$data['css']=$cssfiles;
 			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
 			
-			$cssfiles[]="styles.css";
+			$cssfiles=Array('styles.css','demo_table.css');
 			$data['css']=$cssfiles;
-			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
-			
+			//$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+			$data['scripts']=Array('jquery.js','jquery.dataTables.js');
+		
 			$this->load->library('table');
+			$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="admin_list">' );
 
+			$this->table->set_template($tmpl);
+			
 			$this->table->set_heading('Person Reported', 'Reason');
 
 			$this->table->add_row('2010061', 'Wrong distance calculated');
 			$this->table->add_row('2010044', 'Wrong address submitted to erp');
 			
-
+			
 			$data['table']=$this->table->generate();
 			
 			$this->load->view('show_report_page',$data);
