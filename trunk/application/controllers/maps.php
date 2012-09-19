@@ -47,7 +47,7 @@ class Maps extends CI_Controller {
 		//$this->load->view('maps_page',$data);
 		// Load the library
 		$this->load->library('googlemaps');
-		$config['center'] = '26.0167,77.3833';
+		$config['center'] = 'Delhi, India';
 		$this->googlemaps->initialize($config);
 		
 		$data['map'] = $this->googlemaps->create_map();
