@@ -53,6 +53,7 @@ class Address_Maps extends CI_Controller {
 		
 		$marker = array();
 		$marker['position'] = 'Indraprastha Institute of Information Technology, Delhi';
+		$marker['title']='Indraprastha Institute of Information Technology, Delhi';
 		$this->googlemaps->add_marker($marker);
 		
 		// 30km radius
