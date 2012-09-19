@@ -60,8 +60,8 @@ class Welcome extends CI_Controller {
 	function name_rollno()
 	{
 		$this->load->helper('form');
-		$form_elem=Array('Name'=>Array('input'=>'text','name'=>'name','id'=>'name','type'=>'text','label'=>'Your name','class'=>'required'),
-						'Roll'=>Array('input'=>'text','name'=>'roll','id'=>'roll','type'=>'text','label'=>'Your roll no','class'=>'required'),
+		$form_elem=Array('Name'=>Array('input'=>'text','name'=>'name','id'=>'name','type'=>'text','label'=>'Your Name','class'=>'required'),
+						'Roll'=>Array('input'=>'text','name'=>'roll','id'=>'roll','type'=>'text','label'=>'Your Roll. No.','class'=>'required'),'Contact'=>Array('input'=>'text','name'=>'contact','id'=>'contact','type'=>'text','label'=>'Your Contact No.','class'=>'required'),
 						'Location'=>Array('input'=>'text','name'=>'location','id'=>'location','type'=>'text','label'=>'Your Location','class'=>'required'),
 						'Gender'=>Array('input'=>'select','name'=>Array('name'=>'gender','label'=>'Gender: '),'values'=>Array('Male', 'Female')),
 						'Program'=>Array('input'=>'select','name'=>Array('name'=>'program1','label'=>'Program: '),'values'=>Array('B. Tech', 'M. Tech','Phd')),
