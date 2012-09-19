@@ -19,8 +19,9 @@
 
 <div class="admin-container">
 	<div class="admin-topbar"> <?php echo $top_menu?> </div>
+	
 	<div class="admin-contentbar" align=center>
-
+	<h2 style="text-align:center">Reports</h2>
 	<?php echo $table?>
 		
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
