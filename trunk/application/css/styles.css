@@ -192,6 +192,9 @@ div.login_bar_wrapper{
 		color: white;
 		
 	}
+	a.menu_item:hover{
+		color: #0cc6e6;
+	}
 	a.logout_link{
 		float: right;
 		font-size: 24;
