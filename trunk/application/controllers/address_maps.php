@@ -44,6 +44,8 @@ class Address_Maps extends CI_Controller {
 		$cssfiles[]="styles.css";
 		$data['scripts']=Array('jquery.js');
 		
+		
+		
 		$data['css']=$cssfiles;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		//$this->load->view('maps_page',$data);
@@ -70,8 +72,10 @@ class Address_Maps extends CI_Controller {
 		$marker['draggable'] = TRUE;
 		$marker['title']='Vikas Kunj';
 		$marker['infowindow_content'] = 'Your Address:1059, Vikas Kunj, Vikas Puri';
-$marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+		$marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
 		$this->googlemaps->add_marker($marker);
+		
+		
 		
 		// 30km radius
 		$circle = array();

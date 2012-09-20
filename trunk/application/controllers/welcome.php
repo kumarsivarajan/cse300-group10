@@ -212,7 +212,19 @@ class Welcome extends CI_Controller {
 		$this->load->view('report_issue',$data);	
 	}
 	
-
+	
+function submit()
+	{
+		$this->load->helper('url');
+		$base_url = base_url();
+		$cssfiles[]="styles.css";
+		$data['css']=$cssfiles;
+		$navigation_data['navTab']='apply';
+		$navigation_data['base_url']=$base_url;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		$this->load->view('Submit_page',$data);	
+	}
+	
 	
 }
 
