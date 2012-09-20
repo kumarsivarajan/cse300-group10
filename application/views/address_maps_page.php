@@ -17,7 +17,14 @@
 		</script>
 		
 		<br />
-		<button>Proceed</button>
+		<strong>Applicant's Name:</strong>Manik<br>
+		
+		<strong>ERP Address:</strong>1059 Vikas Kunj Vikas Puri New Delhi-110018<br>
+		
+		<strong>Distance Calculated:</strong>24 K.M<br>
+		
+		
+		<button>Proceed</button><button>Report</button>
 		
 		</br>
 	
