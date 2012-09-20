@@ -15,7 +15,7 @@ class Email_user extends CI_Controller {
  
 		if($this->email->send())
 		{
-			echo '<html> <body><h1>Email sent. Follow the link in the email to proceed</h1>
+			echo '<html> <body><h1>Email sent. Follow the link in the email to proceed (Please check the SPAM folder as well)</h1>
 			Mail Link : <a href="http://mail.iiitd.ac.in">IIITD:Webmail</a>
 			</body> </html>';
 		}
