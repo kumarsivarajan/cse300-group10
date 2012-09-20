@@ -56,6 +56,15 @@ class Address_Maps extends CI_Controller {
 		$marker['title']='Indraprastha Institute of Information Technology, Delhi';
 		$this->googlemaps->add_marker($marker);
 		
+		$marker = array();
+		$marker['position'] = '1059, Vikas Kunj, Vikas Puri';
+		$marker['animation'] = 'DROP';
+		$marker['draggable'] = TRUE;
+		$marker['title']='Vikas Kunj';
+		$marker['infowindow_content'] = 'Your Address:Vikas Kunj';
+$marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+		$this->googlemaps->add_marker($marker);
+		
 		// 30km radius
 		$circle = array();
 		$circle['center'] = 'Indraprastha Institute of Information Technology, Delhi';
