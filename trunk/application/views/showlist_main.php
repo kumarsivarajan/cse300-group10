@@ -27,6 +27,12 @@
 	<option value="M.Tech">M.Tech</option>
 	<option value="PhD">PhD</option>
 	</select>
+	<br><br>Room Preference:
+	<select name="Room Preference">
+	<option value="Single">Single</option>
+	<option value="Double">Double</option>
+	<option value="Triple">Triple</option>
+	</select>
 	<br><br><form name="input" action="showlist" method="get">
 	<input type="submit" value="Submit" />
 	</form>
