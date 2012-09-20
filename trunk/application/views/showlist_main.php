@@ -20,12 +20,14 @@
 	<select name="Gender">
 	<option value="Male">Male</option>
 	<option value="Female">Female</option>
+	<option value="All">All</option>
 	</select>
 	<br><br>Program:
 	<select name="Program">
 	<option value="B.Tech">B.Tech</option>
 	<option value="M.Tech">M.Tech</option>
 	<option value="PhD">PhD</option>
+	<option value="All">All</option>
 	</select>
 	<br><br>Room Preference:
 	<select name="Room Preference">
