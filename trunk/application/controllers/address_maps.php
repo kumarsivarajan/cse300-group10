@@ -42,6 +42,8 @@ class Address_Maps extends CI_Controller {
 		$navigation_data['navTab']='home';
 		$navigation_data['base_url']=$base_url;
 		$cssfiles[]="styles.css";
+		$data['scripts']=Array('jquery.js');
+		
 		$data['css']=$cssfiles;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		//$this->load->view('maps_page',$data);
@@ -49,19 +51,25 @@ class Address_Maps extends CI_Controller {
 		$this->load->library('googlemaps');
 		$config['center'] = 'Indraprastha Institute of Information Technology, Delhi';
 		$config['zoom']=10;
+		$config['directions'] = TRUE;
+		$config['directionsStart'] = '1059 Vikas Kunj Vikaspuri New Delhi';
+		$config['directionsEnd'] = 'Indraprastha Institute of Information Technology, Delhi';
+		$config['directionsDivID'] = 'directionsDiv';
 		$this->googlemaps->initialize($config);
 		
 		$marker = array();
 		$marker['position'] = 'Indraprastha Institute of Information Technology, Delhi';
 		$marker['title']='Indraprastha Institute of Information Technology, Delhi';
+		
+		$marker['infowindow_content'] = 'Insitute : IIIT-D Okhla';
 		$this->googlemaps->add_marker($marker);
 		
 		$marker = array();
-		$marker['position'] = '1059, Vikas Kunj, Vikas Puri';
+		$marker['position'] = '1059 Vikas Kunj Vikaspuri New Delhi';
 		$marker['animation'] = 'DROP';
 		$marker['draggable'] = TRUE;
 		$marker['title']='Vikas Kunj';
-		$marker['infowindow_content'] = 'Your Address:Vikas Kunj';
+		$marker['infowindow_content'] = 'Your Address:1059, Vikas Kunj, Vikas Puri';
 $marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
 		$this->googlemaps->add_marker($marker);
 		
@@ -69,6 +77,12 @@ $marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld
 		$circle = array();
 		$circle['center'] = 'Indraprastha Institute of Information Technology, Delhi';
 		$circle['radius'] = '30000';
+		$this->googlemaps->add_circle($circle);
+		
+		$circle = array();
+		$circle['center'] = '1059 Vikas Kunj Vikaspuri New Delhi';
+		$circle['radius'] = '1000';
+		$circle['fillColor']='blue';
 		$this->googlemaps->add_circle($circle);
 		
 		
