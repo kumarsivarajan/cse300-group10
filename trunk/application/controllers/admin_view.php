@@ -40,7 +40,7 @@ class Admin_view extends CI_Controller {
 		
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
-			$data['scripts']=Array('jquery.js','graphs/highcharts.js','graphs/modules/exporting.js');
+//			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
 			$this->load->view('admin_home',$data);
 
 		
@@ -59,15 +59,17 @@ class Admin_view extends CI_Controller {
 			
 			
 			//by Mayank
-			$form_elem = Array('Current_Password'=>Array('input'=>'text','name'=>'current_Password','id'=>'pass','type'=>'password','label'=>'Current Password','class'=>'required'), 'New_Password'=>Array('input'=>'text','name'=>'new_Password','id'=>'n_pass','type'=>'password','label'=>'New Password','class'=>'required'), 'Confirm_New_Password'=>Array('input'=>'text','name'=>'confirm_new_Password','id'=>'cn_pass','type'=>'password','label'=>'Confirm New Password','class'=>'required'), 'Change'=>Array('input'=>'submit','value'=>'Change Password','type'=>'submit'));
+			$form_elem = Array('Current_Password'=>Array('input'=>'text','name'=>'Current_Password','id'=>'pass','type'=>'password','label'=>'Current Password'), 'New_Password'=>Array('input'=>'text','name'=>'New_Password','id'=>'n_pass','type'=>'password','label'=>'New Password'), 'Confirm_New_Password'=>Array('input'=>'text','name'=>'Confirm_New_Password','id'=>'cn_pass','type'=>'password','label'=>'Confirm New Password'), 'Change'=>Array('input'=>'submit','value'=>'Change Password','type'=>'submit'));
 			$data['form_elem']=$form_elem;
-			$form_attr=array('id'=>'modifyForm');
-			$data['form_attr']=$form_attr;
 			
 			
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
-			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
+			
+			//A little issue here [Java script not working] (or I dont know how to make it work)
+//			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+			
+			
 			$this->load->view('admin_manage',$data);
 
 	}
@@ -88,62 +90,18 @@ class Admin_view extends CI_Controller {
 
 		
 	}
-	public function getreports()
-	{
-			$this->load->helper('url');
-			$base_url=base_url();
-			$top_bar['curTab']='modify';
-			$top_bar['base_url']=$base_url;
-			$cssfiles[]="styles.css";
-			$data['css']=$cssfiles;
-			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
-			
-			$cssfiles=Array('styles.css','demo_table.css');
-			$data['css']=$cssfiles;
-			//$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
-			$data['scripts']=Array('jquery.js','jquery.dataTables.js');
-		
-			$this->load->library('table');
-			$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="admin_list">' );
-
-			$this->table->set_template($tmpl);
-			
-			$this->table->set_heading('Person Reported', 'Reason');
-
-			$this->table->add_row('2010061', 'Wrong distance calculated');
-			$this->table->add_row('2010044', 'Wrong address submitted to erp');
-			
-			
-			$data['table']=$this->table->generate();
-			
-			$this->load->view('show_report_page',$data);
-	}
-			
-	
 	public function showlist(){
 			$this->load->helper('url');
 			$top_bar['curTab']='modify';
 			$base_url=base_url();
 			$top_bar['base_url']=$base_url;
-			$cssfiles=Array('styles.css','demo_table.css');
+			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
 			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
-			$this->load->library('table');
-			$this->load->database();
-
-			$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="admin_list">' );
-
-			$this->table->set_template($tmpl);
-			$this->table->set_heading('First name', 'Last name', 'Roll No.', 'Address', 'email id', 'Distance','Status');
 		
-			$query = $this->db->query("SELECT first_name,last_name,roll_no,address,email,distance,status FROM alloc_list");
-
-		
-		
-			$data['table']=$this->table->generate($query);
-		
+			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
-			$data['scripts']=Array('jquery.js','jquery.dataTables.js');
+//			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
 		
 			$this->load->view('showlist',$data);
 
@@ -160,32 +118,47 @@ class Admin_view extends CI_Controller {
 	{
 		//Load Change Password Module to use its functions
 		$this->load->model('change_pass_model');
+		
 		$this->load->helper('url');
 		
+		$cur_pass1 = $_POST['Current_Password']; //Get current password posted in Form made in views/admin_manage
+		$new_pass1 = $_POST['New_Password']; //Get New password posted in Form made in views/admin_manage
+		$confirm_new_pass1 = $_POST['Confirm_New_Password']; //Get confirm new password posted in Form made in views/admin_manage
 		
-		$login_name = $_POST[''];  // ISSUE1 Have to get this Login_name (i.e. currently logged in admin's username) somehow. 
-		
-		
-		$cur_pass1 = $_POST['Current_Password'];
-		$new_pass1 = $_POST['New_Password'];
-		$confirm_new_pass1 = $_POST['Confirm_New_Password'];
 		
 		if ($new_pass1 == $confirm_new_pass1)
-		{
-			if ($this->change_pass_model->check_current_password($cur_pass1, $login_name))
+		{	
+			/* The following line checks if current password as provided by user in form correctly matches the 
+			*	password of currently logged in user. It calls check_current_password() function from 
+			*	"change_pass_model" MODEL 
+			*/				
+			if ($this->change_pass_model->check_current_password($cur_pass1))
 			{
 			
 				/*This following line calls "change_the_password()" FUNCTION from "change_pass_model" MODEL and
-					changes the password for the above user with username "$login_name".
+					changes the password for the currently logged-in user.
 				*/
 				$this->change_pass_model->change_the_password($new_pass1);
 				
-				
-				/*
-				ISSUE 2 I dont exactly know what to do after changing password. 
-				I was thinking to redirect the user to Admin homepage. 
+				/* FOLLOWING NEEDS TO BE edited/changed TO show user that his password has been chagned. 
+				* [MAYBE JAVASCRIPT IS NEEDED in "views/admin_manage" which is ultimately called by the
+				*  following redirect]
 				*/
+				redirect('Admin_view/modify');
+				
 			}
+			
+			else
+			{
+			  // Comes here when the current user's (who is logged in) password in database does not match
+			  // with the one provided in form in the field Current Password.
+			}
+			
+		}
+		else 
+		{
+		// COMES here when new_password is not same as confirm_new_password field
+		
 		}
 	}
 	
