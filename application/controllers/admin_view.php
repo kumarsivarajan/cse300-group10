@@ -136,7 +136,7 @@ class Admin_view extends CI_Controller {
 			$this->table->set_template($tmpl);
 			$this->table->set_heading('First name', 'Last name', 'Roll No.', 'Address', 'email id', 'Distance','Status');
 		
-			$query = $this->db->query("SELECT first_name,last_name,roll_no,address,email,distance,status FROM alloc_list");
+			$query = $this->db->query("SELECT first_name,last_name,roll_no,location,email,distance,status FROM alloc_list");
 
 		
 		
