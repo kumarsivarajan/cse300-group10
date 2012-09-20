@@ -17,8 +17,11 @@
 		Course: <b><?php if ($course == 0) {echo "M. Tech";}
 						 elseif ($course == 1){echo "B. Tech";}
 						 else {echo "Phd";}?></b><br />
-		Room Preference: <b><?php if ($room_preference == 0) {echo "Single";}
-						 elseif ($course == 1){echo "Double";}
+		Room Preference 1: <b><?php if ($room_preference1 == 0) {echo "Single";}
+						 elseif ($room_preference1 == 1){echo "Double";}
+						 else {echo "Triple";} ?></b><br />
+		Room Preference 2: <b><?php if ($room_preference2 == 0) {echo "Single";}
+						 elseif ($room_preference2 == 1){echo "Double";}
 						 else {echo "Triple";} ?></b><br />
 		Address: [Will be taken fron the database]<br /><br />
 		

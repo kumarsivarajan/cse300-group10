@@ -61,11 +61,14 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->helper('form');
 		$form_elem=Array('Name'=>Array('input'=>'text','name'=>'name','id'=>'name','type'=>'text','label'=>'Your Name','class'=>'required'),
-						'Roll'=>Array('input'=>'text','name'=>'roll','id'=>'roll','type'=>'text','label'=>'Your Roll. No.','class'=>'required'),'Contact'=>Array('input'=>'text','name'=>'contact','id'=>'contact','type'=>'text','label'=>'Your Contact No.','class'=>'required'),
+						'Roll'=>Array('input'=>'text','name'=>'roll','id'=>'roll','type'=>'text','label'=>'Your Roll. No.','class'=>'required'),
+						'E-mail'=>Array('input'=>'text','name'=>'email','id'=>'email','type'=>'text','label'=>'Your E-mail ID','class'=>'required'),
+						'Contact'=>Array('input'=>'text','name'=>'contact','id'=>'contact','type'=>'text','label'=>'Your Contact No.','class'=>'required'),
 						'Location'=>Array('input'=>'text','name'=>'location','id'=>'location','type'=>'text','label'=>'Your Location','class'=>'required'),
 						'Gender'=>Array('input'=>'select','name'=>Array('name'=>'gender','label'=>'Gender: '),'values'=>Array('Male', 'Female')),
 						'Program'=>Array('input'=>'select','name'=>Array('name'=>'program1','label'=>'Program: '),'values'=>Array('B. Tech', 'M. Tech','Phd')),
-						'room_pref'=>Array('input'=>'select','name'=>Array('name'=>'room_preference','label'=>'Room Preference:'),'values'=>Array('Single','Double','Triple')),
+						'room_pref1'=>Array('input'=>'select','name'=>Array('name'=>'room_preference1','label'=>'Room Preference 1:'),'values'=>Array('Single','Double','Triple')),
+						'room_pref2'=>Array('input'=>'select','name'=>Array('name'=>'room_preference2','label'=>'Room Preference 2:'),'values'=>Array('Single','Double','Triple')),
 						'Submit'=>Array('input'=>'submit','value'=>'Apply!','type'=>'submit'));
 
 		$form_attr=array('id'=>'applyForm');
@@ -90,7 +93,9 @@ class Welcome extends CI_Controller {
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
 		$program = $_POST['program1'];  // student course as in(mtech,btech)
-		$room_preference = $_POST['room_preference']; // room preferesnce (as in type of room single,double ..)
+		$email = $_POST['email'];
+		$room_preference1 = $_POST['room_preference1']; // room preferesnce (as in type of room single,double ..)
+		$room_preference2 = $_POST['room_preference2'];
 		$name = $_POST['name'];
 		//Process $name
 		$roll = $_POST['roll'];
@@ -99,10 +104,12 @@ class Welcome extends CI_Controller {
 		//Process $age
 		$data['name']=$name;
 		$data['roll']=$roll;
+		$data['email']=$email;
 		$data['location']=$location;
 		$data['program']=$program;
 		$data['gender']=$gender;
-		$data['room_preference']=$room_preference;
+		$data['room_preference1']=$room_preference1;
+		$data['room_preference2']=$room_preference2;
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
@@ -120,21 +127,25 @@ class Welcome extends CI_Controller {
 		
 		$name = $_POST['name'];
 		$roll = $_POST['roll'];
+		$email = $_POST['email'];
 		$location=$_POST['location'];
 		$gender=$_POST['gender'];
 		$program = $_POST['program1'];  // student course as in(mtech,btech)
-		$room_preference = $_POST['room_preference']; // room preferesnce (as in type of room single,double ..)
 		
+		$room_preference1 = $_POST['room_preference1']; // room preferesnce (as in type of room single,double ..)
+		$room_preference2 = $_POST['room_preference2']; // room preferesnce (as in type of room single,double ..)
 		$data1=Array();
 		$data1=$this->student_verification->getinfo($name, $roll);
 		
 		$data['firstname']=$data1['first_name'];
 		$data['roll']=$data1['roll_no'];
+		$data['email'] = $data1['email'];
 		$data['address']=$data1['address'];
 		$data['location']=$location;
 		$data['program']=$program;
 		$data['gender']=$gender;
-		$data['room_preference']=$room_preference;		
+		$data['room_preference1']=$room_preference1;		
+		$data['room_preference2']=$room_preference2;
 		
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
