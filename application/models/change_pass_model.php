@@ -64,7 +64,7 @@ class Change_pass_model extends CI_Model{
 	{
 		$this->load->database();
 		$data = array('pwd' => $new_pass);
-		$this->db->update('admin_users', $data);			
+		$this->db->update('admin_users', $data);
 		
 	}
 	
