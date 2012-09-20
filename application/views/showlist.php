@@ -33,6 +33,13 @@
 	<option value="B.Tech">B.Tech</option>
 	<option value="M.Tech">M.Tech</option>
 	<option value="PhD">PhD</option>
+	<option value="All">All</option>
+	</select>
+	Room Preference:
+	<select name="Room Preference">
+	<option value="Single">Single</option>
+	<option value="Double">Double</option>
+	<option value="Triple">Triple</option>
 	</select>
 	<form name="input" action="showlist" method="get">
 	<input type="submit" value="Submit" />
