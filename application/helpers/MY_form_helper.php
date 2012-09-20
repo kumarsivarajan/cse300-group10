@@ -14,6 +14,9 @@ function form_input_infield($data = '', $value = '', $extra = '')
     $defaults = array('type' => 'text', 'name' => (( ! is_array($data)) ? $data : ''), 'value' => $value);
     	$prefix="<p>";
     	$suffix="</p>";
+
+    	if(isset($data['instruction']))
+    		 $suffix="&nbsp".$data['instruction'].$suffix;
     	if(isset($data['label'])&&isset($data['id']))
     		$prefix=$prefix."<label for=".$data['id'].">".$data['label']."</label>";
 		return $prefix."<input "._parse_form_attributes($data, $defaults).$extra." />".$suffix;

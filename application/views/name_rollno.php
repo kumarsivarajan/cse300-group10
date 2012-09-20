@@ -31,7 +31,28 @@
 	<h1><center>Hostel Application Form</center></h1>
 		<?php echo generate_form('Welcome/validate_student',$form_elem,$form_attr);?>
 		<br />
-		</form>
+		
+		<div id="instr";>
+		<br />
+		<center><b>Instructions</b></center>
+		<br />
+		
+		<div style="position: absolute;left: 50px;right: 30px">
+		<li>To apply for the hostel, please fill in all the fields marked in red</li>
+		<br />
+		<li>If you haven't been given your IIIT Email, enter any alternate email<br />
+		    on which a verification link can be sent</li>
+		<br />
+		<li>Make sure your first room preference is different from the second room preference</li>
+		<br />
+		<li>In the location field, enter only the area where your house is located<br />
+		    (Precise address is not required)</li>
+		<br />
+	 	</div>
+		</div>
+		
+		
+		
 		
 	</div>
 </body>
