@@ -134,13 +134,36 @@ class Admin_view extends CI_Controller {
 			$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="admin_list">' );
 
 			$this->table->set_template($tmpl);
-			$this->table->set_heading('First name', 'Last name', 'Roll No.', 'Address', 'email id', 'Distance','Status');
+			$this->table->set_heading('First name', 'Last name', 'Gender','Roll No.','Program', 'Address', 'email id', 'Distance','Status','Action','Message');
 		
-			$query = $this->db->query("SELECT first_name,last_name,roll_no,location,email,distance,status FROM alloc_list");
-
+			$query = $this->db->query("SELECT first_name,last_name,gender,roll_no,program,location,email,distance,status FROM alloc_list");
+			//print_r($query);
+			foreach($query->result() as $row)
+			{
+				/*$row[0]['select']='<select>
+						<option value="volvo">Weak accept</option>
+		  <option value="saab">Weak reject</option>
+		  <option value="mercedes">Strong accept</option>
+		  <option value="audi">Strong reject</option>
+			<option value="audi">Waiting</option>
+													
+		</select>';
+				
+				$row[0]['msg']='<button >add message</button>';*/
+				$this->table->add_row(array($row->first_name,$row->last_name,$row->gender,$row->roll_no,$row->program,$row->location,$row->email,$row->distance,$row->status,'<select>
+						<option value="volvo">Weak accept</option>
+		  <option value="saab">Weak reject</option>
+		  <option value="mercedes">Strong accept</option>
+		  <option value="audi">Strong reject</option>
+			<option value="audi">Waiting</option>
+													
+		</select>','<button >add message</button>'));
+					
+			
+			}
+			//return;
 		
-		
-			$data['table']=$this->table->generate($query);
+			$data['table']=$this->table->generate();
 		
 			$data['css']=$cssfiles;
 			$data['scripts']=Array('jquery.js','jquery.dataTables.js');
