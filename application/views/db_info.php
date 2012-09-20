@@ -28,8 +28,8 @@
 		Room Preference1: <b><?php if ($room_preference1 == 0) {echo "Single";}
 						 elseif ($room_preference1 == 1){echo "Double";}
 						 else {echo "Triple";} ?></b><br />
-		Room Preference2: <b><?php if ($room_preference2 == 0) {echo "Single";}
-						 elseif ($room_preference2 == 1){echo "Double";}
+		Room Preference2: <b><?php if ($room_preference2 == 0) {echo "Double";}
+						 //elseif ($room_preference2 == 1){echo "Double";}
 						 else {echo "Triple";} ?></b><br /><br />
 		
 		<button onclick="location.href='<?php echo site_url('Email_user');?>'">Proceed</button>
