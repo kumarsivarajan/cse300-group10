@@ -43,8 +43,15 @@
 		
 		<strong>ERP Address:</strong>1059 Vikas Kunj Vikas Puri New Delhi-110018<br>
 		
+		<center><p><b><big>If you have some issue with the shown address please click Report otherwise submit</big></b></p></center>
+		<center>
+		<!--<button style="height: 50px; width: 200px">Proceed</button> 
+		&nbsp;
+		&nbsp;
+		<button style="height: 50px; width: 200px" action ="">Report</button></center>-->
 		
-		<button>Proceed</button><button>Report</button>
+		<button onclick="location.href="#">Proceed</button>
+		<button onclick="location.href='<?php echo site_url('Maps');?>'">Report</button>
 		
 		</br>
 	
