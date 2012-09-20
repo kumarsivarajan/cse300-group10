@@ -21,8 +21,11 @@
 		Gender: <b><?php if($gender==0){echo "Male";}
 							else{echo "Female";}
 						?></b><br />
-		Room Preference: <b><?php if ($room_preference == 0) {echo "Single";}
-						 elseif ($program == 1){echo "Double";}
+		Room Preference 1: <b><?php if ($room_preference1 == 0) {echo "Single";}
+						 elseif ($room_preference1 == 1){echo "Double";}
+						 else {echo "Triple";} ?></b><br /><br />
+		Room Preference 2: <b><?php if ($room_preference2 == 0) {echo "Single";}
+						 elseif ($room_preference2 == 1){echo "Double";}
 						 else {echo "Triple";} ?></b><br /><br />
 		
 		<button onclick="location.href='<?php echo site_url('Email_user');?>'">Proceed</button>
