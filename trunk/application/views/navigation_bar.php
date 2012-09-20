@@ -4,9 +4,10 @@
 </h1>
 <h2 id="navigation"title="institute logo">Site Navigator:</h2>
 <ul class="nav_bar" title="navigation">
- <li <? if($navTab == "about"){echo " id=\"active\"";}?>><a href="<?php echo site_url('Welcome/about'); ?>" title="About Page">About the System</a></li>
+ <li <? if($navTab == "home"){echo " id=\"active\"";}?>><a href="<?php echo base_url(); ?>" title="Home Page">Home</a></li>
  <li <? if($navTab == "add"){echo " id=\"active\"";}?>><a href="<?php echo site_url('Welcome/name_rollno'); ?>" title="Apply">Apply For Hostel Room</a></li>
  <li <? if($navTab == "list"){echo " id=\"active\"";}?>><a href="<?php echo site_url('Welcome/alloc_list'); ?>" title="Apply">Allocation List</a></li>
- <li <? if($navTab == "home"){echo " id=\"active\"";}?>><a href="<?php echo base_url(); ?>" title="Home Page">Home</a></li>
+ 
+ <li <? if($navTab == "about"){echo " id=\"active\"";}?>><a href="<?php echo site_url('Welcome/about'); ?>" title="About Page">About the System</a></li>
  </ul>
  </div>
