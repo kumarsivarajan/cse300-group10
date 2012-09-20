@@ -6,9 +6,13 @@ class Email_user extends CI_Controller {
 		$this->load->library('session');
 
 		$this->email->from('hosteliiitd@gmail.com'); // change it to yours
+
+		$this->email->to('kunal08030@iiitd.ac.in'); // change it to yours
+
 		$student_data=$this->session->all_userdata();
 		$emailTo=$student_data['email'];
 		$this->email->to($emailTo); // change it to yours
+
 		$this->email->subject('Hostel Application Form Verification');
 		$this->email->message('Verify your hostel application by clicking on this link:-
 		http://localhost/cse300-group10/index.php/address_maps');
