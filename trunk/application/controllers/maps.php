@@ -48,7 +48,19 @@ class Maps extends CI_Controller {
 		// Load the library
 		$this->load->library('googlemaps');
 		$config['center'] = 'Delhi, India';
+		$config['zoom']='10';
 		$this->googlemaps->initialize($config);
+		
+		
+		$marker = array();
+		$marker['position'] = 'Indraprastha Institute of Information Technology, Delhi';
+		
+		
+		$marker['animation'] = 'DROP';
+		$marker['draggable'] = TRUE;
+	
+		$this->googlemaps->add_marker($marker);
+		
 		
 		$data['map'] = $this->googlemaps->create_map();
 		
