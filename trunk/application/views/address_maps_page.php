@@ -51,7 +51,7 @@
 		<button style="height: 50px; width: 200px" action ="">Report</button></center>-->
 		
 		<button onclick="location.href='<?php echo site_url('Welcome/submit');?>'">Proceed</button>
-		<button onclick="location.href='<?php echo site_url('Maps');?>'">Report</button>
+		<button onclick="location.href='<?php echo site_url('Welcome/report_person');?>'">Report</button>
 		
 		</br>
 	
