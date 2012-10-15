@@ -40,7 +40,7 @@
 		<div style="position: absolute;left: 50px;right: 30px">
 		<li>To apply for the hostel, please fill in all the fields marked in red</li>
 		<br />
-		<li>If you haven't been given your IIIT Email, enter any alternate email<br />
+		<li>If you haven't been given your IIIT-D Email, enter your registered e-mail<br />
 		    on which a verification link can be sent</li>
 		<br />
 		<li>Make sure your first room preference is different from the second room preference</li>
