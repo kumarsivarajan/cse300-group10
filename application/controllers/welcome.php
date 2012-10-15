@@ -60,8 +60,8 @@ class Welcome extends CI_Controller {
 	function name_rollno()
 	{
 		$this->load->helper('form');
-		$form_elem=Array('First_Name'=>Array('input'=>'text','name'=>'name','id'=>'name','type'=>'text','label'=>'Your First Name','class'=>'required'),
-						 'Second_Name'=>Array('input'=>'text','name'=>'name','id'=>'name','type'=>'text','label'=>'Your Second Name','class'=>'required'),
+		$form_elem=Array('First_Name'=>Array('input'=>'text','name'=>'fname','id'=>'fname','type'=>'text','label'=>'Your First Name','class'=>'required'),
+						 'Last_Name'=>Array('input'=>'text','name'=>'lname','id'=>'lname','type'=>'text','label'=>'Your Last Name','class'=>'required'),
 						'Roll'=>Array('input'=>'text','name'=>'roll','id'=>'roll','type'=>'text','label'=>'Your Roll. No.','class'=>'required'),
 						'E-mail'=>Array('input'=>'text','name'=>'email','id'=>'email','type'=>'text','label'=>'Your E-mail ID','class'=>'required'),
 						'Contact'=>Array('input'=>'text','name'=>'contact','id'=>'contact','type'=>'text','label'=>'Your Contact No.','class'=>'required'),
