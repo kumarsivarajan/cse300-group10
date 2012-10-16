@@ -5,16 +5,18 @@ class Student_verification extends CI_Model{
         parent::__construct();
     }
 	
-	public function getinfo($name,$roll)
+	public function getinfo($fname,$lname,$roll)
 	{
 		$this->load->database();
 		$this->load->library('session');
 
 		//$query = $this->db->query('SELECT first_name, roll_no, address, email FROM student_info WHERE first_name='.$name);
 		
-		$this->db->select('first_name, roll_no, address, email');
+		$this->db->select('first_name, last_name, roll_no, address, email');
 		$this->db->from('student_info');
-		$this->db->where('first_name',$name);
+		$this->db->where('first_name',$fname);
+		$this->db->where('last_name',$lname);
+		
 		$this->db->where('roll_no',$roll);
 		
 		
@@ -26,6 +28,8 @@ class Student_verification extends CI_Model{
 			{
 				$data1=array(
 				'first_name'=> $row->first_name,
+				'last_name'=> $row->last_name,
+				
 				'roll_no'=> $row->roll_no,
 				'address'=> $row->address,
 				'email'=>$row->email,

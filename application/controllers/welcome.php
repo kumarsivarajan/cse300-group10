@@ -18,6 +18,11 @@ class Welcome extends CI_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	 
+	 
+	public $FName='';
+	public $LName='';
+	public $Roll='';
+	 
 	public function index()
 	{
 		$this->load->helper('url');
@@ -121,13 +126,25 @@ class Welcome extends CI_Controller {
 	function validate_student()
 	{
 		$this->load->model('student_verification');
+		$this->load->library('session');
 		$this->load->helper('url');
 		$base_url = base_url();
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
 		
-		$name = $_POST['name'];
+		$this->load->library('session');
+		
+		$fname = $_POST['fname'];
+		$lname=$_POST['lname'];
+		
+		$this->FName=$fname;
+		$this->LName=$lname;
+		$this->ROll=$roll;
+		
+		//echo $this->FName."   ".$fname;
+		
 		$roll = $_POST['roll'];
+		$Roll=$roll;
 		$email = $_POST['email'];
 		$location=$_POST['location'];
 		$gender=$_POST['gender'];
@@ -136,9 +153,11 @@ class Welcome extends CI_Controller {
 		$room_preference1 = $_POST['room_preference1']; // room preferesnce (as in type of room single,double ..)
 		$room_preference2 = $_POST['room_preference2']; // room preferesnce (as in type of room single,double ..)
 		$data1=Array();
-		$data1=$this->student_verification->getinfo($name, $roll);
+		$data1=$this->student_verification->getinfo($fname, $lname, $roll);
 		
 		$data['firstname']=$data1['first_name'];
+		$data['lastname']=$data1['last_name'];
+		
 		$data['roll']=$data1['roll_no'];
 		$data['email'] = $data1['email'];
 		$data['address']=$data1['address'];
@@ -147,6 +166,8 @@ class Welcome extends CI_Controller {
 		$data['gender']=$gender;
 		$data['room_preference1']=$room_preference1;		
 		$data['room_preference2']=$room_preference2;
+		
+		$this->session->set_userdata($data);
 		
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
@@ -159,6 +180,77 @@ class Welcome extends CI_Controller {
 		else
 		{
 			$this->load->view('db_info',$data);
+		}
+	}
+	
+	
+	function email_user()
+	{
+		$this->load->library('email');
+		$this->load->library('session');
+		//$base_url = base_url();
+		$cssfiles[]="styles.css";
+		$data['css']=$cssfiles;
+		
+		
+		$roll= $this->session->userdata('roll');
+		
+		$this->session->sess_destroy();
+		
+		//echo $data1;
+		
+		//$name = $_POST['fname'];
+		//$roll = $_POST['roll'];
+		//$email = $_POST['email'];
+		//$location=$_POST['location'];
+		//$gender=$_POST['gender'];
+		//$program = $_POST['program1'];  // student course as in(mtech,btech)
+		
+		
+		
+		//echo $this->FName." -----l-----\n";
+		
+		
+		
+		///key being generated here  /////////////////////////////
+		$key = '';
+		$length=30;
+		list($usec, $sec) = explode(' ', microtime());
+		mt_srand((float) $sec + ((float) $usec * 100000));
+		
+		$inputs = array_merge(range('z','a'),range(0,9),range('A','Z'));
+
+		for($i=0; $i<$length; $i++)
+		{
+			$key .= $inputs{mt_rand(0,61)};
+		}
+		$key=$roll.$key;
+		echo $key."  --- ";
+		
+		///////////////////////////////////////
+		
+		
+		$this->email->from('hosteliiitd@gmail.com'); // change it to yours
+
+		$this->email->to($email); // change it to yours
+
+		$student_data=$this->session->all_userdata();
+		$emailTo=$student_data['email'];
+		$this->email->to($emailTo); // change it to yours
+
+		$this->email->subject('Hostel Application Form Verification');
+		$this->email->message('Verify your hostel application by clicking on this link:-
+		http://localhost/cse300-group10/index.php/address_maps?key='.$key);
+ 
+		if($this->email->send())
+		{
+			echo '<html> <body><h1>Email sent. Follow the link in the email to proceed (Please check the SPAM folder as well)</h1>
+			Mail Link : <a href="http://mail.iiitd.ac.in">IIITD:Webmail</a>
+			</body> </html>';
+		}
+		else
+		{
+			show_error($this->email->print_debugger());
 		}
 	}
 	

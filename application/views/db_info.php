@@ -32,7 +32,7 @@
 						 //elseif ($room_preference2 == 1){echo "Double";}
 						 else {echo "Triple";} ?></b><br /><br />
 		
-		<button onclick="location.href='<?php echo site_url('Email_user');?>'">Proceed</button>
+		<button onclick="location.href='<?php echo site_url('Welcome/email_user');?>'">Proceed</button>
 		&nbsp<button onClick="history.go(-1);return true;">Go back</button><br />
 		</br>
 	</div>
