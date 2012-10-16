@@ -346,7 +346,9 @@ class Welcome extends CI_Controller {
 			$address.=$addsplit[$i].',';
 			}
 
-		$data['name']=$fname;
+		$data['fname']=$fname;
+		$data['lname']=$lname;
+		
 		$config['directionsStart'] = $address;
 		$config['directionsEnd'] = 'Indraprastha Institute of Information Technology, Delhi';
 		$config['directionsDivID'] = 'directionsDiv';
