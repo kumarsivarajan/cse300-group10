@@ -34,6 +34,11 @@ class Address_Maps extends CI_Controller {
 		$this->load->helper('date');
 		$time = time();
 		$base_url = base_url();
+		
+		$key=$_GET["key"];
+		
+		
+		
 		date_default_timezone_set('Asia/Calcutta');
 		
 		$format = 'DATE_RFC822';
