@@ -39,9 +39,11 @@
 		
 		<br />
 		<div id="directionsDiv"></div>
-		<strong>Applicant's Name:</strong><?php echo $name;?><br>
+		<br />
+		<br />
+		<strong> &nbsp &nbsp Applicant's Name: </strong><?php echo $fname." ".$lname;?><br>
 		
-		<strong>ERP Address:</strong><?php echo $address;?><br>
+		<strong> &nbsp &nbsp ERP Address: </strong><?php echo $address;?><br>
 		
 		<center><p><b><big>If you have some issue with the shown address please click Report otherwise submit</big></b></p></center>
 		<center>
@@ -52,6 +54,8 @@
 		
 		<button onclick="location.href='<?php echo site_url('Welcome/submit');?>'">Proceed</button>
 		<button onclick="location.href='<?php echo site_url('Welcome/report_person');?>'">Report</button>
+		<br />
+		<br />
 		
 		</br>
 	
