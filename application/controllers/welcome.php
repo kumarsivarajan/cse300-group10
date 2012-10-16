@@ -132,7 +132,7 @@ class Welcome extends CI_Controller {
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
 		
-		$this->load->library('session');
+		//$this->load->library('session');
 		
 		$fname = $_POST['fname'];
 		$lname=$_POST['lname'];
@@ -197,18 +197,7 @@ class Welcome extends CI_Controller {
 		
 		$this->session->sess_destroy();
 		
-		//echo $data1;
 		
-		//$name = $_POST['fname'];
-		//$roll = $_POST['roll'];
-		//$email = $_POST['email'];
-		//$location=$_POST['location'];
-		//$gender=$_POST['gender'];
-		//$program = $_POST['program1'];  // student course as in(mtech,btech)
-		
-		
-		
-		//echo $this->FName." -----l-----\n";
 		
 		
 		
@@ -227,6 +216,18 @@ class Welcome extends CI_Controller {
 		$key=$roll.$key;
 		echo $key."  --- ";
 		
+		$this->load->database();
+		
+		$data3 = array(
+               'random' => $key
+               //'name' => $name,
+               //'date' => $date
+            );
+		
+		$this->db->where('roll_no', $roll);
+		$this->db->update('student_info', $data3); 
+		echo "[[[[[".$key;
+		
 		///////////////////////////////////////
 		
 		
@@ -240,7 +241,7 @@ class Welcome extends CI_Controller {
 
 		$this->email->subject('Hostel Application Form Verification');
 		$this->email->message('Verify your hostel application by clicking on this link:-
-		http://localhost/cse300-group10/index.php/address_maps?key='.$key);
+		http://localhost/cse300-group10/index.php/Welcome/address_maps?key='.$key);
  
 		if($this->email->send())
 		{
@@ -253,6 +254,127 @@ class Welcome extends CI_Controller {
 			show_error($this->email->print_debugger());
 		}
 	}
+	
+	function address_maps()
+	{
+	
+		$this->load->helper('url');
+
+		$this->load->helper('date');
+		$time = time();
+		$base_url = base_url();
+		
+		$key=$_GET["key"];
+		//echo $key;
+		$this->load->database();
+		
+		$this->db->select('first_name, last_name, roll_no, address, email');
+		$this->db->from('student_info');
+		$this->db->where('random',$key);
+		
+		$query=$this->db->get();
+		
+		if($query->num_rows == 1)
+		{
+			foreach ($query->result() as $row)
+			{
+				$data1=array(
+				'first_name'=> $row->first_name,
+				'last_name'=> $row->last_name,				
+				'roll_no'=> $row->roll_no,
+				'address'=> $row->address,
+				'email'=>$row->email,
+				'isvalidated'=>true
+				);
+				
+				
+			}
+		}
+		else
+		{
+			$this->load->view('wrong_link');
+			return;
+		}
+		
+		
+		//DATA to be used for plotting purposes
+		
+		
+		$fname=$data1['first_name'];
+		$lname=$data1['last_name'];
+		$roll=$data1['roll_no'];
+		$address=$data1['address'];
+		$email=$data1['email'];
+		
+		
+		
+		
+		date_default_timezone_set('Asia/Calcutta');
+		
+		$format = 'DATE_RFC822';
+		$datestring = standard_date($format,$time);
+		$data['date']=$datestring;
+		$navigation_data['navTab']='home';
+		$navigation_data['base_url']=$base_url;
+		$cssfiles[]="styles.css";
+		$data['scripts']=Array('jquery.js');
+		
+		
+		
+		$data['css']=$cssfiles;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		//$this->load->view('maps_page',$data);
+		
+		$this->load->library('googlemaps');
+		$config['center'] = 'Indraprastha Institute of Information Technology, Delhi';
+		$config['zoom']=10;
+		$config['directions'] = TRUE;
+		$config['directionsStart'] = '1059 Vikas Kunj Vikaspuri New Delhi';
+		$config['directionsEnd'] = 'Indraprastha Institute of Information Technology, Delhi';
+		$config['directionsDivID'] = 'directionsDiv';
+		$this->googlemaps->initialize($config);
+		
+		$marker = array();
+		$marker['position'] = 'Indraprastha Institute of Information Technology, Delhi';
+		$marker['title']='Indraprastha Institute of Information Technology, Delhi';
+		
+		$marker['infowindow_content'] = 'Insitute : IIIT-D Okhla';
+		$this->googlemaps->add_marker($marker);
+		
+		$marker = array();
+		$marker['position'] = '1059 Vikas Kunj Vikaspuri New Delhi';
+		$marker['animation'] = 'DROP';
+		$marker['draggable'] = TRUE;
+		$marker['title']='Vikas Kunj';
+		$marker['infowindow_content'] = 'Your Address:1059, Vikas Kunj, Vikas Puri';
+		$marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+		$this->googlemaps->add_marker($marker);
+		
+		
+		
+		// 30km radius
+		$circle = array();
+		$circle['center'] = 'Indraprastha Institute of Information Technology, Delhi';
+		$circle['radius'] = '30000';
+		$this->googlemaps->add_circle($circle);
+		
+		$circle = array();
+		$circle['center'] = '1059 Vikas Kunj Vikaspuri New Delhi';
+		$circle['radius'] = '1000';
+		$circle['fillColor']='blue';
+		$this->googlemaps->add_circle($circle);
+		
+		
+		
+		$data['map'] = $this->googlemaps->create_map();
+		// Load our view, passing the map data that has just been created
+		$this->load->view('address_maps_page', $data);
+	
+	
+	}
+	
+	
+	
 	
 	function alloc_list()
 	{
