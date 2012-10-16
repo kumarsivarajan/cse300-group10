@@ -15,17 +15,7 @@
 		font-weight: normal;
 	}
 	
-	#instr
-	{
-		border: 1px solid #D0D0D0;
-		position: absolute;
-		right: 50px;
-		height: 300px;
-		width: 550px;
-		top: 80px;
-		
 	
-	}
 	
 
 	h1, h2 {
@@ -145,6 +135,28 @@
 			box-shadow: 0 0 8px #D0D0D0;
 
 		}
+		.container .col2 .instr{
+	
+		border: 1px solid #D0D0D0;
+		position: absolute;
+		right: 50px;
+		height: 300px;
+		width: 550px;
+		top: 80px;
+		
+	
+	
+		}
+		.container .col2 .instr-note{
+	
+	position: absolute;
+	left: 50px;
+	right: 30px;
+		
+	
+	
+		}
+		
 		.container .col1{
 			float:left;
 			display: inline;

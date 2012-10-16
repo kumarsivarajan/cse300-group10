@@ -37,10 +37,10 @@ function generate_form($action='',$elements='',$attr=''){
 				$html.=form_input_infield($elem);
 				}
 			else if($elem['input']=="select"){
-				$html.=form_dropdown_formatted($elem['name'], $elem['values']);
+				$html.=form_dropdown_formatted($elem['name'], $elem['attributes'], $elem['values']);
 			}
 			else if($elem['input']=="submit"){
-				$html.=form_submit('', $elem['value']);
+				$html.=form_submit('',$elem['value']);
 			}
 			
 		
@@ -51,7 +51,7 @@ function generate_form($action='',$elements='',$attr=''){
 
 	return $html;
 }
-	function form_dropdown_formatted($name = '', $options = array(), $selected = array(), $extra = '')
+	function form_dropdown_formatted($name = '',$attributes=array(), $options = array(), $selected = array(), $extra = '')
 	{	$label='';
 		if(is_array($name))
 		{	$label=$name['label'];
@@ -75,8 +75,10 @@ function generate_form($action='',$elements='',$attr=''){
 		if ($extra != '') $extra = ' '.$extra;
 
 		$multiple = (count($selected) > 1 && strpos($extra, 'multiple') === FALSE) ? ' multiple="multiple"' : '';
-		
-		$form ='<p>'.$label. '<select name="'.$name.'"'.$extra.$multiple.">\n";
+		$id='';
+		if(isset($attributes['id']))
+			$id=' id="'.$attributes['id'].'" ';
+		$form ='<p>'.$label. '<select'.$id.' name="'.$name.'"'.$extra.$multiple.">\n";
 
 		foreach ($options as $key => $val)
 		{
