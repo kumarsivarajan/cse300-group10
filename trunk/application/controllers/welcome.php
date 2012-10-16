@@ -329,7 +329,7 @@ class Welcome extends CI_Controller {
 		$config['center'] = 'Indraprastha Institute of Information Technology, Delhi';
 		$config['zoom']=10;
 		$config['directions'] = TRUE;
-		$config['directionsStart'] = '1059 Vikas Kunj Vikaspuri New Delhi';
+		$config['directionsStart'] = $address;
 		$config['directionsEnd'] = 'Indraprastha Institute of Information Technology, Delhi';
 		$config['directionsDivID'] = 'directionsDiv';
 		$this->googlemaps->initialize($config);
@@ -342,11 +342,11 @@ class Welcome extends CI_Controller {
 		$this->googlemaps->add_marker($marker);
 		
 		$marker = array();
-		$marker['position'] = '1059 Vikas Kunj Vikaspuri New Delhi';
+		$marker['position'] = $address;
 		$marker['animation'] = 'DROP';
 		$marker['draggable'] = TRUE;
-		$marker['title']='Vikas Kunj';
-		$marker['infowindow_content'] = 'Your Address:1059, Vikas Kunj, Vikas Puri';
+		//$marker['title']='Vikas Kunj';
+		$marker['infowindow_content'] = 'Your Address: '.$address;
 		$marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
 		$this->googlemaps->add_marker($marker);
 		
@@ -359,7 +359,7 @@ class Welcome extends CI_Controller {
 		$this->googlemaps->add_circle($circle);
 		
 		$circle = array();
-		$circle['center'] = '1059 Vikas Kunj Vikaspuri New Delhi';
+		$circle['center'] = $address;
 		$circle['radius'] = '1000';
 		$circle['fillColor']='blue';
 		$this->googlemaps->add_circle($circle);
