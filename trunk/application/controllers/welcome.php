@@ -233,7 +233,7 @@ class Welcome extends CI_Controller {
 		
 		$this->email->from('hosteliiitd@gmail.com'); // change it to yours
 
-		$this->email->to($email); // change it to yours
+		//$this->email->to($email); // change it to yours
 
 		$student_data=$this->session->all_userdata();
 		$emailTo=$student_data['email'];
@@ -345,6 +345,7 @@ class Welcome extends CI_Controller {
 			else if($i!=0)
 			$address.=$addsplit[$i].',';
 			}
+
 		$data['name']=$fname;
 		$config['directionsStart'] = $address;
 		$config['directionsEnd'] = 'Indraprastha Institute of Information Technology, Delhi';
