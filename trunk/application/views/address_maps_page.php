@@ -39,9 +39,9 @@
 		
 		<br />
 		<div id="directionsDiv"></div>
-		<strong>Applicant's Name:</strong>Manik<br>
+		<strong>Applicant's Name:</strong><?php echo $name;?><br>
 		
-		<strong>ERP Address:</strong>1059 Vikas Kunj Vikas Puri New Delhi-110018<br>
+		<strong>ERP Address:</strong><?php echo $address;?><br>
 		
 		<center><p><b><big>If you have some issue with the shown address please click Report otherwise submit</big></b></p></center>
 		<center>
