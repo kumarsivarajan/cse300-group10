@@ -36,7 +36,7 @@ class Admin_view extends CI_Controller {
 			$top_bar['base_url']=$base_url;
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
-			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
+			$data['top_menu'] = $this->load->view('header', $top_bar, true);
 		
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
@@ -55,7 +55,7 @@ class Admin_view extends CI_Controller {
 			$top_bar['base_url']=$base_url;
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
-			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
+			$data['top_menu'] = $this->load->view('header', $top_bar, true);
 			
 			
 			//by Mayank
@@ -78,7 +78,7 @@ class Admin_view extends CI_Controller {
 			$top_bar['base_url']=$base_url;
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
-			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
+			$data['top_menu'] = $this->load->view('header', $top_bar, true);
 		
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
@@ -96,7 +96,7 @@ class Admin_view extends CI_Controller {
 			$top_bar['base_url']=$base_url;
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
-			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
+			$data['top_menu'] = $this->load->view('header', $top_bar, true);
 			
 			$cssfiles=Array('styles.css','demo_table.css');
 			$data['css']=$cssfiles;
@@ -127,7 +127,7 @@ class Admin_view extends CI_Controller {
 			$top_bar['base_url']=$base_url;
 			$cssfiles=Array('styles.css','demo_table.css');
 			$data['css']=$cssfiles;
-			$data['top_menu'] = $this->load->view('top_bar', $top_bar, true);
+			$data['top_menu'] = $this->load->view('header', $top_bar, true);
 			$this->load->library('table');
 			$this->load->database();
 
