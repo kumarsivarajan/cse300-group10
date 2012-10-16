@@ -37,6 +37,23 @@ class Address_Maps extends CI_Controller {
 		
 		$key=$_GET["key"];
 		
+		$this->load->database();
+		
+		$this->db->select('first_name, last_name, roll_no, address, email');
+		$this->db->from('student_info');
+		$this->db->where('random',$key);
+		
+		$query=$this->db->get();
+		
+		if($query->num_rows == 1)
+		{
+		
+		}
+		else
+		{
+		
+		}
+		
 		
 		
 		date_default_timezone_set('Asia/Calcutta');
