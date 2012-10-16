@@ -73,8 +73,8 @@ class Welcome extends CI_Controller {
 						'Location'=>Array('input'=>'text','name'=>'location','id'=>'location','type'=>'text','label'=>'Your Location','class'=>'required'),
 						'Gender'=>Array('input'=>'select','name'=>Array('name'=>'gender','label'=>'Gender: '),'values'=>Array('Male', 'Female')),
 						'Program'=>Array('input'=>'select','name'=>Array('name'=>'program1','label'=>'Program: '),'values'=>Array('B. Tech', 'M. Tech','Phd')),
-						'room_pref1'=>Array('input'=>'select','name'=>Array('name'=>'room_preference1','label'=>'Room Preference 1:'),'values'=>Array('Single','Double','Triple')),
-						'room_pref2'=>Array('input'=>'select','name'=>Array('name'=>'room_preference2','label'=>'Room Preference 2:'),'values'=>Array('Double','Triple')),
+						'room_pref1'=>Array('input'=>'select','attributes'=>Array('id'=>'pref1'),'name'=>Array('name'=>'room_preference1','label'=>'Room Preference 1:'),'values'=>Array('Single','Double','Triple')),
+						'room_pref2'=>Array('input'=>'select','attributes'=>Array('id'=>'pref2'),'name'=>Array('name'=>'room_preference2','label'=>'Room Preference 2:'),'values'=>Array()),
 						'Submit'=>Array('input'=>'submit','value'=>'Apply!','type'=>'submit'));
 
 		$form_attr=array('id'=>'applyForm');

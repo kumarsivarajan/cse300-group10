@@ -22,6 +22,31 @@
                     });
 			 });
 	</script>
+	<script type="text/javascript">
+		var j = jQuery.noConflict();
+
+		 j(document).ready(function(){
+	
+	var el = document.getElementById("pref1");
+		el.onchange = updateSelectTarget;
+		el.onchange();
+		function updateSelectTarget () {
+			var id = this.options[this.selectedIndex].value;
+			//alert("hello");
+			var targets = j("#pref2");
+			//alert(targets.length);
+			var len = this.length;
+			targets.empty();
+			for (var i = 0; i < len; i++) {
+			//alert(targets.options[i].);
+			if (this.options[i].value != id) {
+					targets.append("<option value='"+this.options[i].value+"'>"+this.options[i].label+"</option>");
+				}
+				}
+				}
+				});
+	
+	</script>
 </head>
 <body>
 <div class="container">
@@ -30,14 +55,13 @@
 	<div class="col2" >
 	<h1><center>Hostel Application Form</center></h1>
 		<?php echo generate_form('Welcome/validate_student',$form_elem,$form_attr);?>
-		<br />
 		
-		<div id="instr";>
+		<div class="instr">
 		<br />
 		<center><b>Instructions</b></center>
 		<br />
 		
-		<div style="position: absolute;left: 50px;right: 30px">
+		<div class="instr-note">
 		<li>To apply for the hostel, please fill in all the fields marked in red</li>
 		<br />
 		<li>If you haven't been given your IIIT-D Email, enter your registered e-mail<br />
