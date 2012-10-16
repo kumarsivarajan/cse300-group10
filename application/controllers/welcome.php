@@ -329,6 +329,23 @@ class Welcome extends CI_Controller {
 		$config['center'] = 'Indraprastha Institute of Information Technology, Delhi';
 		$config['zoom']=10;
 		$config['directions'] = TRUE;
+		//remove house no
+		$addsplit=explode( ',',$address);
+				$data['address']=$address;
+
+		//print_r($addsplit);
+		$address='';
+		//echo count($addsplit)."<br>";
+
+		for($i=0;$i<count($addsplit);$i++){
+			//	echo $addsplit[$i]."<br>";
+
+			if($i==count($addsplit)-1)
+			$address.=$addsplit[$i];
+			else if($i!=0)
+			$address.=$addsplit[$i].',';
+			}
+		$data['name']=$fname;
 		$config['directionsStart'] = $address;
 		$config['directionsEnd'] = 'Indraprastha Institute of Information Technology, Delhi';
 		$config['directionsDivID'] = 'directionsDiv';
