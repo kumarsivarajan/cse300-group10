@@ -150,11 +150,17 @@
 			display: inline;
 			height:auto;
 			width: 24%;
+			height: 500px;
+			#background-image: url("../images/page-left.png");
 			border: 0.5px solid #D0D0D0;
 			-webkit-box-shadow: 0 0 8px #D0D0D0;
 			box-shadow: 0 0 8px #D0D0D0;
-
+			
 		}
+		/*.container .col1 .nav_bar{
+		padding-left: 70px;
+		padding-top: 15px;
+		}*/
 	/*	Admin Block - Transfer to a new file in future */
 div.login_bar_wrapper{
 			height:auto;
@@ -229,6 +235,11 @@ div.login_bar_wrapper{
 			box-shadow: 0 0 8px #D0D0D0;
 
 		}
+		.admin-container .admin-topbar .top_bar{
+			height:auto;
+			width: auto;
+			font-size: 34;
+			}
 	a.menu_item {
 		
 		margin: 10px 10px 10px 10px;
@@ -245,6 +256,11 @@ div.login_bar_wrapper{
 	}
 	a.logout_link:hover{
 		color: red;
+	}
+	a.title{
+		font-size: 34;
+		position: relative;
+		text-align: center;
 	}
 #navigation{
 	text-align: center;
