@@ -62,15 +62,16 @@
 		<br />
 		
 		<div class="instr-note">
-		<li>To apply for the hostel, please fill in all the fields marked in red</li>
+		<li>First Name : Ex:For "Jay Prakash Sharma" it is "Jay"</li>
 		<br />
-		<li>If you haven't been given your IIIT-D Email, enter your registered e-mail<br />
-		    on which a verification link can be sent</li>
+		<li>Last Name : "Sharma"</li>
 		<br />
-		<li>Make sure your first room preference is different from the second room preference</li>
+		<li>Roll No. is the full roll number mentioned on ID card (MT201201,20120001,PHD1201)</li>
 		<br />
-		<li>In the location field, enter only the area where your house is located<br />
-		    (Precise address is not required)</li>
+		<li>E-Mail is your IIITD E-Mail, otherwise your registered E-Mail</li>
+		<br />
+		
+		<li>In the location field, enter only the area and city where your house is located (Ex: Rajendra Nagar, New Delhi)</li>
 		<br />
 	 	</div>
 		</div>
