@@ -10,7 +10,7 @@
 	 <?php endforeach; ?>
 
 	<title>Hostel Allocation - Backend</title>
-	<!--<script type="text/javascript">
+	<script type="text/javascript">
 	var j = jQuery.noConflict();
 
 		 j(document).ready(function(){
@@ -22,7 +22,7 @@
                                         }
                     });
 			 });
-	</script>-->
+	</script>
 </head>
 <body>
 
@@ -33,7 +33,7 @@
 	<!--USING HELPER TO generate a FORM and passing "Admin/modify" as action, with Current, New
 		and Confirm New PASSWORD PLUS CHANGE PASSWORD BUTTON as form elements aka $form_elem-->
 	<div >
-			<?php echo generate_form('Admin_view/pass_change', $form_elem);?>
+			<?php echo generate_form('Admin_view/pass_change', $form_elem, $form_attr);?>
 		</div>
 	
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>

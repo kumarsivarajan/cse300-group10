@@ -70,7 +70,7 @@ class Admin_view extends CI_Controller {
 			
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
-			//$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
+			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
 			$this->load->view('admin_manage',$data);
 
 	}
