@@ -18,7 +18,7 @@ class Change_pass_model extends CI_Model{
 		
 		
 		//GET USERID aka LOGIN NAME of currently logged in user
-		$name = $this->session->userdata['uid'];  //this 'userid' ([keyword] for LOGIN NAME) is the same as in backend_login MODEL being saved in $data
+		$name = $this->session->userdata['uid'];  //this 'uid' ([keyword] for LOGIN NAME) is the same as in backend_login MODEL being saved in $data
 		
 		//echo "CHECK" ;
 		//echo "Usernameis: ". $name ;
