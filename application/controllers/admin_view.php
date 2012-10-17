@@ -59,7 +59,10 @@ class Admin_view extends CI_Controller {
 			
 			
 			//by Mayank
-			$form_elem = Array('Current_Password'=>Array('input'=>'text','name'=>'current_Password','id'=>'pass','type'=>'password','label'=>'Current Password','class'=>'required'), 'New_Password'=>Array('input'=>'text','name'=>'new_Password','id'=>'n_pass','type'=>'password','label'=>'New Password','class'=>'required'), 'Confirm_New_Password'=>Array('input'=>'text','name'=>'confirm_new_Password','id'=>'cn_pass','type'=>'password','label'=>'Confirm New Password','class'=>'required'), 'Change'=>Array('input'=>'submit','value'=>'Change Password','type'=>'submit'));
+			$form_elem = Array('Current_Password'=>Array('input'=>'text','name'=>'current_Password','id'=>'pass','type'=>'password','label'=>'Current Password','class'=>'required'),
+								'New_Password'=>Array('input'=>'text','name'=>'new_Password','id'=>'n_pass','type'=>'password','label'=>'New Password','class'=>'required'),
+								'Confirm_New_Password'=>Array('input'=>'text','name'=>'confirm_new_Password','id'=>'c_n_pass','type'=>'password','label'=>'Confirm New Password','class'=>'required'), 
+								'Change'=>Array('input'=>'submit','value'=>'Change Password','type'=>'submit'));
 			$data['form_elem']=$form_elem;
 			$form_attr=array('id'=>'modifyForm');
 			$data['form_attr']=$form_attr;
@@ -67,7 +70,7 @@ class Admin_view extends CI_Controller {
 			
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
-			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
+			//$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
 			$this->load->view('admin_manage',$data);
 
 	}
@@ -186,29 +189,42 @@ class Admin_view extends CI_Controller {
 		$this->load->helper('url');
 		
 		
-		$login_name = $_POST[''];  // ISSUE1 Have to get this Login_name (i.e. currently logged in admin's username) somehow. 
+		$cur_pass1 = $_POST['current_Password']; //Get current password posted in Form made in views/admin_manage
+		$new_pass1 = $_POST['new_Password']; //Get New password posted in Form made in views/admin_manage
+		$confirm_new_pass1 = $_POST['confirm_new_Password']; //Get confirm new password posted in Form made in views/admin_manage
 		
-		
-		$cur_pass1 = $_POST['Current_Password'];
-		$new_pass1 = $_POST['New_Password'];
-		$confirm_new_pass1 = $_POST['Confirm_New_Password'];
 		
 		if ($new_pass1 == $confirm_new_pass1)
 		{
-			if ($this->change_pass_model->check_current_password($cur_pass1, $login_name))
+			/* The following line checks if current password as provided by user in form correctly matches the 
+			*	password of currently logged in user. It calls check_current_password() function from 
+			*	"change_pass_model" MODEL 
+			*/		
+			if ($this->change_pass_model->check_current_password($cur_pass1))
 			{
 			
 				/*This following line calls "change_the_password()" FUNCTION from "change_pass_model" MODEL and
-					changes the password for the above user with username "$login_name".
+					changes the password for the currently logged-in user.
 				*/
 				$this->change_pass_model->change_the_password($new_pass1);
 				
-				
-				/*
-				ISSUE 2 I dont exactly know what to do after changing password. 
-				I was thinking to redirect the user to Admin homepage. 
+				/* FOLLOWING NEEDS TO BE edited/changed TO show user that his password has been chagned. 
+				* [MAYBE JAVASCRIPT IS NEEDED in "views/admin_manage" which is ultimately called by the
+				*  following redirect]
 				*/
+				redirect('Admin_view/modify');
 			}
+			
+			else
+			{
+			  // Comes here when the current user's (who is logged in) password in database does not match
+			  // with the one provided in form in the field Current Password.
+			}
+		}
+		else 
+		{
+		// COMES here when new_password is not same as confirm_new_password field
+		
 		}
 	}
 	

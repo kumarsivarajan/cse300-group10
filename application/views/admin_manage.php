@@ -10,7 +10,7 @@
 	 <?php endforeach; ?>
 
 	<title>Hostel Allocation - Backend</title>
-	<script type="text/javascript">
+	<!--<script type="text/javascript">
 	var j = jQuery.noConflict();
 
 		 j(document).ready(function(){
@@ -22,7 +22,7 @@
                                         }
                     });
 			 });
-	</script>
+	</script>-->
 </head>
 <body>
 
