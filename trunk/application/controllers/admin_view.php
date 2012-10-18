@@ -47,7 +47,7 @@ class Admin_view extends CI_Controller {
 
 	}
 	
-		public function modify(){
+		public function modify($message=""){
 			$this->load->helper('url');
 			$this->load->helper('form');
 			$top_bar['curTab']='modify';
@@ -70,6 +70,8 @@ class Admin_view extends CI_Controller {
 			
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
+			
+			$data['msg']=$message;
 			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
 			$this->load->view('admin_manage',$data);
 
@@ -194,13 +196,15 @@ class Admin_view extends CI_Controller {
 		$confirm_new_pass1 = $_POST['confirm_new_Password']; //Get confirm new password posted in Form made in views/admin_manage
 		
 		
-		if ($new_pass1 == $confirm_new_pass1)
-		{
-			/* The following line checks if current password as provided by user in form correctly matches the 
+		/* The following line checks if current password as provided by user in form correctly matches the 
 			*	password of currently logged in user. It calls check_current_password() function from 
 			*	"change_pass_model" MODEL 
 			*/		
-			if ($this->change_pass_model->check_current_password($cur_pass1))
+		$result = $this->change_pass_model->check_current_password($cur_pass1);
+		if ($result)
+		{
+			
+			if ($new_pass1 == $confirm_new_pass1)
 			{
 			
 				/*This following line calls "change_the_password()" FUNCTION from "change_pass_model" MODEL and
@@ -208,22 +212,26 @@ class Admin_view extends CI_Controller {
 				*/
 				$this->change_pass_model->change_the_password($new_pass1);
 				
-				/* FOLLOWING NEEDS TO BE edited/changed TO show user that his password has been chagned. 
-				* [MAYBE JAVASCRIPT IS NEEDED in "views/admin_manage" which is ultimately called by the
-				*  following redirect]
-				*/
-				redirect('Admin_view/modify');
+				
+				$alert="Your Password has been changed.";
+				$this->modify($alert);
+				//redirect('Admin_view/modify');
 			}
 			
 			else
 			{
-			  // Comes here when the current user's (who is logged in) password in database does not match
-			  // with the one provided in form in the field Current Password.
+				// COMES here when new_password is not same as confirm_new_password field
+				$alert="Your New Password doesn't match Confirm New Password. Please try again.";
+				$this->modify($alert);
+				
 			}
 		}
 		else 
 		{
-		// COMES here when new_password is not same as confirm_new_password field
+		$alert="Invalid Password. Please Try Again.";
+				$this->modify($alert);
+			  // Comes here when the current user's (who is logged in) password in database does not match
+			  // with the one provided in form in the field Current Password.
 		
 		}
 	}
