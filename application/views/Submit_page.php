@@ -13,6 +13,8 @@
 	<div class="col2">
 	<h1><center>Application Submitted<center></h1>
 		<div id="body">		
+			<strong> &nbsp &nbsp Distance: </strong><?php echo $dist;?><br>
+	
 			<p> <b><center>Keep on checking for allocation updates<center> <b></p>
 			
 		</div>
