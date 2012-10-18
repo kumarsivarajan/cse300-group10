@@ -1853,7 +1853,32 @@ class Googlemaps {
 			  	directionsService.route(request, function(response, status) {
 			    	if (status == google.maps.DirectionsStatus.OK) {
 			      		directionsDisplay.setDirections(response);
-			    	}else{
+			      		var ajaxRequest;  // The variable that makes Ajax possible!
+	
+			      		try{
+			      			// Opera 8.0+, Firefox, Safari
+			      			ajaxRequest = new XMLHttpRequest();
+			      		} 	catch (e){
+			      				// Internet Explorer Browsers
+			      				try{
+			      					ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+			      				} catch (e) {
+			      						try{
+			      							ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			      						} catch (e){
+			      							// Something went wrong
+			      							alert("Your browser broke!");
+			      							return false;
+			      							}
+			      					}
+			      			}
+			      		
+				var dist = response.routes[0].legs[0].distance.value/1000;
+				var queryString = "?dist=" + dist;
+				ajaxRequest.open("GET", "setDistance" + queryString, true);
+				ajaxRequest.send(null); 
+				
+			      	}else{
 			    		switch (status) { 	
 			    			case "NOT_FOUND": { alert("Either the start location or destination were not recognised"); break }
 			    			case "ZERO_RESULTS": { alert("No route could be found between the start location and destination"); break }

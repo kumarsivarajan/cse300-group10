@@ -259,6 +259,7 @@ class Welcome extends CI_Controller {
 	{
 	
 		$this->load->helper('url');
+		$this->load->library('session');
 
 		$this->load->helper('date');
 		$time = time();
@@ -299,7 +300,10 @@ class Welcome extends CI_Controller {
 		
 		//DATA to be used for plotting purposes
 		
-		
+		$data['roll']=$data1['roll_no'];
+		$data['distance']=0;
+		$this->session->set_userdata($data);
+
 		$fname=$data1['first_name'];
 		$lname=$data1['last_name'];
 		$roll=$data1['roll_no'];
@@ -384,17 +388,22 @@ class Welcome extends CI_Controller {
 		$circle['fillColor']='blue';
 		$this->googlemaps->add_circle($circle);
 		
-		echo $my_lat."hello";
+		//echo $my_lat."hello";
 		
 		$data['map'] = $this->googlemaps->create_map();
 		
-		echo $data['maps']['marker_0']."ji";
+		//echo $data['maps']['marker_0']."ji";
 		// Load our view, passing the map data that has just been created
 		$this->load->view('address_maps_page', $data);
 	
 	
 	}
-	
+	function setDistance(){
+		$this->load->library('session');
+		$dist=$_GET['dist'];
+
+		$this->session->set_userdata('distance', $dist);
+	}
 	
 	
 	
@@ -452,6 +461,8 @@ class Welcome extends CI_Controller {
 	
 function submit()
 	{
+			$this->load->library('session');
+			$data['dist'] = $this->session->userdata('distance');
 		$this->load->helper('url');
 		$base_url = base_url();
 		$cssfiles[]="styles.css";
