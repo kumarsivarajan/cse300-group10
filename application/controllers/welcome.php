@@ -188,6 +188,8 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->library('email');
 		$this->load->library('session');
+				$this->load->helper('url');
+
 		//$base_url = base_url();
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
@@ -240,8 +242,9 @@ class Welcome extends CI_Controller {
 		$this->email->to($emailTo); // change it to yours
 
 		$this->email->subject('Hostel Application Form Verification');
+		$urlinfo=site_url('Welcome/address_maps');
 		$this->email->message('Verify your hostel application by clicking on this link:-
-		http://localhost/cse300-group10/index.php/Welcome/address_maps?key='.$key);
+		'.$urlinfo.'?key='.$key);
  
 		if($this->email->send())
 		{
@@ -301,9 +304,9 @@ class Welcome extends CI_Controller {
 		//DATA to be used for plotting purposes
 		
 		$data['roll']=$data1['roll_no'];
-		$data['distance']=0;
+		$data['distance']=-1;
 		$this->session->set_userdata($data);
-
+		$this->session->set_userdata('refered_from',site_url('Welcome/address_maps').'?key='.$key ); 
 		$fname=$data1['first_name'];
 		$lname=$data1['last_name'];
 		$roll=$data1['roll_no'];
@@ -461,9 +464,12 @@ class Welcome extends CI_Controller {
 	
 function submit()
 	{
+				$this->load->helper('url');
+
 			$this->load->library('session');
 			$data['dist'] = $this->session->userdata('distance');
-		$this->load->helper('url');
+			if($data['dist']==-1)
+				redirect($this->session->userdata('refered_from'));
 		$base_url = base_url();
 		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
