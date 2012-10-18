@@ -307,6 +307,8 @@ class Welcome extends CI_Controller {
 		$data['distance']=-1;
 		$this->session->set_userdata($data);
 		$this->session->set_userdata('refered_from',site_url('Welcome/address_maps').'?key='.$key ); 
+		$this->session->set_userdata('isDistance',1); 
+
 		$fname=$data1['first_name'];
 		$lname=$data1['last_name'];
 		$roll=$data1['roll_no'];
@@ -404,8 +406,11 @@ class Welcome extends CI_Controller {
 	function setDistance(){
 		$this->load->library('session');
 		$dist=$_GET['dist'];
-
-		$this->session->set_userdata('distance', $dist);
+		if($this->session->userdata('isDistance')==1){
+			$this->session->set_userdata('distance', $dist);
+			$this->session->set_userdata('isDistance',0);
+		}
+		
 	}
 	
 	
@@ -468,7 +473,7 @@ function submit()
 
 			$this->load->library('session');
 			$data['dist'] = $this->session->userdata('distance');
-			if($data['dist']==-1)
+			if($this->session->userdata('isDistance')==1)
 				redirect($this->session->userdata('refered_from'));
 		$base_url = base_url();
 		$cssfiles[]="styles.css";
@@ -476,6 +481,8 @@ function submit()
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+				$this->session->sess_destroy();
+
 		$this->load->view('Submit_page',$data);	
 	}
 	
