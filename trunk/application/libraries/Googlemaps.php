@@ -1872,7 +1872,6 @@ class Googlemaps {
 			      							}
 			      					}
 			      			}
-			      		
 				var dist = response.routes[0].legs[0].distance.value/1000;
 				var queryString = "?dist=" + dist;
 				ajaxRequest.open("GET", "setDistance" + queryString, true);
