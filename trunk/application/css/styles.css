@@ -154,6 +154,13 @@
 	
 	
 		}
+		
+		.container .col2 .db_info-info{
+			position : relative;
+			left:20px;
+			
+		}
+		
 		.container .col2 .instr-note{
 padding-left: 10px;		
 	
@@ -220,9 +227,15 @@ div.login_bar_wrapper{
 
 		}
 		.admin-container .admin-contentbar h2{
-		text-align: center;
+			text-align: center;
 
 		}
+		
+		.admin-container .showlist-menu{
+			position: relative;
+			left: 10px;
+		}
+		
 		.admin-container .admin-contentbar .info{
 			font-size: 42;
 			color: teal;

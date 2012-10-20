@@ -12,7 +12,10 @@
 	<div class="col1"> <?php echo $content_navigation?> </div>
 	<div class="col2">
 		<h1><center>Database Info Verification</center></h1>
+		
+		<div class="db_info-info">
 		<i>Name and Roll Number exist in the system</i> <br/><br />
+		
 		Name: <b><?php echo $firstname; ?></b><br />
 		Roll No.: <b><?php echo $roll; ?></b><br />
 		<!--Address: <b><?php echo $address ; ?></b><br /><br />-->
@@ -34,6 +37,7 @@
 		
 		<button onclick="location.href='<?php echo site_url('Welcome/email_user');?>'">Proceed</button>
 		&nbsp<button onClick="history.go(-1);return true;">Go back</button><br />
+		</div>
 		</br>
 	</div>
 </div>
