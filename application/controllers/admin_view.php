@@ -214,7 +214,7 @@ class Admin_view extends CI_Controller {
 				$this->change_pass_model->change_the_password($new_pass1);
 				
 				
-				$alert="Your Password has been changed.";
+				$alert="  Your Password has been changed successfully.";
 				$this->modify($alert);
 				//redirect('Admin_view/modify');
 			}
@@ -222,14 +222,14 @@ class Admin_view extends CI_Controller {
 			else
 			{
 				// COMES here when new_password is not same as confirm_new_password field
-				$alert="Your New Password doesn't match Confirm New Password. Please try again.";
+				$alert="  The 'New Password' field doesn't match 'Confirm New Password' field. Please try again.";
 				$this->modify($alert);
 				
 			}
 		}
 		else 
 		{
-		$alert="Invalid Password. Please Try Again.";
+		$alert="  Invalid 'Current Password'. Please Try Again.";
 				$this->modify($alert);
 			  // Comes here when the current user's (who is logged in) password in database does not match
 			  // with the one provided in form in the field Current Password.

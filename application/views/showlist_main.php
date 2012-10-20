@@ -16,6 +16,7 @@
 
 	<!-- This where you write you code-->
 	<!-- Test 123  -->
+	<div class="showlist-menu">
 	Gender:
 	<select name="Gender">
 	<option value="Male">Male</option>
@@ -38,6 +39,7 @@
 	<br><br><form name="input" action="showlist" method="get">
 	<input type="submit" value="Submit" />
 	</form>
+	</div>
 	
 		
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
