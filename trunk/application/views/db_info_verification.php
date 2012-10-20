@@ -10,7 +10,7 @@
 <div class="container">
 
 	<div class="col1"> <?php echo $content_navigation?> </div>
-	<div class="col2" style="padding-left: 20px;padding-bottom: 10px">
+	<div class="col2">
 		<h1><center>Database Verification</center></h1>
 		Name: <b><?php echo $name; ?></b><br />
 		Roll No.: <b><?php echo $roll; ?></b><br />

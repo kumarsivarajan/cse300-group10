@@ -10,7 +10,7 @@
 <div class="container">
 
 	<div class="col1"> <?php echo $content_navigation?> </div>
-	<div class="col2" style="padding-left: 20px;padding-bottom: 10px">
+	<div class="col2">
 		<h1><center>Database Info Verification</center></h1>
 		<i>Name and Roll Number exist in the system</i> <br/><br />
 		Name: <b><?php echo $firstname; ?></b><br />
@@ -28,8 +28,8 @@
 		Room Preference1: <b><?php if ($room_preference1 == 0) {echo "Single";}
 						 elseif ($room_preference1 == 1){echo "Double";}
 						 else {echo "Triple";} ?></b><br />
-		Room Preference2: <b><?php if ($room_preference2 == 0) {echo "Double";}
-						 //elseif ($room_preference2 == 1){echo "Double";}
+		Room Preference2: <b><?php if ($room_preference2 == 0) {echo "Single";}
+						 elseif ($room_preference2 == 1){echo "Double";}
 						 else {echo "Triple";} ?></b><br /><br />
 		
 		<button onclick="location.href='<?php echo site_url('Welcome/email_user');?>'">Proceed</button>

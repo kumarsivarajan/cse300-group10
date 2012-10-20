@@ -11,8 +11,8 @@
 
 <div class="admin-container">
 	<div class="admin-topbar"> <?php echo $top_menu?> </div>
-	<div class="admin-contentbar" align = center>
-		<h2 style="text-align:center">Manage Applications</h2>
+	<div class="admin-contentbar">
+		<h2>Manage Applications</h2>
 
 	<!-- This where you write you code-->
 	<!-- Test 123  -->

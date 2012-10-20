@@ -10,7 +10,7 @@
 <div class="container">
 
 	<div class="col1"> <?php echo $content_navigation?> </div>
-	<div class="col2" style="padding-left: 20px;padding-bottom: 10px">
+	<div class="col2">
 		<h1><center>Report Issue</center></h1>
 		<form method="post" action="">
 		<textarea name="Report issue" cols="50" rows="10">

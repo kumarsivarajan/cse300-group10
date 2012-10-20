@@ -36,12 +36,13 @@
 			var targets = j("#pref2");
 			//alert(targets.length);
 			var len = this.length;
+			//alert(id);
 			targets.empty();
 			for (var i = 0; i < len; i++) {
-			//alert(targets.options[i].);
 			if (this.options[i].value != id) {
-					targets.append("<option value='"+this.options[i].value+"'>"+this.options[i].label+"</option>");
-				}
+			
+								targets.append("<option value='"+this.options[i].value+"'>"+this.options[i].text+"</option>");
+						}
 				}
 				}
 				});
