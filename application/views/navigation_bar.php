@@ -8,7 +8,7 @@
 <div id="navigationMenu" title="navigation">
  <li ><a class="home <?php if($navTab == "home"){echo " active";}?>" href="<?php echo base_url(); ?>" title="Home Page"><span>Home</span></a></li>
  <li ><a class="services <?php if($navTab == "apply"){echo " active";}?>" href="<?php echo site_url('Welcome/name_rollno'); ?>" title="Apply"><span>Apply For Hostel Room</span></a></li>
- <li ><a class="services <?php if($navTab == "list"){echo " active";}?>" href="<?php echo site_url('Welcome/alloc_list'); ?>" title="Apply"><span>Allocation List</span></a></li>
+ <li ><a class="portfolio <?php if($navTab == "list"){echo " active";}?>" href="<?php echo site_url('Welcome/alloc_list'); ?>" title="Allocation List"><span>Allocation List</span></a></li>
  
  <li ><a class="about <?php if($navTab == "about"){echo " active";}?>" href="<?php echo site_url('Welcome/about'); ?>" title="About Page"><span>About the System</span></a></li>
  </div>
