@@ -31,9 +31,10 @@ class Admin_view extends CI_Controller {
 	public function index()
 	{
 			$this->load->helper('url');
-			$top_bar['curTab']='home';
 			$base_url=base_url();
 			$top_bar['base_url']=$base_url;
+			$top_bar['curTab']='home';
+			
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
 			$data['top_menu'] = $this->load->view('header', $top_bar, true);
@@ -79,8 +80,8 @@ class Admin_view extends CI_Controller {
 	public function showlistmain(){
 			$this->load->helper('url');
 			$base_url=base_url();
-			$top_bar['curTab']='modify';
 			$top_bar['base_url']=$base_url;
+			$top_bar['curTab']='list';
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
 			$data['top_menu'] = $this->load->view('header', $top_bar, true);
@@ -97,7 +98,7 @@ class Admin_view extends CI_Controller {
 	{
 			$this->load->helper('url');
 			$base_url=base_url();
-			$top_bar['curTab']='modify';
+			$top_bar['curTab']='report';
 			$top_bar['base_url']=$base_url;
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
@@ -127,7 +128,7 @@ class Admin_view extends CI_Controller {
 	
 	public function showlist(){
 			$this->load->helper('url');
-			$top_bar['curTab']='modify';
+			$top_bar['curTab']='list';
 			$base_url=base_url();
 			$top_bar['base_url']=$base_url;
 			$cssfiles=Array('styles.css','demo_table.css');

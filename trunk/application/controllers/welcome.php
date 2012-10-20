@@ -40,7 +40,7 @@ class Welcome extends CI_Controller {
 		$data['cust_msg']=$cust_message;
 		$navigation_data['navTab']='home';
 		$navigation_data['base_url']=$base_url;
-		$cssfiles[]="styles.css";
+		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['scripts']=Array('jquery.js','graphs/highcharts.js','graphs/modules/exporting.js');
 		$data['css']=$cssfiles;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
@@ -52,7 +52,7 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->helper('url');
 		$base_url = base_url();
-		$cssfiles[]="styles.css";
+		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
 		$institutename='IIIT-D';
 		$data['ins_name']=$institutename;
@@ -80,7 +80,7 @@ class Welcome extends CI_Controller {
 		$form_attr=array('id'=>'applyForm');
 		$this->load->helper('url');
 		$base_url = base_url();
-		$cssfiles[]="styles.css";
+		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
 		$data['form_elem']=$form_elem;
 		$navigation_data['navTab']='apply';
@@ -96,7 +96,7 @@ class Welcome extends CI_Controller {
 		
 		$this->load->helper('url');
 		$base_url = base_url();
-		$cssfiles[]="styles.css";
+		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
 		$program = $_POST['program1'];  // student course as in(mtech,btech)
 		$email = $_POST['email'];
@@ -129,7 +129,7 @@ class Welcome extends CI_Controller {
 		$this->load->library('session');
 		$this->load->helper('url');
 		$base_url = base_url();
-		$cssfiles[]="styles.css";
+		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
 		
 		//$this->load->library('session');
@@ -191,7 +191,7 @@ class Welcome extends CI_Controller {
 				$this->load->helper('url');
 
 		//$base_url = base_url();
-		$cssfiles[]="styles.css";
+		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
 		
 		
@@ -323,9 +323,9 @@ class Welcome extends CI_Controller {
 		$format = 'DATE_RFC822';
 		$datestring = standard_date($format,$time);
 		$data['date']=$datestring;
-		$navigation_data['navTab']='home';
+		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
-		$cssfiles[]="styles.css";
+		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['scripts']=Array('jquery.js');
 		
 		
@@ -421,13 +421,13 @@ class Welcome extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->library('table');
 		$base_url = base_url();
-		$cssfiles=Array('styles.css','demo_table.css');
+		$cssfiles=Array('styles.css','demo_table.css','sidenavigation.css');
 		$data['scripts']=Array('jquery.js','jquery.dataTables.js');
 		
 
 		$data['css']=$cssfiles;		
 
-		$navigation_data['navTab']='apply';
+		$navigation_data['navTab']='list';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		
@@ -437,7 +437,7 @@ class Welcome extends CI_Controller {
 		$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="allocation_list">' );
 
 		$this->table->set_template($tmpl);
-		$this->table->set_heading('First name','Gender', 'Roll No.','Program', 'Location', 'email id', 'Distance','Status');
+		$this->table->set_heading('First name','Sex', 'Roll No.','Program', 'Location', 'email id', 'Dist','Status');
 		
 		$query = $this->db->query("SELECT first_name,gender,roll_no,program,location,email,distance,status FROM alloc_list");
 
@@ -458,7 +458,7 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->helper('url');
 		$base_url = base_url();
-		$cssfiles[]="styles.css";
+		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
@@ -476,7 +476,7 @@ function submit()
 			if($this->session->userdata('isDistance')==1)
 				redirect($this->session->userdata('refered_from'));
 		$base_url = base_url();
-		$cssfiles[]="styles.css";
+		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
