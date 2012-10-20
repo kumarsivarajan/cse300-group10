@@ -43,7 +43,7 @@
 
 /* General hover styles */
 
-#navigationMenu a:hover span{ width:auto; padding:0 20px;overflow:visible; 	text-shadow:1px 1px 0 #d8b54b;}
+#navigationMenu a:hover span{ width:auto; padding:0 12px;overflow:visible; 	text-shadow:1px 1px 0 #d8b54b;}
 #navigationMenu a:hover{
 	text-decoration:none;
 	
@@ -61,7 +61,7 @@
 	background-color:#7da315;
 	color:#3d4f0c;
 }
-#navigationMenu .active span{ width:auto; padding:0 20px;overflow:visible;
+#navigationMenu .active span{ width:auto; padding:0 17px;overflow:visible;
  }
 
 /* Blue Button */
