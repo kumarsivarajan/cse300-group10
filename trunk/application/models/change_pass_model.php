@@ -63,8 +63,14 @@ class Change_pass_model extends CI_Model{
 	public function change_the_password($new_pass)
 	{
 		$this->load->database();
+		
+		$this->load->library('session');
+		$name = $this->session->userdata['uid'];
+		
 		$data = array('pwd' => $new_pass);
-		$this->db->update('admin_users', $data);
+		
+		$this->db->where('uid', $name);
+		$this->db->update('admin_users', $data, $where);
 		
 	}
 	
