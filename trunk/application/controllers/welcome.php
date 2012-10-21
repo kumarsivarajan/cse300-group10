@@ -486,6 +486,23 @@ function submit()
 		$this->load->view('Submit_page',$data);	
 	}
 	
+function format_add()
+	{
+		$this->load->helper('url');
+		$base_url = base_url();
+		$cssfiles=Array("styles.css","sidenavigation.css");
+		$data['css']=$cssfiles;
+		$institutename='IIIT-D';
+		$address = '1059 Vikas Kunj Vikas Puri New Delhi-110018';
+		$data['address'] = $address; 
+		$data['ins_name']=$institutename;
+		$navigation_data['navTab']='about';
+		$navigation_data['base_url']=$base_url;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		
+		$this->load->view('format_address',$data);
+	}
+	
 	
 }
 
