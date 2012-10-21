@@ -367,7 +367,7 @@ class Welcome extends CI_Controller {
 		$marker['position'] = 'Indraprastha Institute of Information Technology, Delhi';
 		$marker['title']='Indraprastha Institute of Information Technology, Delhi';
 		
-		$marker['infowindow_content'] = 'Insitute : IIIT-D Okhla';
+		$marker['infowindow_content'] = 'Institute : IIIT-D Okhla';
 		$this->googlemaps->add_marker($marker);
 		
 		$marker = array();
@@ -444,9 +444,6 @@ class Welcome extends CI_Controller {
 		
 		
 		$data['table']=$this->table->generate($query);
-		
-		
-		
 		$this->load->view('allocation_list',$data);
 			
 			
@@ -494,7 +491,7 @@ function format_add()
 		$data['css']=$cssfiles;
 		$institutename='IIIT-D';
 		$address = '1059 Vikas Kunj Vikas Puri New Delhi-110018';
-		$data['address'] = $address; 
+		$data['address'] = $address;
 		$data['ins_name']=$institutename;
 		$navigation_data['navTab']='about';
 		$navigation_data['base_url']=$base_url;

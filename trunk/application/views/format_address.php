@@ -12,11 +12,16 @@
 <div class="container">
 	<div class="col1"> <?php echo $content_navigation?> </div>
 	<div class="col2">
-	<h1><center>Hostel Allocation System - IIIT-D<center></h1>
-		<div><h2>Instructions</h2></div>
+	<h1>
+	<center>
+	Hostel Allocation System - IIIT-D
+	<br>
+	<center>
+	</h1>
+		<div><h2>Please format your address according to the instructions given below</h2></div>
 <div id="text">
 Instructions for formatting to be written here<br>
-
+<textarea readonly="readonly" onclick="InsertText();" id="txtArea" ><?php echo $address ?></textarea>
 <script>
 function getCaret(el) {
 	  if (el.selectionStart) {
