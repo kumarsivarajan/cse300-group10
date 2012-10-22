@@ -1,3 +1,37 @@
+<script type="text/javascript">
+if(typeof jQuery == 'undefined'){
+	var head= document.getElementsByTagName('head')[0];
+   var script= document.createElement('script');
+   script.type= 'text/javascript';
+   script.src= '<?php echo base_url("/application/js/jquery.js")?>';
+ if(script.addEventListener) {
+  script.addEventListener("load",callback,false);
+  } 
+  else if(script.readyState) {
+  script.onreadystatechange = callback;
+  }
+     head.appendChild(script);
+
+  }
+  else{
+  	if (typeof(window.$) === 'undefined') { window.$ = jQuery; }
+  	callback();
+  	}
+  function callback() { 
+$(document).ready(function(){
+			 var col2=$(".col2").height(),col1=$(".col1").height();
+			 if(col2>col1)
+			 {
+				 $(".col1").height(col2);
+			 }
+			 else{
+				 $(".col2").height(col1);
+			 }
+			 			 });
+
+ }
+
+</script>
 <div id="nav-bar">
 <h1><a href="<?php echo base_url() ?>"> <img src="<?php echo base_url("/application/images/logo.png")?>" height="50" width="70"/></a>
 <a href="<?php echo "http://www.iiitd.ac.in" ?>"> <img src="<?php echo base_url("/application/images/ins_logo.png")?>" height="50" /></a>
