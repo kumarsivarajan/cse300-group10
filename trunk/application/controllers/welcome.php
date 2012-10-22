@@ -492,14 +492,53 @@ function format_add()
 		//echo $key;
 		$this->load->database();
 		
+		$cssfiles=Array("styles.css","sidenavigation.css");
+		$data['css']=$cssfiles;
+		$institutename='IIIT-D';
+		$this->load->database();
+		
 		$this->db->select('first_name, last_name, roll_no, address, email');
 		$this->db->from('student_info');
 		$this->db->where('random',$key);
 		
-		$cssfiles=Array("styles.css","sidenavigation.css");
-		$data['css']=$cssfiles;
-		$institutename='IIIT-D';
-		$address = '1059 Vikas Kunj Vikas Puri New Delhi-110018';
+		$query=$this->db->get();
+		
+		if($query->num_rows == 1)
+		{
+			foreach ($query->result() as $row)
+			{
+				$data1=array(
+						'first_name'=> $row->first_name,
+						'last_name'=> $row->last_name,
+						'roll_no'=> $row->roll_no,
+						'address'=> $row->address,
+						'email'=>$row->email,
+						'isvalidated'=>true
+				);
+		
+		
+			}
+		}
+		else
+		{
+			$this->load->view('wrong_link');
+			return;
+		}
+		
+		$data['roll']=$data1['roll_no'];
+		$data['distance']=-1;
+		//$this->session->set_userdata($data);
+		//$this->session->set_userdata('refered_from',site_url('Welcome/address_maps').'?key='.$key );
+		//$this->session->set_userdata('isDistance',1);
+		
+		$fname=$data1['first_name'];
+		$lname=$data1['last_name'];
+		$roll=$data1['roll_no'];
+		$address=$data1['address'];
+		$email=$data1['email'];
+		
+		
+		//$address = '1059 Vikas Kunj Vikas Puri New Delhi-110018';
 		$data['address'] = $address;
 		$data['ins_name']=$institutename;
 		$navigation_data['navTab']='about';
