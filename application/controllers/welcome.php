@@ -242,7 +242,7 @@ class Welcome extends CI_Controller {
 		$this->email->to($emailTo); // change it to yours
 
 		$this->email->subject('Hostel Application Form Verification');
-		$urlinfo=site_url('Welcome/address_maps');
+		$urlinfo=site_url('Welcome/format_add');
 		$this->email->message('Verify your hostel application by clicking on this link:-
 		'.$urlinfo.'?key='.$key);
  
@@ -487,6 +487,15 @@ function format_add()
 	{
 		$this->load->helper('url');
 		$base_url = base_url();
+		
+		$key=$_GET["key"];
+		//echo $key;
+		$this->load->database();
+		
+		$this->db->select('first_name, last_name, roll_no, address, email');
+		$this->db->from('student_info');
+		$this->db->where('random',$key);
+		
 		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
 		$institutename='IIIT-D';
