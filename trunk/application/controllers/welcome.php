@@ -283,13 +283,12 @@ class Welcome extends CI_Controller {
 		$this->load->database();
 		
 		$data3 = array(
-               'random' => $key
+               'rand_key' => $key
                //'name' => $name,
                //'date' => $date
             );
 		
-		$this->db->where('roll_no', $roll);
-		$this->db->update('student_info', $data3); 
+		$this->db->query("UPDATE applicants_info_male SET rand_key='$key' where roll_no='$roll'");
 		echo "[[[[[".$key;
 		
 		///////////////////////////////////////
