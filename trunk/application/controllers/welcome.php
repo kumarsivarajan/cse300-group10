@@ -187,7 +187,7 @@ class Welcome extends CI_Controller {
 			//$this->db->query("insert into applicants_info values('$roll','m')  WHERE NOT EXISTS (select * from applicants_info where roll_no='$roll')");
 			$this->db->query("insert into applicants_info values('$roll','m')");
 			//$this->db->quer("WHERE (select count(*) from applicants_info where roll_no='$roll')==0");
-			echo "hello";
+			//echo "hello";
 				
 			$this->db->query("INSERT INTO applicants_info_male (roll_no, f_name,l_name,contact_no,location,email,pref_1,pref_2,program_id) 
 					VALUES ('$roll','$fname','$lname','$contact','$location','$email','$room_preference1','$room_preference2','$program')");
@@ -202,7 +202,7 @@ class Welcome extends CI_Controller {
 			$query = $this->db->query("INSERT INTO applicants_info_female (roll_no, f_name,l_name,contact_no,location,email,pref_1,pref_2,program_id) 
 					VALUES ('$roll','$fname','$lname','$contact','$location','$email','$room_preference1','$room_preference2','$program')");				
 		}
-		echo $roll;
+		//echo $roll;
 		
 		
 		
