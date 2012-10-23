@@ -19,7 +19,7 @@
 		Name: <b><?php echo $firstname." ".$lastname; ?></b><br />
 
 		
-		Name: <b><?php echo $firstname; ?></b><br />
+		
 
 		Roll No.: <b><?php echo $roll; ?></b><br />
 		<!--Address: <b><?php echo $address ; ?></b><br /><br />-->
