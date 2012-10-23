@@ -303,7 +303,7 @@ class Welcome extends CI_Controller {
 		$this->email->to($emailTo); // change it to yours
 
 		$this->email->subject('Hostel Application Form Verification');
-		$urlinfo=site_url('Welcome/format_add');
+		$urlinfo=site_url('Welcome/address_maps');
 		$this->email->message('Verify your hostel application by clicking on this link:-
 		'.$urlinfo.'?key='.$key);
  
@@ -318,8 +318,177 @@ class Welcome extends CI_Controller {
 			show_error($this->email->print_debugger());
 		}
 	}
-	
 	function address_maps()
+	{
+	
+		$this->load->helper('url');
+	
+		$this->load->helper('date');
+		$time = time();
+		$base_url = base_url();
+	
+		$key=$_GET["key"];
+		//echo $key;
+		$this->load->database();
+	
+		/* $this->db->select('f_name, l_name, roll_no, location, email');
+			$this->db->from('applicants_info_male');
+		$this->db->where('rand_key',$key);
+	
+	
+		$query=$this->db->get(); */
+	
+		$query = $this->db->query("SELECT f_name, l_name, location, roll_no, email FROM applicants_info_male WHERE rand_key= '$key'");
+	
+	
+		if($query/* ->num_rows == 1 */)
+		{
+			foreach ($query->result() as $row)
+			{
+				$data1=array(
+						'f_name'=> $row->f_name,
+						'l_name'=> $row->l_name,
+						'roll_no'=> $row->roll_no,
+						'location'=> $row->location,
+						'email'=>$row->email,
+						'isvalidated'=>true
+				);
+	
+	
+			}
+		}
+		/* else
+			{
+		$this->db->select('f_name, l_name, roll_no, location, email');
+		$this->db->from('applicants_info_female');
+		$this->db->where('rand_key',$key);
+			
+		$query1=$this->db->get();
+			
+		if($query1->num_rows == 1)
+		{
+		foreach ($query1->result() as $row)
+		{
+		$data1=array(
+				'f_name'=> $row->f_name,
+				'l_name'=> $row->l_name,
+				'roll_no'=> $row->roll_no,
+				'location'=> $row->location,
+				'email'=>$row->email,
+				'isvalidated'=>true
+		);
+			
+			
+		}
+		}
+		*/
+		else
+		{
+				
+			$this->load->view('wrong_link');
+			return;
+		}
+	
+	
+	
+		//DATA to be used for plotting purposes
+	
+	
+		$fname=$data1['f_name'];
+		$lname=$data1['l_name'];
+		$roll=$data1['roll_no'];
+		$location=$data1['location'];
+		$email=$data1['email'];
+	
+	
+	
+	
+		date_default_timezone_set('Asia/Calcutta');
+	
+		$format = 'DATE_RFC822';
+		$datestring = standard_date($format,$time);
+		$data['date']=$datestring;
+		$navigation_data['navTab']='home';
+		$navigation_data['base_url']=$base_url;
+		$cssfiles[]="styles.css";
+		$data['scripts']=Array('jquery.js');
+	
+	
+	
+		$data['css']=$cssfiles;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		//$this->load->view('maps_page',$data);
+	
+		$this->load->library('googlemaps');
+		$config['center'] = 'Indraprastha Institute of Information Technology, Delhi';
+		$config['zoom']=10;
+		$config['directions'] = TRUE;
+		//remove house no
+		$addsplit=explode( ',',$location);
+		$data['location']=$location;
+	
+		//print_r($addsplit);
+		$location='';
+		//echo count($addsplit)."<br>";
+	
+		for($i=0;$i<count($addsplit);$i++){
+			//	echo $addsplit[$i]."<br>";
+	
+			if($i==count($addsplit)-1)
+				$location.=$addsplit[$i];
+			else if($i!=0)
+				$location.=$addsplit[$i].',';
+		}
+	
+		$data['fname']=$fname;
+		$data['lname']=$lname;
+	
+		$config['directionsStart'] = $location;
+		$config['directionsEnd'] = 'Indraprastha Institute of Information Technology, Delhi';
+		$config['directionsDivID'] = 'directionsDiv';
+		$this->googlemaps->initialize($config);
+	
+		$marker = array();
+		$marker['position'] = 'Indraprastha Institute of Information Technology, Delhi';
+		$marker['title']='Indraprastha Institute of Information Technology, Delhi';
+	
+		$marker['infowindow_content'] = 'Insitute : IIIT-D Okhla';
+		$this->googlemaps->add_marker($marker);
+	
+		$marker = array();
+		$marker['position'] = $location;
+		$marker['animation'] = 'DROP';
+		$marker['draggable'] = TRUE;
+		//$marker['title']='Vikas Kunj';
+		$marker['infowindow_content'] = 'Your Address: '.$location;
+		$marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+		$this->googlemaps->add_marker($marker);
+	
+	
+	
+		// 30km radius
+		$circle = array();
+		$circle['center'] = 'Indraprastha Institute of Information Technology, Delhi';
+		$circle['radius'] = '30000';
+		$this->googlemaps->add_circle($circle);
+	
+		$circle = array();
+		$circle['center'] = $location;
+		$circle['radius'] = '1000';
+		$circle['fillColor']='blue';
+		$this->googlemaps->add_circle($circle);
+	
+	
+	
+		$data['map'] = $this->googlemaps->create_map();
+		// Load our view, passing the map data that has just been created
+		$this->load->view('address_maps_page', $data);
+	
+	
+	}
+	
+	
+/* 	function address_maps()
 	{
 	
 		$this->load->helper('url');
@@ -333,21 +502,18 @@ class Welcome extends CI_Controller {
 		//echo $key;
 		$this->load->database();
 		
-		$this->db->select('first_name, last_name, roll_no, address, email');
-		$this->db->from('student_info');
-		$this->db->where('random',$key);
+		$query = $this->db->query("SELECT f_name, l_name, location, roll_no, email FROM applicants_info_male WHERE rand_key= '$key'");
 		
-		$query=$this->db->get();
 		
-		if($query->num_rows == 1)
+		if($query)
 		{
 			foreach ($query->result() as $row)
 			{
 				$data1=array(
-				'first_name'=> $row->first_name,
-				'last_name'=> $row->last_name,				
+				'f_name'=> $row->f_name,
+				'l_name'=> $row->l_name,				
 				'roll_no'=> $row->roll_no,
-				'address'=> $row->address,
+				'location'=> $row->location,
 				'email'=>$row->email,
 				'isvalidated'=>true
 				);
@@ -370,12 +536,11 @@ class Welcome extends CI_Controller {
 		$this->session->set_userdata('refered_from',site_url('Welcome/address_maps').'?key='.$key ); 
 		$this->session->set_userdata('isDistance',1); 
 
-		$fname=$data1['first_name'];
-		$lname=$data1['last_name'];
+		$fname=$data1['f_name'];
+		$lname=$data1['l_name'];
 		$roll=$data1['roll_no'];
-		$address=$data1['address'];
+		$location=$data1['location'];
 		$email=$data1['email'];
-		
 		
 		
 		
@@ -463,7 +628,7 @@ class Welcome extends CI_Controller {
 		$this->load->view('address_maps_page', $data);
 	
 	
-	}
+	} */
 	function setDistance(){
 		$this->load->library('session');
 		$dist=$_GET['dist'];
@@ -547,7 +712,7 @@ function submit()
 		$this->load->view('Submit_page',$data);	
 	}
 	
-function format_add()
+/* function format_add()
 	{
 		$this->load->helper('url');
 		$base_url = base_url();
@@ -561,9 +726,9 @@ function format_add()
 		$institutename='IIIT-D';
 		$this->load->database();
 		
-		$this->db->select('first_name, last_name, roll_no, address, email');
-		$this->db->from('student_info');
-		$this->db->where('random',$key);
+		$this->db->select('f_name, l_name, roll_no, address, email');
+		$this->db->from('applicants_info_male');
+		$this->db->where('rand_key',$key);
 		
 		$query=$this->db->get();
 		
@@ -611,7 +776,7 @@ function format_add()
 		
 		$this->load->view('format_address',$data);
 	}
-	
+	 */
 	
 }
 
