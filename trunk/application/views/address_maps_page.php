@@ -41,9 +41,9 @@
 		<div id="directionsDiv"></div>
 		<br />
 		<br />
-		<strong> &nbsp &nbsp Applicant's Name: </strong><?php echo $fname." ".$lname;?><br>
+		<strong> &nbsp &nbsp Applicant's Name: </strong><?php echo $f_name." ".$l_name;?><br>
 		
-		<strong> &nbsp &nbsp ERP Address: </strong><?php echo $address;?><br>
+		<strong> &nbsp &nbsp ERP Address: </strong><?php echo $location;?><br>
 		
 		
 		<center><p><b><big>If you have some issue with the shown address please click Report otherwise submit</big></b></p></center>
