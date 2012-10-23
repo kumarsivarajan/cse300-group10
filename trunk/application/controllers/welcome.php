@@ -125,39 +125,99 @@ class Welcome extends CI_Controller {
 	
 	function validate_student()
 	{
-		$this->load->model('student_verification');
+	$this->load->model('student_verification');
+		$this->load->database();
+		
+		
+		//////
+		
+		/*
+		$this->load->library('session');
+		$gender= $this->session->userdata('gender');
+		$this->session->sess_destroy();
+		*/
+		
+		
+		
 		$this->load->library('session');
 		$this->load->helper('url');
 		$base_url = base_url();
-		$cssfiles=Array("styles.css","sidenavigation.css");
+		$cssfiles[]="styles.css";
 		$data['css']=$cssfiles;
+		
+	
+		
+		
+		
+		
+		
+		
 		
 		//$this->load->library('session');
 		
 		$fname = $_POST['fname'];
 		$lname=$_POST['lname'];
-		
-		$this->FName=$fname;
-		$this->LName=$lname;
-		$this->ROll=$roll;
+		//echo $fname;
+		//$this->FName=$fname;
+		//$this->LName=$lname;
+		//$this->ROll=$roll;
 		
 		//echo $this->FName."   ".$fname;
 		
 		$roll = $_POST['roll'];
-		$Roll=$roll;
+		//$Roll=$roll;
 		$email = $_POST['email'];
 		$location=$_POST['location'];
 		$gender=$_POST['gender'];
-		$program = $_POST['program1'];  // student course as in(mtech,btech)
+		$program = $_POST['program1'];
+		$contact = $_POST['contact'];
+		  // student course as in(mtech,btech)
 		
 		$room_preference1 = $_POST['room_preference1']; // room preferesnce (as in type of room single,double ..)
 		$room_preference2 = $_POST['room_preference2']; // room preferesnce (as in type of room single,double ..)
+		
+		
+		if($gender=='0')
+		{
+			/* $this->db->insert('applicant_info_male');
+			 $this->db->('student_info');
+			$this->db->where('f_name',$fname);
+			$this->db->where('l_name',$lname);
+			$this->db->where('roll_no',$roll); */
+			//$this->db->query("insert into applicants_info values('$roll','m')  WHERE NOT EXISTS (select * from applicants_info where roll_no='$roll')");
+			$this->db->query("insert into applicants_info values('$roll','m')");
+			//$this->db->quer("WHERE (select count(*) from applicants_info where roll_no='$roll')==0");
+			echo "hello";
+				
+			$this->db->query("INSERT INTO applicants_info_male (roll_no, f_name,l_name,contact_no,location,email,pref_1,pref_2,program_id) 
+					VALUES ('$roll','$fname','$lname','$contact','$location','$email','$room_preference1','$room_preference2','$program')");
+			
+		
+		}
+		else
+		{
+			$this->db->query("insert into applicants_info values('$roll','f')");
+				
+
+			$query = $this->db->query("INSERT INTO applicants_info_female (roll_no, f_name,l_name,contact_no,location,email,pref_1,pref_2,program_id) 
+					VALUES ('$roll','$fname','$lname','$contact','$location','$email','$room_preference1','$room_preference2','$program')");				
+		}
+		echo $roll;
+		
+		
+		
+
+		
+		
+		
+		
+		
 		$data1=Array();
-		$data1=$this->student_verification->getinfo($fname, $lname, $roll);
+		$data1=$this->student_verification->getinfo($fname, $lname, $roll,$gender);
 		
-		$data['firstname']=$data1['first_name'];
-		$data['lastname']=$data1['last_name'];
-		
+		$data['firstname']=$data1['f_name'];
+		$data['lastname']=$data1['l_name'];
+		//echo $data1['f_name']."hi";
 		$data['roll']=$data1['roll_no'];
 		$data['email'] = $data1['email'];
 		$data['address']=$data1['address'];
@@ -166,8 +226,10 @@ class Welcome extends CI_Controller {
 		$data['gender']=$gender;
 		$data['room_preference1']=$room_preference1;		
 		$data['room_preference2']=$room_preference2;
+		//$data['gender']=$gender;
 		
 		$this->session->set_userdata($data);
+		//echo $gender=='0';
 		
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
@@ -415,19 +477,19 @@ class Welcome extends CI_Controller {
 	
 	
 	
-	function alloc_list()
+function alloc_list()
 	{
 		//$this->load->model('student_verification');
 		$this->load->helper('url');
 		$this->load->library('table');
 		$base_url = base_url();
-		$cssfiles=Array('styles.css','demo_table.css','sidenavigation.css');
+		$cssfiles=Array('styles.css','demo_table.css');
 		$data['scripts']=Array('jquery.js','jquery.dataTables.js');
 		
 
 		$data['css']=$cssfiles;		
 
-		$navigation_data['navTab']='list';
+		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		
@@ -437,13 +499,16 @@ class Welcome extends CI_Controller {
 		$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="allocation_list">' );
 
 		$this->table->set_template($tmpl);
-		$this->table->set_heading('First name','Sex', 'Roll No.','Program', 'Location', 'Dist','Status');
+		$this->table->set_heading('First name', 'Roll No.','Program', 'Location', 'email id', 'Distance','Status');
 		
-		$query = $this->db->query("SELECT first_name,gender,roll_no,program,location,distance,status FROM alloc_list");
-
+		//$query = $this->db->query("SELECT first_name,gender,roll_no,program,location,email,distance,status FROM alloc_list");
+		$query1 = $this->db->query("SELECT f_name,roll_no,program_id,address,email,distance_km,status FROM applicants_info_male natural join applicant_status_male");
 		
 		
-		$data['table']=$this->table->generate($query);
+		$data['table1']=$this->table->generate($query1);
+		
+		
+		
 		$this->load->view('allocation_list',$data);
 			
 			
