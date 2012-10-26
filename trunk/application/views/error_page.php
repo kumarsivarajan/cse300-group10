@@ -14,7 +14,7 @@
 	<h1><center>oops something is Wrong !!<center></h1>
 		<div id="body">		
 			<p> <b><center>Name or Roll Number doesn't exist<center> <b></p>
-			<a href="<?php echo site_url('Welcome/name_rollno'); ?>"><p>Go back and Try again !!</p></a>
+			<button onClick="history.go(-1);return true;">Go back</button><br />
 		</div>
 		
 			<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>

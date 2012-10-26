@@ -140,9 +140,9 @@ class Admin_view extends CI_Controller {
 			$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="admin_list">' );
 
 			$this->table->set_template($tmpl);
-			$this->table->set_heading('First name', 'Last name', 'Gender','Roll No.','Program', 'Address', 'email id', 'Distance','Status','Action','Message');
+			$this->table->set_heading('name', 'Roll No.','Program', 'Location', 'Dist','Status','Room','Action','Message');
 		
-			$query = $this->db->query("SELECT first_name,last_name,gender,roll_no,program,location,email,distance,status FROM alloc_list");
+			$query = $this->db->query("SELECT name,rollno,program,location,distance,status,room_type FROM admin_allocationlist_boys_btech");
 			//print_r($query);
 			foreach($query->result() as $row)
 			{
@@ -156,7 +156,8 @@ class Admin_view extends CI_Controller {
 		</select>';
 				
 				$row[0]['msg']='<button >add message</button>';*/
-				$this->table->add_row(array($row->first_name,$row->last_name,$row->gender,$row->roll_no,$row->program,$row->location,$row->email,$row->distance,$row->status,'<select>
+				//print_r($row);
+				$this->table->add_row(array($row->NAME,$row->ROLLNO,$row->PROGRAM,$row->LOCATION,$row->DISTANCE,$row->STATUS,$row->room_type,'<select>
 						<option value="volvo">Weak accept</option>
 		  <option value="saab">Weak reject</option>
 		  <option value="mercedes">Strong accept</option>
