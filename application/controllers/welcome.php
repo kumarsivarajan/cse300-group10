@@ -125,141 +125,56 @@ class Welcome extends CI_Controller {
 	
 	function validate_student()
 	{
-	$this->load->model('student_verification');
-		$this->load->database();
-		
-		
-		//////
-		
-		/*
-		$this->load->library('session');
-		$gender= $this->session->userdata('gender');
-		$this->session->sess_destroy();
-		*/
-		
-		
-		
+		$this->load->model('student_verification');
 		$this->load->library('session');
 		$this->load->helper('url');
 		$base_url = base_url();
-		$cssfiles[]="styles.css";
+		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
-		
-	
-		
-		
-		
-		
-		
-		
-		
-		//$this->load->library('session');
-		
-		$fname = $_POST['fname'];
-		$lname=$_POST['lname'];
-		//echo $fname;
-		//$this->FName=$fname;
-		//$this->LName=$lname;
-		//$this->ROll=$roll;
-		
-		//echo $this->FName."   ".$fname;
-		
-		$roll = $_POST['roll'];
-		//$Roll=$roll;
-		$email = $_POST['email'];
-		$location=$_POST['location'];
-		$gender=$_POST['gender'];
-		$program = $_POST['program1'];
-		$contact = $_POST['contact'];
-		  // student course as in(mtech,btech)
-		
-		$room_preference1 = $_POST['room_preference1']; // room preferesnce (as in type of room single,double ..)
-		$room_preference2 = $_POST['room_preference2']; // room preferesnce (as in type of room single,double ..)
-		
-		
-		if($gender=='0')
-		{
-			/* $this->db->insert('applicant_info_male');
-			 $this->db->('student_info');
-			$this->db->where('f_name',$fname);
-			$this->db->where('l_name',$lname);
-			$this->db->where('roll_no',$roll); */
-			//$this->db->query("insert into applicants_info values('$roll','m')  WHERE NOT EXISTS (select * from applicants_info where roll_no='$roll')");
-			$this->db->query("insert into applicants_info values('$roll','m')");
-			//$this->db->quer("WHERE (select count(*) from applicants_info where roll_no='$roll')==0");
-			//echo "hello";
-				
-			$this->db->query("INSERT INTO applicants_info_male (roll_no, f_name,l_name,contact_no,location,email,pref_1,pref_2,program_id) 
-					VALUES ('$roll','$fname','$lname','$contact','$location','$email','$room_preference1','$room_preference2','$program')");
-			
-		
-		}
-		else
-		{
-			$this->db->query("insert into applicants_info values('$roll','f')");
-				
+		$roll=$this->security->xss_clean($this->input->post('roll'));
+		$fname=$this->security->xss_clean($this->input->post('fname'));
 
-			$query = $this->db->query("INSERT INTO applicants_info_female (roll_no, f_name,l_name,contact_no,location,email,pref_1,pref_2,program_id) 
-					VALUES ('$roll','$fname','$lname','$contact','$location','$email','$room_preference1','$room_preference2','$program')");				
-		}
-		//echo $roll;
-		
-		
-		
-
-		
-		
-		
-		
-		
-		$data1=Array();
-		$data1=$this->student_verification->getinfo($fname, $lname, $roll,$gender);
-		
-		$data['firstname']=$data1['f_name'];
-		$data['lastname']=$data1['l_name'];
-		//echo $data1['f_name']."hi";
-		$data['roll']=$data1['roll_no'];
-		$data['email'] = $data1['email'];
-		$data['address']=$data1['address'];
-		$data['location']=$location;
-		$data['program']=$program;
-		$data['gender']=$gender;
-		$data['room_preference1']=$room_preference1;		
-		$data['room_preference2']=$room_preference2;
-		//$data['gender']=$gender;
-		
-		$this->session->set_userdata($data);
-		//echo $gender=='0';
-		
 		$navigation_data['navTab']='apply';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 
-		if($data['firstname']=="xxx")
-		{
-			$this->load->view('error_page',$data);
+		$data1=$this->student_verification->dbvalidation($roll,$fname);
+		$temparr=$student_data=$this->session->all_userdata();
+		echo "<br>the function<br>";
+					print_r($temparr);
+		if(!is_array($data1)){
+					$this->load->view('error_page',$data);
+					
 		}
-		else
-		{
+		else{
+			$data['app_info']=$data1;
 			$this->load->view('db_info',$data);
-		}
+			}
+			$temparr=$student_data=$this->session->all_userdata();
+		echo "<br>the function ends<br>";
+					print_r($temparr);
+		
 	}
 	
 	
 	function email_user()
 	{
+		
+		$this->load->model('student_verification');
+
 		$this->load->library('email');
 		$this->load->library('session');
 				$this->load->helper('url');
-
+				$temparr=$student_data=$this->session->all_userdata();
+		echo "<br>the email<br>";
+					print_r($temparr);
 		//$base_url = base_url();
 		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
 		
 		
-		$roll= $this->session->userdata('roll');
+		$roll= $this->session->userdata('roll_no');
 		
-		$this->session->sess_destroy();
 		
 		
 		
@@ -267,7 +182,7 @@ class Welcome extends CI_Controller {
 		
 		///key being generated here  /////////////////////////////
 		$key = '';
-		$length=30;
+		$length=30-strlen($roll);
 		list($usec, $sec) = explode(' ', microtime());
 		mt_srand((float) $sec + ((float) $usec * 100000));
 		
@@ -278,18 +193,9 @@ class Welcome extends CI_Controller {
 			$key .= $inputs{mt_rand(0,61)};
 		}
 		$key=$roll.$key;
-		echo $key."  --- ";
-		
-		$this->load->database();
-		
-		$data3 = array(
-               'rand_key' => $key
-               //'name' => $name,
-               //'date' => $date
-            );
-		
-		$this->db->query("UPDATE applicants_info_male SET rand_key='$key' where roll_no='$roll'");
-		echo "[[[[[".$key;
+		echo $key."  --- ".$roll;
+		$this->student_verification->confirmed_application($key);
+
 		
 		///////////////////////////////////////
 		
@@ -299,6 +205,9 @@ class Welcome extends CI_Controller {
 		//$this->email->to($email); // change it to yours
 
 		$student_data=$this->session->all_userdata();
+		print_r($student_data);
+		//$emailTo=$student_data['email'];
+		echo "Email:".$student_data['email'];
 		$emailTo=$student_data['email'];
 		$this->email->to($emailTo); // change it to yours
 
@@ -312,184 +221,23 @@ class Welcome extends CI_Controller {
 			echo '<html> <body><h1>Email sent. Follow the link in the email to proceed (Please check the SPAM folder as well)</h1>
 			Mail Link : <a href="http://mail.iiitd.ac.in">IIITD:Webmail</a>
 			</body> </html>';
+							$this->session->sess_destroy();
+
 		}
 		else
 		{
 			show_error($this->email->print_debugger());
+			
+				$this->session->sess_destroy();
+
 		}
+				$this->session->sess_destroy();
+
 	}
+	
 	function address_maps()
 	{
-	
-		$this->load->helper('url');
-	
-		$this->load->helper('date');
-		$time = time();
-		$base_url = base_url();
-	
-		$key=$_GET["key"];
-		//echo $key;
-		$this->load->database();
-	
-		/* $this->db->select('f_name, l_name, roll_no, location, email');
-			$this->db->from('applicants_info_male');
-		$this->db->where('rand_key',$key);
-	
-	
-		$query=$this->db->get(); */
-	
-		$query = $this->db->query("SELECT f_name, l_name, location, roll_no, email FROM applicants_info_male WHERE rand_key= '$key'");
-	
-	
-		if($query/* ->num_rows == 1 */)
-		{
-			foreach ($query->result() as $row)
-			{
-				$data1=array(
-						'f_name'=> $row->f_name,
-						'l_name'=> $row->l_name,
-						'roll_no'=> $row->roll_no,
-						'location'=> $row->location,
-						'email'=>$row->email,
-						'isvalidated'=>true
-				);
-	
-	
-			}
-		}
-		/* else
-			{
-		$this->db->select('f_name, l_name, roll_no, location, email');
-		$this->db->from('applicants_info_female');
-		$this->db->where('rand_key',$key);
-			
-		$query1=$this->db->get();
-			
-		if($query1->num_rows == 1)
-		{
-		foreach ($query1->result() as $row)
-		{
-		$data1=array(
-				'f_name'=> $row->f_name,
-				'l_name'=> $row->l_name,
-				'roll_no'=> $row->roll_no,
-				'location'=> $row->location,
-				'email'=>$row->email,
-				'isvalidated'=>true
-		);
-			
-			
-		}
-		}
-		*/
-		else
-		{
-				
-			$this->load->view('wrong_link');
-			return;
-		}
-	
-	
-	
-		//DATA to be used for plotting purposes
-	
-	
-		$fname=$data1['f_name'];
-		$lname=$data1['l_name'];
-		$roll=$data1['roll_no'];
-		$location=$data1['location'];
-		$email=$data1['email'];
-	
-	
-	
-	
-		date_default_timezone_set('Asia/Calcutta');
-	
-		$format = 'DATE_RFC822';
-		$datestring = standard_date($format,$time);
-		$data['date']=$datestring;
-		$navigation_data['navTab']='home';
-		$navigation_data['base_url']=$base_url;
-		$cssfiles[]="styles.css";
-		$data['scripts']=Array('jquery.js');
-	
-	
-	
-		$data['css']=$cssfiles;
-		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
-		//$this->load->view('maps_page',$data);
-	
-		$this->load->library('googlemaps');
-		$config['center'] = 'Indraprastha Institute of Information Technology, Delhi';
-		$config['zoom']=10;
-		$config['directions'] = TRUE;
-		//remove house no
-		$addsplit=explode( ',',$location);
-		$data['location']=$location;
-	
-		//print_r($addsplit);
-		$location='';
-		//echo count($addsplit)."<br>";
-	
-		for($i=0;$i<count($addsplit);$i++){
-			//	echo $addsplit[$i]."<br>";
-	
-			if($i==count($addsplit)-1)
-				$location.=$addsplit[$i];
-			else if($i!=0)
-				$location.=$addsplit[$i].',';
-		}
-	
-		$data['fname']=$fname;
-		$data['lname']=$lname;
-	
-		$config['directionsStart'] = $location;
-		$config['directionsEnd'] = 'Indraprastha Institute of Information Technology, Delhi';
-		$config['directionsDivID'] = 'directionsDiv';
-		$this->googlemaps->initialize($config);
-	
-		$marker = array();
-		$marker['position'] = 'Indraprastha Institute of Information Technology, Delhi';
-		$marker['title']='Indraprastha Institute of Information Technology, Delhi';
-	
-		$marker['infowindow_content'] = 'Insitute : IIIT-D Okhla';
-		$this->googlemaps->add_marker($marker);
-	
-		$marker = array();
-		$marker['position'] = $location;
-		$marker['animation'] = 'DROP';
-		$marker['draggable'] = TRUE;
-		//$marker['title']='Vikas Kunj';
-		$marker['infowindow_content'] = 'Your Address: '.$location;
-		$marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
-		$this->googlemaps->add_marker($marker);
-	
-	
-	
-		// 30km radius
-		$circle = array();
-		$circle['center'] = 'Indraprastha Institute of Information Technology, Delhi';
-		$circle['radius'] = '30000';
-		$this->googlemaps->add_circle($circle);
-	
-		$circle = array();
-		$circle['center'] = $location;
-		$circle['radius'] = '1000';
-		$circle['fillColor']='blue';
-		$this->googlemaps->add_circle($circle);
-	
-	
-	
-		$data['map'] = $this->googlemaps->create_map();
-		// Load our view, passing the map data that has just been created
-		$this->load->view('address_maps_page', $data);
-	
-	
-	}
-	
-	
-/* 	function address_maps()
-	{
+				$this->load->model('student_verification');
 	
 		$this->load->helper('url');
 		$this->load->library('session');
@@ -500,47 +248,25 @@ class Welcome extends CI_Controller {
 		
 		$key=$_GET["key"];
 		//echo $key;
-		$this->load->database();
 		
-		$query = $this->db->query("SELECT f_name, l_name, location, roll_no, email FROM applicants_info_male WHERE rand_key= '$key'");
-		
-		
-		if($query)
-		{
-			foreach ($query->result() as $row)
-			{
-				$data1=array(
-				'f_name'=> $row->f_name,
-				'l_name'=> $row->l_name,				
-				'roll_no'=> $row->roll_no,
-				'location'=> $row->location,
-				'email'=>$row->email,
-				'isvalidated'=>true
-				);
-				
-				
-			}
-		}
-		else
-		{
-			$this->load->view('wrong_link');
+		$data1=$this->student_verification->getAddress($key);
+		if(!is_array($data1))
 			return;
-		}
-		
-		
 		//DATA to be used for plotting purposes
 		
 		$data['roll']=$data1['roll_no'];
+		$data1['distance']=-1;
 		$data['distance']=-1;
-		$this->session->set_userdata($data);
+		$this->session->set_userdata($data1);
 		$this->session->set_userdata('refered_from',site_url('Welcome/address_maps').'?key='.$key ); 
 		$this->session->set_userdata('isDistance',1); 
 
-		$fname=$data1['f_name'];
-		$lname=$data1['l_name'];
+		$fname=$data1['first_name'];
+		$lname=$data1['last_name'];
 		$roll=$data1['roll_no'];
-		$location=$data1['location'];
+		$address=$data1['address'];
 		$email=$data1['email'];
+		
 		
 		
 		
@@ -628,7 +354,7 @@ class Welcome extends CI_Controller {
 		$this->load->view('address_maps_page', $data);
 	
 	
-	} */
+	}
 	function setDistance(){
 		$this->load->library('session');
 		$dist=$_GET['dist'];
@@ -641,19 +367,19 @@ class Welcome extends CI_Controller {
 	
 	
 	
-function alloc_list()
+	function alloc_list()
 	{
 		//$this->load->model('student_verification');
 		$this->load->helper('url');
 		$this->load->library('table');
 		$base_url = base_url();
-		$cssfiles=Array('styles.css','demo_table.css');
+		$cssfiles=Array('styles.css','demo_table.css','sidenavigation.css');
 		$data['scripts']=Array('jquery.js','jquery.dataTables.js');
 		
 
 		$data['css']=$cssfiles;		
 
-		$navigation_data['navTab']='apply';
+		$navigation_data['navTab']='list';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		
@@ -663,16 +389,13 @@ function alloc_list()
 		$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="allocation_list">' );
 
 		$this->table->set_template($tmpl);
-		$this->table->set_heading('First name', 'Roll No.','Program', 'Location', 'email id', 'Distance','Status');
+		$this->table->set_heading('name', 'Roll No.','Program', 'Location', 'Dist','Status');
 		
-		//$query = $this->db->query("SELECT first_name,gender,roll_no,program,location,email,distance,status FROM alloc_list");
-		$query1 = $this->db->query("SELECT f_name,roll_no,program_id,address,email,distance_km,status FROM applicants_info_male natural join applicant_status_male");
-		
-		
-		$data['table1']=$this->table->generate($query1);
+		$query = $this->db->query("SELECT name,rollno,program,location,distance,status FROM allocationlist_boys ");
 		
 		
 		
+		$data['table']=$this->table->generate($query);
 		$this->load->view('allocation_list',$data);
 			
 			
@@ -695,10 +418,13 @@ function alloc_list()
 	
 function submit()
 	{
-				$this->load->helper('url');
+			$this->load->model('student_verification');
 
-			$this->load->library('session');
+				$this->load->helper('url');
+				$this->load->library('session');
 			$data['dist'] = $this->session->userdata('distance');
+			$this->student_verification->insertDistance($data['dist']);
+			
 			if($this->session->userdata('isDistance')==1)
 				redirect($this->session->userdata('refered_from'));
 		$base_url = base_url();
@@ -712,7 +438,7 @@ function submit()
 		$this->load->view('Submit_page',$data);	
 	}
 	
-/* function format_add()
+function format_add()
 	{
 		$this->load->helper('url');
 		$base_url = base_url();
@@ -726,9 +452,9 @@ function submit()
 		$institutename='IIIT-D';
 		$this->load->database();
 		
-		$this->db->select('f_name, l_name, roll_no, address, email');
-		$this->db->from('applicants_info_male');
-		$this->db->where('rand_key',$key);
+		$this->db->select('first_name, last_name, roll_no, address, email');
+		$this->db->from('student_info');
+		$this->db->where('random',$key);
 		
 		$query=$this->db->get();
 		
@@ -776,7 +502,7 @@ function submit()
 		
 		$this->load->view('format_address',$data);
 	}
-	 */
+	
 	
 }
 
