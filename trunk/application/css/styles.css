@@ -127,11 +127,9 @@
 	}
 		.container .col2{
 			float:left;
-			position:relative;
-			display: inline;
 			
 			height:auto;
-			width: 900px;
+			width: 890px;
 			border: 0.5px solid #ffffff;
 			-webkit-box-shadow: 0 0 8px #D0D0D0;
 			box-shadow: 0 0 8px #D0D0D0;
@@ -168,10 +166,14 @@ padding-left: 10px;
 	
 	
 		}
+		@-moz-document url-prefix() {
+
+   .container .col2 .instr-note { padding-left: 15px; }
+
+    }
 		
 		.container .col1{
 			float:left;
-			display: inline;
 			height:auto;
 			width: 300px;
 			height: 500px;

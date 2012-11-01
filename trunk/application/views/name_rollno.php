@@ -24,9 +24,18 @@
 	</script>
 	<script type="text/javascript">
 		var j = jQuery.noConflict();
-
+		var pref_f="",pref_m="";
+		<?php foreach($f_pref as $pref):
+		?>
+		pref_f+="<option value=\"<?php echo $pref['preference_id']; ?>\"><?php echo $pref['preference_name']; ?></option>";
+		<?php endforeach ?>
+		<?php foreach($m_pref as $pref):
+		?>
+		pref_m+="<option value=\"<?php echo $pref['preference_id']; ?>\"><?php echo $pref['preference_name']; ?></option>";
+		<?php endforeach ?>
+		
 		 j(document).ready(function(){
-	
+	//alert(pref_f);
 	var el = document.getElementById("pref1");
 		el.onchange = updateSelectTarget;
 		el.onchange();
@@ -45,6 +54,36 @@
 						}
 				}
 				}
+	var genup = document.getElementById("gender");
+		genup.onchange = updategenPref;
+		genup.onchange();
+		function updategenPref () {
+		
+			var id = this.options[this.selectedIndex].text;
+			var targets = j("#pref1");
+			//alert(id);
+			if(id=="Male")
+			{
+			//alert("into male");
+				targets.empty();
+				targets.append(pref_m);
+				el.onchange();
+				//targets.innerHTML=pref_m;
+			
+			}
+			else if(id=="Female")
+			{
+				targets.empty();
+				
+				targets.append(pref_f);
+				el.onchange();
+				
+			}
+			
+			
+				}
+				
+	
 				});
 	
 	</script>

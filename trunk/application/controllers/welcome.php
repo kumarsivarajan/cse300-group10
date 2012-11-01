@@ -65,16 +65,25 @@ class Welcome extends CI_Controller {
 	function name_rollno()
 	{
 		$this->load->helper('form');
+		$this->load->model('student_verification');
+		$female=$this->student_verification->getPreferences('F');
+		$male=$this->student_verification->getPreferences('M');
+		
+		$data['m_pref']=$male;
+		$data['f_pref']=$female;
+		
+		print_r($male);
+		
 		$form_elem=Array('First_Name'=>Array('input'=>'text','name'=>'fname','id'=>'fname','type'=>'text','label'=>'Your First Name','class'=>'required'),
 						 'Last_Name'=>Array('input'=>'text','name'=>'lname','id'=>'lname','type'=>'text','label'=>'Your Last Name','class'=>'required'),
 						'Roll'=>Array('input'=>'text','name'=>'roll','id'=>'roll','type'=>'text','label'=>'Your Roll. No.','class'=>'required'),
 						'E-mail'=>Array('input'=>'text','name'=>'email','id'=>'email','type'=>'text','label'=>'Your E-mail ID','class'=>'required'),
 						'Contact'=>Array('input'=>'text','name'=>'contact','id'=>'contact','type'=>'text','label'=>'Your Contact No.','class'=>'required'),
 						'Location'=>Array('input'=>'text','name'=>'location','id'=>'location','type'=>'text','label'=>'Your Location','class'=>'required'),
-						'Gender'=>Array('input'=>'select','name'=>Array('name'=>'gender','label'=>'Gender: '),'values'=>Array('Male', 'Female')),
+						'Gender'=>Array('input'=>'select','attributes'=>Array('id'=>'gender'),'name'=>Array('name'=>'gender','label'=>'Gender: '),'values'=>Array('Male', 'Female')),
 						'Program'=>Array('input'=>'select','name'=>Array('name'=>'program1','label'=>'Program: '),'values'=>Array('B. Tech', 'M. Tech','Phd')),
-						'room_pref1'=>Array('input'=>'select','attributes'=>Array('id'=>'pref1'),'name'=>Array('name'=>'room_preference1','label'=>'Room Preference 1:'),'values'=>Array('Single','Double','Triple')),
-						'room_pref2'=>Array('input'=>'select','attributes'=>Array('id'=>'pref2'),'name'=>Array('name'=>'room_preference2','label'=>'Room Preference 2:'),'values'=>Array()),
+						'room_pref1'=>Array('input'=>'select','attributes'=>Array('id'=>'pref1'),'name'=>Array('name'=>'room_preference1','label'=>'Room Preference 1:'),'values'=>Array('Loading...')),
+						'room_pref2'=>Array('input'=>'select','attributes'=>Array('id'=>'pref2'),'name'=>Array('name'=>'room_preference2','label'=>'Room Preference 2:')),
 						'Submit'=>Array('input'=>'submit','value'=>'Apply!','type'=>'submit'));
 
 		$form_attr=array('id'=>'applyForm');
@@ -409,7 +418,7 @@ class Welcome extends CI_Controller {
 		$base_url = base_url();
 		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
-		$navigation_data['navTab']='apply';
+		$navigation_data['navTab']='list';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		$this->load->view('report_issue',$data);	
