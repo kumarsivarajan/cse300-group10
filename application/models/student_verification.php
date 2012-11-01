@@ -135,6 +135,38 @@ class Student_verification extends CI_Model{
 				}
 
 	}
+	public function getPreferences($gender){
+			$tablename='eav_preferences_';
+			if($gender=='M')
+				$tablename.='male';
+			else if($gender=='F')
+				$tablename.='female';
+			else
+				return false;
+			$this->load->database();
+			$this->db->select('preference_id, preference_name,preference_available');
+
+			$this->db->from('eav_preferences NATURAL JOIN '.$tablename);
+			//$this->db->where('eav_preferences.preference_id',$tablename.'.preference_id');
+			$pquery=$this->db->get();
+			if($pquery->num_rows>0){
+				foreach ($pquery->result() as $row)
+				{
+				if($row->preference_available>0)
+				{
+					$data1[]=array(
+					'preference_id'=> $row->preference_id,
+					'preference_name'=> $row->preference_name,
+					'preference_available'=> $row->preference_available
+					
+					);
+				}
+				}
+				return $data1;
+				
+				}
+
+	}
 	public function confirmed_application($rand_key){
 			$this->load->database();
 
