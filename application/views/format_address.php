@@ -21,6 +21,7 @@
 		<div><h2>Please format your address according to the instructions given below</h2></div>
 <div id="text">
 Instructions for formatting to be written here<br>
+<?php $address1 = $address?>
 <textarea readonly="readonly" onclick="InsertText();" id="txtArea" ><?php echo $address ?></textarea>
 <script>
 function getCaret(el) {
