@@ -145,8 +145,13 @@ class Welcome extends CI_Controller {
 		$data['roll']=$roll;
 		
 		$data1=$this->student_verification->insertFalseApplicantReport($roll, $comment);
-		
-		print_r($data);
+		$data['check']=true;
+		echo $data1;
+		if($data1==false)
+		{
+			$data['check']=false;
+		}
+		//print_r($data);
 		
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		$this->load->view('final_report',$data);

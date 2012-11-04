@@ -308,8 +308,12 @@ class Student_verification extends CI_Model{
 			{
 				$sql='insert into false_applicants_reports(roll_no, reason) values('.$roll.',"'.$reason.'")';
 				$this->db->query($sql);
+				return true;
 			}
-			
+			else
+			{
+				return false;
+			}
 			//$sql='insert into false_applicants_reports(roll_no, reason) values('.$roll.',"'.$reason.'") where '.$roll.' in (select roll_no from applicants_info)';  
 			
 			
