@@ -300,9 +300,18 @@ class Student_verification extends CI_Model{
 	public function insertFalseApplicantReport($roll, $reason)
 	{
 			$this->load->database();
+			$this->db->select('roll_no');
+			$this->db->from('applicants_info');
+			$this->db->where('roll_no',$roll);
+			$query1=$this->db->get();
+			if($query1->num_rows==1)
+			{
+				$sql='insert into false_applicants_reports(roll_no, reason) values('.$roll.',"'.$reason.'")';
+				$this->db->query($sql);
+			}
 			
-			$sql='insert into false_applicants_reports(roll_no, reason) values('.$roll.','.$reason.') where '.$roll.' in (select roll_no from applicants_info)';  
-			$this->db->query($sql);
+			//$sql='insert into false_applicants_reports(roll_no, reason) values('.$roll.',"'.$reason.'") where '.$roll.' in (select roll_no from applicants_info)';  
+			
 			
 	}
 	

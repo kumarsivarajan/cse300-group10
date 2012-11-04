@@ -21,6 +21,31 @@ function form_input_infield($data = '', $value = '', $extra = '')
     		$prefix=$prefix."<label for=".$data['id'].">".$data['label']."</label>";
 		return $prefix."<input "._parse_form_attributes($data, $defaults).$extra." />".$suffix;
 }
+
+function form_textarea_formatted($data = '', $value = '', $extra = '')
+	{
+		$defaults = array('name' => (( ! is_array($data)) ? $data : ''), 'cols' => '40', 'rows' => '10');
+
+		$prefix="<p>";
+    	$suffix="</p>";
+		
+		if ( ! is_array($data) OR ! isset($data['value']))
+		{
+			$val = $value;
+		}
+		else
+		{
+			$val = $data['value'];
+			unset($data['value']); // textareas don't use the value attribute
+		}
+
+		if(isset($data['label'])&&isset($data['id']))
+    		$prefix=$prefix."<label for=".$data['id'].">".$data['label']."</label>";
+		
+		$name = (is_array($data)) ? $data['name'] : $data;
+		return $prefix."<textarea "._parse_form_attributes($data, $defaults).$extra.">".form_prep($val, $name)."</textarea>".$suffix;
+	}
+
 function generate_form($action='',$elements='',$attr=''){
 		$html='<div id="errorPanel">Fields Marked In Red Must Be Filled!</div>';
 
@@ -43,7 +68,7 @@ function generate_form($action='',$elements='',$attr=''){
 				$html.=form_submit('',$elem['value']);
 			}
 			else if ($elem['input']=="textarea"){
-				$html.=Form_textarea($textarea);
+				$html.=form_textarea_formatted($elem);
 				}
 			
 		

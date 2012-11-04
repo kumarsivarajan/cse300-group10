@@ -107,12 +107,12 @@ class Welcome extends CI_Controller {
 		$this->load->helper('form');
 		
 		$form_elem=Array('roll_report'=>Array('input'=>'text','name'=>'roll_report','id'=>'roll_report','type'=>'text','label'=>'Roll No. to report','class'=>'required'),
-						  'report_box'=>Array('input'=>'textarea','name' => 'report_box', 'cols' => '10', 'id'=>'report_box', 'class'=>'required'),
+						  'report_box'=>Array('input'=>'textarea','name' => 'report_box', 'cols' => '40', 'id'=>'report_box', 'class'=>'required','label'=>'Enter comments', 'defaultValue'=>'enter'),
 							'Submit'=>Array('input'=>'submit','value'=>'Submit report','type'=>'submit'));
-		$form_attr=array('id'=>'applyForm');
+		$form_attr=array('id'=>'reportForm');
 		$data['form_elem']=$form_elem;
 		$data['form_attr']=$form_attr;
-		
+		$this->load->model('student_verification');
 		
 		$this->load->helper('url');		
 		$base_url = base_url();
@@ -128,6 +128,7 @@ class Welcome extends CI_Controller {
 	
 	function add_report_to_db()
 	{
+		$this->load->model('student_verification');
 	
 		$this->load->helper('url');		
 		$base_url = base_url();
@@ -142,6 +143,10 @@ class Welcome extends CI_Controller {
 		
 		$data['comment']=$comment;
 		$data['roll']=$roll;
+		
+		$data1=$this->student_verification->insertFalseApplicantReport($roll, $comment);
+		
+		print_r($data);
 		
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		$this->load->view('final_report',$data);
