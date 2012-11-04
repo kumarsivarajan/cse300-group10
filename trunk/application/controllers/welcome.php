@@ -372,6 +372,7 @@ class Welcome extends CI_Controller {
 
 		$data['fname']=$fname;
 		$data['lname']=$lname;
+		$data['address']=$address;
 		
 		$config['directionsStart'] = $address;
 		$config['directionsEnd'] = 'Indraprastha Institute of Information Technology, Delhi';
@@ -491,7 +492,7 @@ function submit()
 		$this->load->view('Submit_page',$data);	
 	}
 	
-function format_add()
+function format_address()
 	{
 		$this->load->helper('url');
 		$base_url = base_url();
@@ -555,7 +556,30 @@ function format_add()
 		
 		$this->load->view('format_address',$data);
 	}
-	
+
+function format_address_incorrect()
+	{
+		$this->load->helper('url');
+		$base_url = base_url();
+		
+		$key=$_GET["key"];
+		//echo $key;
+		$this->load->database();
+		
+		$this->db->select('first_name, last_name, roll_no, address, email');
+		$this->db->from('student_info');
+		$this->db->where('random',$key);
+		
+		$cssfiles=Array("styles.css","sidenavigation.css");
+		$data['key1'] = $key;
+		$data['css']=$cssfiles;
+		$institutename='IIIT-D';
+		$data['ins_name']=$institutename;
+		$navigation_data['navTab']='about';
+		$navigation_data['base_url']=$base_url;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		$this->load->view('format_address_incorrect', $data);
+	}
 	
 }
 
