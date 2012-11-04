@@ -42,6 +42,9 @@ function generate_form($action='',$elements='',$attr=''){
 			else if($elem['input']=="submit"){
 				$html.=form_submit('',$elem['value']);
 			}
+			else if ($elem['input']=="textarea"){
+				$html.=Form_textarea($textarea);
+				}
 			
 		
 	}

@@ -72,7 +72,7 @@ class Welcome extends CI_Controller {
 		$data['m_pref']=$male;
 		$data['f_pref']=$female;
 		
-		print_r($male);
+		//print_r($male);
 		
 		$form_elem=Array('First_Name'=>Array('input'=>'text','name'=>'fname','id'=>'fname','type'=>'text','label'=>'Your First Name','class'=>'required'),
 						 'Last_Name'=>Array('input'=>'text','name'=>'lname','id'=>'lname','type'=>'text','label'=>'Your Last Name','class'=>'required'),
@@ -100,6 +100,55 @@ class Welcome extends CI_Controller {
 		
 		$this->load->view('name_rollno',$data);
 	}
+	
+	
+	function report_person()
+	{
+		$this->load->helper('form');
+		
+		$form_elem=Array('roll_report'=>Array('input'=>'text','name'=>'roll_report','id'=>'roll_report','type'=>'text','label'=>'Roll No. to report','class'=>'required'),
+						  'report_box'=>Array('input'=>'textarea','name' => 'report_box', 'cols' => '10', 'id'=>'report_box', 'class'=>'required'),
+							'Submit'=>Array('input'=>'submit','value'=>'Submit report','type'=>'submit'));
+		$form_attr=array('id'=>'applyForm');
+		$data['form_elem']=$form_elem;
+		$data['form_attr']=$form_attr;
+		
+		
+		$this->load->helper('url');		
+		$base_url = base_url();
+		$cssfiles=Array("styles.css","sidenavigation.css");
+		$data['css']=$cssfiles;
+		$navigation_data['navTab']='list';
+		$navigation_data['base_url']=$base_url;
+		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
+
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		$this->load->view('report_issue',$data);	
+	}
+	
+	function add_report_to_db()
+	{
+	
+		$this->load->helper('url');		
+		$base_url = base_url();
+		$cssfiles=Array("styles.css","sidenavigation.css");
+		$data['css']=$cssfiles;
+		$navigation_data['navTab']='list';
+		$navigation_data['base_url']=$base_url;
+		
+		$roll=$_POST['roll_report'];
+		$comment=$_POST['report_box'];
+		
+		
+		$data['comment']=$comment;
+		$data['roll']=$roll;
+		
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		$this->load->view('final_report',$data);
+	}
+	
+	
+	
 	function display_details()	
 	{	
 		
@@ -412,17 +461,7 @@ class Welcome extends CI_Controller {
 	
 	}
 	
-	function report_person()
-	{
-		$this->load->helper('url');
-		$base_url = base_url();
-		$cssfiles=Array("styles.css","sidenavigation.css");
-		$data['css']=$cssfiles;
-		$navigation_data['navTab']='list';
-		$navigation_data['base_url']=$base_url;
-		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
-		$this->load->view('report_issue',$data);	
-	}
+	
 	
 	
 function submit()
