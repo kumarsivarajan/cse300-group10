@@ -234,10 +234,15 @@ div.login_bar_wrapper{
 			text-align: center;
 
 		}
+		.admin-container .admin-contentbar .applicant_info{
+			text-align: center;
+
+		}
 		
 		.admin-container .showlist-menu{
 			position: relative;
 			left: 10px;
+			height: auto;
 		}
 		
 		.admin-container .admin-contentbar .info{

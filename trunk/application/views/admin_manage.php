@@ -23,6 +23,19 @@
                     });
 			 });
 	</script>
+		<script type="text/javascript">
+	var j = jQuery.noConflict();
+
+		 j(document).ready(function(){
+			 j("label").inFieldLabels();
+			 j("#applyForm").validate({
+				 	errorPlacement: function(error,element) {
+					 					j('#errorPanel').show();
+                                        }
+                    });
+			 });
+	</script>
+	
 </head>
 <body>
 

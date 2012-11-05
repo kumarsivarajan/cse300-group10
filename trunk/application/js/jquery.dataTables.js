@@ -790,8 +790,10 @@
 		{
 			var oCol = oSettings.aoColumns[iCol];
 			var oData = oSettings.aoData[iRow]._aData;
-		
+			try{
 			oCol.fnSetData( oData, val );
+			}catch(e){
+			}
 		}
 		
 		

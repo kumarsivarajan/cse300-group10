@@ -80,7 +80,7 @@ class Student_verification extends CI_Model{
 						);
 											$this->session->set_userdata($data1);
 
-										print_r($data1);
+										//print_r($data1);
 
 					$data2=array(
 					'first_name'=> $row->f_name,
@@ -96,9 +96,9 @@ class Student_verification extends CI_Model{
 						'pref_1'=>$this->getPrefLabel($this->security->xss_clean($this->input->post('room_preference1'))),
 						'pref_2'=>$this->getPrefLabel($this->security->xss_clean($this->input->post('room_preference2')))
 					);
-					print_r($data2);
+					//print_r($data2);
 							$temparr=$student_data=$this->session->all_userdata();
-					print_r($temparr);
+					//print_r($temparr);
 					return $data2;
 				
 				}
@@ -135,7 +135,7 @@ class Student_verification extends CI_Model{
 				}
 
 	}
-	public function getPreferences($gender){
+	public function getPreferences($gender,$backend=false){
 			$tablename='eav_preferences_';
 			if($gender=='M')
 				$tablename.='male';
@@ -154,6 +154,7 @@ class Student_verification extends CI_Model{
 				{
 				if($row->preference_available>0)
 				{
+					if($backend||$row->preference_name!='None')
 					$data1[]=array(
 					'preference_id'=> $row->preference_id,
 					'preference_name'=> $row->preference_name,
@@ -198,9 +199,21 @@ class Student_verification extends CI_Model{
 						$this->db->query($sqlapp_info);
 						
 						echo $sqlapp_info."<br>";
-						$sql = "INSERT INTO ".$target_table."(roll_no,f_name,l_name,contact_no,location,pref_1,pref_2,rand_key,year,email,address,program_id) VALUES(".$this->db->escape($roll).",".$this->db->escape($row->f_name).",".$this->db->escape($row->l_name).",".$this->db->escape($this->session->userdata('contact')).",".$this->db->escape($this->session->userdata('location')).",".$this->db->escape($this->session->userdata('pref_1')).",".$this->db->escape($this->session->userdata('pref_2')).",".$this->db->escape($rand_key).",".$this->db->escape($row->year).",".$this->db->escape($row->email).",".$this->db->escape($row->address).",".$this->db->escape($data1['program']).")";
+						$sql = "INSERT INTO ".$target_table."(roll_no,f_name,l_name,contact_no,location,pref_1,pref_2,rand_key,year,email,address,program_id,distance_km) VALUES(".$this->db->escape($roll).",".$this->db->escape($row->f_name).",".$this->db->escape($row->l_name).",".$this->db->escape($this->session->userdata('contact')).",".$this->db->escape($this->session->userdata('location')).",".$this->db->escape($this->session->userdata('pref_1')).",".$this->db->escape($this->session->userdata('pref_2')).",".$this->db->escape($rand_key).",".$this->db->escape($row->year).",".$this->db->escape($row->email).",".$this->db->escape($row->address).",".$this->db->escape($data1['program']).",-1)";
 						echo $sql."<br> hello";
 						$this->db->query($sql);
+						
+						$this->db->select('date_application');
+						$this->db->from($target_table);
+						$this->db->where('roll_no',$roll);
+						$query=$this->db->get();
+						if($query->num_rows == 1){
+						$row=$query->result();
+						//print_r($row);
+						return $row[0]->date_application;
+						}
+					
+						
 						
 						}
 	}
@@ -319,6 +332,30 @@ class Student_verification extends CI_Model{
 			
 			
 	}
+	public function getGender($roll)
+	{
+			$this->load->database();
+			$this->db->select('gender');
+			$this->db->from('applicants_info');
+			$this->db->where('roll_no',$roll);
+			$query1=$this->db->get();
+			if($query1->num_rows==1)
+			{
+			$row=$query1->result();
+			return $row[0]->gender;
+				
+						
+				
+			}
+			else
+			{
+				return false;
+			}
+			//$sql='insert into false_applicants_reports(roll_no, reason) values('.$roll.',"'.$reason.'") where '.$roll.' in (select roll_no from applicants_info)';  
+			
+			
+	}
+
 	
 	public function insertWrongAddressReport($roll,$comment)
 	{

@@ -13,7 +13,7 @@
 	$config['smtp_port']=465;  
 	$config['wordwrap'] = TRUE;
 	$config['smtp_timeout']='30';
-	$config['mailtype']='html';
+	$config['mailtype']='text';
 	$config['crlf']="\r\n";
 	$config['newline']="\r\n";
 	

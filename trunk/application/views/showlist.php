@@ -9,11 +9,58 @@
 	    <script type="text/javascript" src="<?php echo base_url("/application/js/".$script)?>"></script>
 	<?php endforeach; ?>
 	    <script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#admin_list').dataTable();
+	    		var k = jQuery.noConflict();
+
+			k(document).ready(function() {
+				k('#admin_list').dataTable();
 			} );
 		</script>
 	<title>Hostel Allocation - Backend</title>
+		<script type="text/javascript">
+		var j = jQuery.noConflict();
+		var pref_f="",pref_m="";
+		<?php foreach($f_pref as $pref):
+		?>
+		pref_f+="<option value=\"<?php echo $pref['preference_id']; ?>\"><?php echo $pref['preference_name']; ?></option>";
+		<?php endforeach ?>
+		<?php foreach($m_pref as $pref):
+		?>
+		pref_m+="<option value=\"<?php echo $pref['preference_id']; ?>\"><?php echo $pref['preference_name']; ?></option>";
+		<?php endforeach ?>
+		
+		 j(document).ready(function(){
+	
+	var genup = document.getElementById("gender");
+		genup.onchange = updategenPref;
+		genup.onchange();
+		function updategenPref () {
+		
+			var id = this.options[this.selectedIndex].text;
+			var targets = j("#pref1");
+			//alert(id);
+			if(id=="Male")
+			{
+			//alert("into male");
+				targets.empty();
+				targets.append(pref_m);
+				//targets.innerHTML=pref_m;
+			
+			}
+			else if(id=="Female")
+			{
+				targets.empty();
+				
+				targets.append(pref_f);
+				
+			}
+			
+			
+				}
+				
+	
+				});
+	
+	</script>
 </head>
 <body>
 
@@ -23,28 +70,8 @@
 	<h2>Manage Applications</h2>
 	<!-- This where you write you code-->
 	<!--Test123-->
-	Gender:
-	<select name="Gender">
-	<option value="Male">Male</option>
-	<option value="Female">Female</option>
-	<option value="All">All</option>
-	</select>
-	Program:
-	<select name="Program">
-	<option value="B.Tech">B.Tech</option>
-	<option value="M.Tech">M.Tech</option>
-	<option value="PhD">PhD</option>
-	<option value="All">All</option>
-	</select>
-	Room Preference:
-	<select name="Room Preference">
-	<option value="Single">Single</option>
-	<option value="Double">Double</option>
-	<option value="Triple">Triple</option>
-	</select>
-	<form name="input" action="showlist" method="get">
-	<input type="submit" value="Submit" />
-	</form>
+		<?php echo generate_form_nobreak('Admin_view/showlist',$form_elem,$form_attr);?>
+
 	<h1><center>Show List</center></h1>
 	<?php echo $table?>
 		
