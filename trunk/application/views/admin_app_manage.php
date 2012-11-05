@@ -45,19 +45,19 @@
 	<h2 >Manage Application</h2>
 	<button onClick="history.go(-1);return true;" style="left:0;">Go back</button><br />
 	<div class="applicant_info">
-		<p>Applicant's First Name: <?php echo $student_data['f_name']; ?> </p>
-		<p>Roll No.:<?php echo $student_data['roll_no']; ?></p>
-		<p>Program:<?php echo $student_data['program']; ?></p>
-		<p>First Preference:<?php echo $student_data['pref_1']; ?></p>
-		<p>Second Preference:<?php echo $student_data['pref_2']; ?></p>
-		<p>Contact No.:<?php echo $student_data['contact']; ?></p>
-		<p>Address:<?php echo $student_data['address']; ?></p>
-		<p>Mentioned Location:<?php echo $student_data['location']; ?></p>
-		<p>Distance:<?php echo $student_data['dist']."KM"; ?></p>
+		<p><b>Applicant's First Name:</b> <?php echo $student_data['f_name']; ?> </p>
+		<p><b>Roll No.:</b> <?php echo $student_data['roll_no']; ?></p>
+		<p><b>Program:</b> <?php echo $student_data['program']; ?></p>
+		<p><b>First Preference:</b> <?php echo $student_data['pref_1']; ?></p>
+		<p><b>Second Preference:</b> <?php echo $student_data['pref_2']; ?></p>
+		<p><b>Contact No.: </b><?php echo $student_data['contact']; ?></p>
+		<p><b>Address: </b><?php echo $student_data['address']; ?></p>
+		<p><b>Mentioned Location: </b><?php echo $student_data['location']; ?></p>
+		<p><b>Distance: </b><?php echo $student_data['dist']."KM"; ?></p>
 
-		<p>Assigned Status:<?php echo $student_data['status']; ?></p>
-		<p>Assigned Room:<?php echo $student_data['room_type']; ?></p>
-		<p>Assigned Remarks:<?php echo $student_data['remarks']; ?></p>
+		<p><b>Assigned Status: </b><?php echo $student_data['status']; ?></p>
+		<p><b>Assigned Room: </b><?php echo $student_data['room_type']; ?></p>
+		<p><b>Assigned Remarks: </b><?php echo $student_data['remarks']; ?></p>
 		
 	</div>
 	<div >
