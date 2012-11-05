@@ -21,9 +21,21 @@
 		<div><h2>Please format your address according to the instructions given below</h2></div>
 <div id="text">
 Instructions for formatting to be written here<br>
-<?php $address1 = $address?>
 <textarea readonly="readonly" onclick="InsertText();" id="txtArea" ><?php echo $address ?></textarea>
-<script>
+<button onclick = "location.href='<?php 
+									if (exec1())
+									{
+										//insert the URL of the site where it is to be directed
+										echo site_url('');	
+									}
+									else
+									{
+										//send to ERROR page
+										echo site_url('Welcome/format_address_incorrect');
+									} 
+									?>'" > Proceed </button>
+		
+<script>							
 function getCaret(el) {
 	  if (el.selectionStart) {
 	    return el.selectionStart;
@@ -53,6 +65,42 @@ function getCaret(el) {
 	    var strMiddle = ",";
 	    var strRight = textarea.value.substring(currentPos,textarea.value.length);
 	    textarea.value = strLeft + strMiddle + strRight;
+
+	function exec1(var1)
+	{
+		var textarea = document.getElementById('txtArea');
+		var n = textarea.split();
+		var db_address = <?php echo $address?>;
+		var n1 = db_address.split(",");
+		var flag = 0;
+		if (n1.length != n.length)
+		{
+			return false;
+		}
+		else
+		{
+			for (var i=0;i<db_address.length;i++)
+			{
+				if (n1[i] != n[i])
+				{
+					flag = 1;
+					break;
+				}
+				else
+				{
+					continue;
+				}
+			}
+			if (flag == 1)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+			
+		}
 	}
 </script>
 </div>
