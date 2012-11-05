@@ -306,7 +306,8 @@ class Student_verification extends CI_Model{
 			$query1=$this->db->get();
 			if($query1->num_rows==1)
 			{
-				$sql='insert into false_applicants_reports(roll_no, reason) values('.$roll.',"'.$reason.'")';
+				//$sql='insert into false_applicants_reports(roll_no, reason) values('.$roll.',"'.$reason.'")';
+				$sql="INSERT INTO false_applicants_reports(roll_no,reason) values(".$this->db->escape($roll).",".$this->db->escape($reason).")";
 				$this->db->query($sql);
 				return true;
 			}
@@ -319,6 +320,12 @@ class Student_verification extends CI_Model{
 			
 	}
 	
+	public function insertWrongAddressReport($roll,$comment)
+	{
+			$this->load->database();
+			$sql="INSERT INTO wrong_info_reports(roll_no,reason) values(".$this->db->escape($roll).",".$this->db->escape($comment).")";
+			$this->db->query($sql);
 	
+	}
 	
 } ?>

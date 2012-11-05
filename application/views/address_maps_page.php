@@ -33,7 +33,7 @@
 
 	<div class="col1"> <?php echo $content_navigation?> </div>
 	<div class="col2">
-		<h1><center>According to our data you live here !!</center></h1>
+		<h1><center>You location and distance from IIIT-D !!!</center></h1>
 		<?php echo $map['html']; ?>
 		</script>
 		
@@ -50,7 +50,7 @@
 		<center>
 		
 		<button onclick="location.href='<?php echo site_url('Welcome/submit');?>'">Proceed</button>
-		<button onclick="location.href='<?php echo site_url('Welcome/report_person');?>'">Report</button>
+		<button onclick="location.href='<?php echo site_url('Welcome/report_address');?>'">Report</button>
 		<br />
 		<br />
 		

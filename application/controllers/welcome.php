@@ -424,6 +424,63 @@ class Welcome extends CI_Controller {
 	
 	
 	}
+	
+	function report_address()
+	{
+		$this->load->helper('form');
+		
+		$form_elem=Array( 'report_box'=>Array('input'=>'textarea','name' => 'report_box', 'cols' => '40', 'id'=>'report_box', 'class'=>'required','label'=>'Enter comments', 'defaultValue'=>'enter'),
+							'Submit'=>Array('input'=>'submit','value'=>'Submit report','type'=>'submit'));
+		$form_attr=array('id'=>'reportForm');
+		$data['form_elem']=$form_elem;
+		$data['form_attr']=$form_attr;
+		$this->load->model('student_verification');
+		
+		$this->load->helper('url');		
+		$base_url = base_url();
+		$cssfiles=Array("styles.css","sidenavigation.css");
+		$data['css']=$cssfiles;
+		$navigation_data['navTab']='list';
+		$navigation_data['base_url']=$base_url;
+		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
+
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		$this->load->view('report_address',$data);	
+	}
+	
+	
+	
+	function add_addr_report_to_db()
+	{
+		$this->load->model('student_verification');
+	
+		$this->load->helper('url');		
+		$base_url = base_url();
+		$cssfiles=Array("styles.css","sidenavigation.css");
+		$data['css']=$cssfiles;
+		$navigation_data['navTab']='list';
+		$navigation_data['base_url']=$base_url;
+		
+		
+		$this->load->library('session');
+		$roll= $this->session->userdata('roll_no');
+		
+		//$roll=$_POST['roll_report'];
+		$comment=$_POST['report_box'];
+		
+		
+		$data['comment']=$comment;
+		$data['roll']=$roll;
+		
+		$data1=$this->student_verification->insertWrongAddressReport($roll, $comment);
+		$data['check']=true;
+		
+		//print_r($data);
+		
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		$this->load->view('final_report_addr',$data);
+	}
+	
 	function setDistance(){
 		$this->load->library('session');
 		$dist=$_GET['dist'];
