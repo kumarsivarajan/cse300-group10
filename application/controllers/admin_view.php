@@ -198,20 +198,23 @@ class Admin_view extends CI_Controller {
 						}
 							$this->email->message($message);
 					
-		if($this->email->send())
-		{
-			echo 'Sent!';
+				if($this->email->send())
+				{
+					echo 'Sent!';
 
-		}
-		else
-		{
-			show_error($this->email->print_debugger());
-		
-		}
+				}
+				else
+				{
+					show_error($this->email->print_debugger());
+				
+				}
 		
 
 
 			}
+			
+			redirect('Admin_view/showlist');
+			
 				
 	}
 	public function getreports()
