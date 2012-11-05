@@ -16,8 +16,8 @@
 		
 		
 		&nbsp &nbsp Your report has been successfully submitted. The administrator will get in touch with you soon.
-		
-		
+		<br /><br />
+		<button onclick="location.href='<?php echo site_url('Welcome/submit');?>'">Submit Hostel Application</button>
 		<!--<h1><center>Report Issue</center></h1>
 		<form method="post" action="">
 		<textarea name="Report issue" cols="50" rows="10">
