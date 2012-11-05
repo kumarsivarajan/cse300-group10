@@ -78,6 +78,17 @@ class Admin_view extends CI_Controller {
 
 	}
 	public function showlistmain(){
+			$this->load->helper('form');
+			$this->load->model('student_verification');
+					$this->load->model('admin_list');
+
+		$female=$this->student_verification->getPreferences('F');
+		$male=$this->student_verification->getPreferences('M');
+		
+		$data['m_pref']=$male;
+		$data['f_pref']=$female;
+		$progList=$this->admin_list->getPrograms();
+		
 			$this->load->helper('url');
 			$base_url=base_url();
 			$top_bar['base_url']=$base_url;
@@ -85,7 +96,11 @@ class Admin_view extends CI_Controller {
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
 			$data['top_menu'] = $this->load->view('header', $top_bar, true);
-		
+			$form_elem = Array('Gender'=>Array('input'=>'select','attributes'=>Array('id'=>'gender'),'name'=>Array('name'=>'gender','label'=>'Gender: '),'values'=>Array('Male', 'Female')),'Program'=>Array('input'=>'select','name'=>Array('name'=>'program1','label'=>'Program: '),'values'=>$progList),'room_pref1'=>Array('input'=>'select','attributes'=>Array('id'=>'pref1'),'name'=>Array('name'=>'room_preference1','label'=>'Room Preference 1:'),'values'=>Array('Loading...')),'Submit'=>Array('input'=>'submit','value'=>'Go!','type'=>'submit'));
+			$form_attr=array('id'=>'listForm');
+			$data['form_elem']=$form_elem;
+			$data['form_attr']=$form_attr;
+
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
 			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
@@ -93,6 +108,111 @@ class Admin_view extends CI_Controller {
 			$this->load->view('showlist_main',$data);
 
 		
+	}
+	public function editApp(){
+			$this->load->helper('form');
+			$this->load->model('student_verification');
+			$this->load->model('admin_list');
+			$student_data=$this->admin_list->getRecord();
+			if($student_data[0]['gender']=='M')
+		$availPref=$this->admin_list->getPreferences('M',true);
+		else
+		
+		$availPref=$this->admin_list->getPreferences('F',true);
+		
+		
+		$data['availPref']=$availPref;
+		$data['student_data']=$student_data[0];
+			$this->load->helper('url');
+			$base_url=base_url();
+			$top_bar['base_url']=$base_url;
+			$top_bar['curTab']='list';
+			$cssfiles[]="styles.css";
+			$data['css']=$cssfiles;
+			$data['top_menu'] = $this->load->view('header', $top_bar, true);
+			$form_elem = Array('status'=>Array('input'=>'select','attributes'=>Array('id'=>'status'),'name'=>Array('name'=>'status','label'=>'Status: '),'values'=>Array('Weak Accept','Weak Reject','Strong Accept','Strong Reject','Waiting')),'room'=>Array('input'=>'select','name'=>Array('name'=>'room','label'=>'Room: '),'values'=>$availPref),'Remarks'=>Array('input'=>'textarea','name'=>'remarks','id'=>'remarks','type'=>'text','cols' => '40','label'=>'remarks'),'notify'=>Array('input'=>'checkbox','id'=>'notify','name'=>'notify','label'=>'Notify?','value'=>'yes'),'Submit'=>Array('input'=>'submit','value'=>'Submit!','type'=>'submit'));
+			$form_attr=array('id'=>'listForm');
+			$data['form_elem']=$form_elem;
+			$data['form_attr']=$form_attr;
+
+			$cssfiles[]="styles.css";
+			$data['css']=$cssfiles;
+			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js');
+		
+			$this->load->view('admin_app_manage',$data);
+
+		
+	}
+	public function setStatus(){
+			$this->load->helper('form');
+			$this->load->model('student_verification');
+			$this->load->model('add_msg_or_status_model');
+
+			$this->load->model('admin_list');
+			$roll=$this->input->get('roll', TRUE);
+
+			$presentStatus=$this->admin_list->getPresentStatus($roll);
+			//print_r($presentStatus);
+			$newstat = $this->security->xss_clean($this->input->post('status'));
+			$newrem = $this->security->xss_clean($this->input->post('remarks'));
+			$newroom = $this->security->xss_clean($this->input->post('room'));
+			$notify= $this->security->xss_clean($this->input->post('notify'));
+				$status='';
+			if($newstat==0)
+				$status='Weak Accept';
+			else if($newstat==1)
+				$status='Weak Reject';
+			else if($newstat==2)
+				$status='Strong Accept';
+			else if($newstat==3)
+				$status='Strong Reject';
+			else if($newstat==4)
+				$status='Waiting';
+			if($newroom==$presentStatus['room_type']){
+				$newroom='';
+				}
+			if($newstat==$presentStatus['status']){
+				$status='';
+				}
+			if($newrem==$presentStatus['remarks']){
+				$newrem='';
+				}
+							echo $status.":".$newroom.":".$newrem.":".$roll.":".$this->student_verification->getGender($roll).":".$notify;
+
+			$this->admin_list->add_msg_or_status_model->editStatus($roll,$newroom,$status,$newrem);
+			if($notify=="yes"){
+						$this->load->library('email');
+						$this->email->from('hosteliiitd@gmail.com'); // change it to yours
+
+						//$this->email->to($email); // change it to yours
+						$student_data=$this->admin_list->getRecord($roll);
+						$emailTo=$student_data[0]['email'];
+						//print_r($student_data);
+						$this->email->to($emailTo); // change it to yours
+						echo "<br>To:".$emailTo;
+						$this->email->subject('Hostel Application Form:Update');
+						$message="Hi, There was an update in your application status. Please refer to the following information.\n";
+						foreach($student_data[0] as $key=>$value){
+						
+							$message.=$key.":".$value."\n";
+						}
+							$this->email->message($message);
+					
+		if($this->email->send())
+		{
+			echo 'Sent!';
+
+		}
+		else
+		{
+			show_error($this->email->print_debugger());
+		
+		}
+		
+
+
+			}
+				
 	}
 	public function getreports()
 	{
@@ -129,6 +249,28 @@ class Admin_view extends CI_Controller {
 	public function showlist(){
 			$this->load->helper('url');
 			$top_bar['curTab']='list';
+				$this->load->helper('form');
+			$this->load->model('student_verification');
+		$this->load->model('admin_list');
+		   $gender = $this->security->xss_clean($this->input->post('gender'));
+        $r_pref = $this->security->xss_clean($this->input->post('room_preference1'));
+		$prog = $this->security->xss_clean($this->input->post('program1'));
+		echo $gender.':'.$r_pref.':'.$prog.'<br>';
+     
+		$table=$this->admin_list->getList();
+		$progList=$this->admin_list->getPrograms();
+		//print_r($table);
+		$female=$this->student_verification->getPreferences('F');
+		$male=$this->student_verification->getPreferences('M');
+		
+		$data['m_pref']=$male;
+		$data['f_pref']=$female;
+		
+		$form_elem = Array('Gender'=>Array('input'=>'select','attributes'=>Array('id'=>'gender'),'name'=>Array('name'=>'gender','label'=>'Gender: '),'values'=>Array('Male', 'Female')),'Program'=>Array('input'=>'select','name'=>Array('name'=>'program1','label'=>'Program: '),'values'=>$progList),'room_pref1'=>Array('input'=>'select','attributes'=>Array('id'=>'pref1'),'name'=>Array('name'=>'room_preference1','label'=>'Room Preference 1:'),'values'=>Array('Loading...')),'Submit'=>Array('input'=>'submit','value'=>'Go!','type'=>'submit'));
+			$form_attr=array('id'=>'listForm');
+			$data['form_elem']=$form_elem;
+			$data['form_attr']=$form_attr;
+
 			$base_url=base_url();
 			$top_bar['base_url']=$base_url;
 			$cssfiles=Array('styles.css','demo_table.css');
@@ -140,31 +282,17 @@ class Admin_view extends CI_Controller {
 			$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="admin_list">' );
 
 			$this->table->set_template($tmpl);
-			$this->table->set_heading('name', 'Roll No.','Program', 'Location', 'Dist','Status','Room','Action','Message');
+			$this->table->set_heading('name', 'Roll No.','Program', 'Location', 'Dist','Status','Room','Status','Edit');
 		
-			$query = $this->db->query("SELECT name,rollno,program,location,distance,status,room_type FROM admin_allocationlist_boys_btech");
-			//print_r($query);
-			foreach($query->result() as $row)
+			
+			foreach($table as $row)
 			{
-				/*$row[0]['select']='<select>
-						<option value="volvo">Weak accept</option>
-		  <option value="saab">Weak reject</option>
-		  <option value="mercedes">Strong accept</option>
-		  <option value="audi">Strong reject</option>
-			<option value="audi">Waiting</option>
-													
-		</select>';
-				
-				$row[0]['msg']='<button >add message</button>';*/
-				//print_r($row);
-				$this->table->add_row(array($row->NAME,$row->ROLLNO,$row->PROGRAM,$row->LOCATION,$row->DISTANCE,$row->STATUS,$row->room_type,'<select>
-						<option value="volvo">Weak accept</option>
-		  <option value="saab">Weak reject</option>
-		  <option value="mercedes">Strong accept</option>
-		  <option value="audi">Strong reject</option>
-			<option value="audi">Waiting</option>
-													
-		</select>','<button >add message</button>'));
+			//	echo 'hello:';
+	
+			//	print_r($row);
+	//				echo 'world';
+	
+				$this->table->add_row(array($row['f_name'],$row['roll_no'],$row['program'],$row['location'],$row['dist'].' K.M',$row['status'],$row['room_type'],$row['status'],'<button onclick="parent.location=\''.site_url('Admin_view/editApp').'?roll='.$row['roll_no'].'\'">Edit</button>'));
 					
 			
 			}

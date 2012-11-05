@@ -5,42 +5,70 @@
 	<?php foreach($css as $cssfile):?>
 	    <link rel="stylesheet" type="text/css" href="<?php echo base_url("/application/css/".$cssfile);?>"/>
 	<?php endforeach; ?>
+	
+<?php foreach($scripts as $script):?>
+	    <script type="text/javascript" src="<?php echo base_url("/application/js/".$script)?>"></script>
+	 <?php endforeach; ?>
+
 	<title>Hostel Allocation - Backend</title>
+	<script type="text/javascript">
+		var j = jQuery.noConflict();
+		var pref_f="",pref_m="";
+		<?php foreach($f_pref as $pref):
+		?>
+		pref_f+="<option value=\"<?php echo $pref['preference_id']; ?>\"><?php echo $pref['preference_name']; ?></option>";
+		<?php endforeach ?>
+		<?php foreach($m_pref as $pref):
+		?>
+		pref_m+="<option value=\"<?php echo $pref['preference_id']; ?>\"><?php echo $pref['preference_name']; ?></option>";
+		<?php endforeach ?>
+		
+		 j(document).ready(function(){
+	
+	var genup = document.getElementById("gender");
+		genup.onchange = updategenPref;
+		genup.onchange();
+		function updategenPref () {
+		
+			var id = this.options[this.selectedIndex].text;
+			var targets = j("#pref1");
+			//alert(id);
+			if(id=="Male")
+			{
+			//alert("into male");
+				targets.empty();
+				targets.append(pref_m);
+				//targets.innerHTML=pref_m;
+			
+			}
+			else if(id=="Female")
+			{
+				targets.empty();
+				
+				targets.append(pref_f);
+				
+			}
+			
+			
+				}
+				
+	
+				});
+	
+	</script>
 </head>
 <body>
 
 <div class="admin-container">
 	<div class="admin-topbar"> <?php echo $top_menu?> </div>
 	<div class="admin-contentbar">
-		<h2>Manage Applications</h2>
-
+	<h2>Manage Applications</h2>
+	<div ><?php echo $msg;?></div>
 	<!-- This where you write you code-->
 	<!-- Test 123  -->
-	<div class="showlist-menu">
-	Gender:
-	<select name="Gender">
-	<option value="Male">Male</option>
-	<option value="Female">Female</option>
-	<option value="All">All</option>
-	</select>
-	<br><br>Program:
-	<select name="Program">
-	<option value="B.Tech">B.Tech</option>
-	<option value="M.Tech">M.Tech</option>
-	<option value="PhD">PhD</option>
-	<option value="All">All</option>
-	</select>
-	<br><br>Room Preference:
-	<select name="Room Preference">
-	<option value="Single">Single</option>
-	<option value="Double">Double</option>
-	<option value="Triple">Triple</option>
-	</select>
-	<br><br><form name="input" action="showlist" method="get">
-	<input type="submit" value="Submit" />
-	</form>
+	<div>
+	<?php echo generate_form('Admin_view/showlist',$form_elem,$form_attr);?>
 	</div>
-	
 		
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 	</div>

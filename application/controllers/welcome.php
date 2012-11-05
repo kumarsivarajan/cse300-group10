@@ -209,7 +209,7 @@ class Welcome extends CI_Controller {
 		$data1=$this->student_verification->dbvalidation($roll,$fname);
 		$temparr=$student_data=$this->session->all_userdata();
 		echo "<br>the function<br>";
-					print_r($temparr);
+					//print_r($temparr);
 		if(!is_array($data1)){
 					$this->load->view('error_page',$data);
 					
@@ -220,7 +220,7 @@ class Welcome extends CI_Controller {
 			}
 			$temparr=$student_data=$this->session->all_userdata();
 		echo "<br>the function ends<br>";
-					print_r($temparr);
+					//print_r($temparr);
 		
 	}
 	
@@ -235,7 +235,7 @@ class Welcome extends CI_Controller {
 				$this->load->helper('url');
 				$temparr=$student_data=$this->session->all_userdata();
 		echo "<br>the email<br>";
-					print_r($temparr);
+					//print_r($temparr);
 		//$base_url = base_url();
 		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
@@ -262,7 +262,7 @@ class Welcome extends CI_Controller {
 		}
 		$key=$roll.$key;
 		echo $key."  --- ".$roll;
-		$this->student_verification->confirmed_application($key);
+		$date_app=$this->student_verification->confirmed_application($key);
 
 		
 		///////////////////////////////////////
@@ -273,7 +273,7 @@ class Welcome extends CI_Controller {
 		//$this->email->to($email); // change it to yours
 
 		$student_data=$this->session->all_userdata();
-		print_r($student_data);
+		//print_r($student_data);
 		//$emailTo=$student_data['email'];
 		echo "Email:".$student_data['email'];
 		$emailTo=$student_data['email'];
@@ -281,8 +281,11 @@ class Welcome extends CI_Controller {
 
 		$this->email->subject('Hostel Application Form Verification');
 		$urlinfo=site_url('Welcome/address_maps');
-		$this->email->message('Verify your hostel application by clicking on this link:-
-		'.$urlinfo.'?key='.$key);
+		$message="Hi,\n";
+		$message.="It seems you had applied for hostel room at IIIT-Delhi, We received the the application from you on ".$date_app."\n";
+		$message.="Verify your hostel application by clicking on this link:-
+		".$urlinfo."?key=".$key;
+		$this->email->message($message);
  
 		if($this->email->send())
 		{
@@ -299,7 +302,6 @@ class Welcome extends CI_Controller {
 				$this->session->sess_destroy();
 
 		}
-				$this->session->sess_destroy();
 
 	}
 	
