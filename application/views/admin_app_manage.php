@@ -10,29 +10,20 @@
 	 <?php endforeach; ?>
 
 	<title>Hostel Allocation - Backend</title>
-	<script type="text/javascript">
-	var j = jQuery.noConflict();
-
-		 j(document).ready(function(){
-			 j("label").inFieldLabels();
-			 j("#listForm").validate({
-				 	errorPlacement: function(error,element) {
-					 					j('#errorPanel').show();
-					 					return true;
-                                        }
-                    });
-			 });
-	</script>
+	
 		<script type="text/javascript">
 	var j = jQuery.noConflict();
 
 		 j(document).ready(function(){
 			 j("label").inFieldLabels();
-			 j("#listForm").validate({
+			 j('#for_list').dataTable();
+			 j('#against_list').dataTable();
+
+		/*	 j("#listForm").validate({
 				 	errorPlacement: function(error,element) {
 					 					j('#errorPanel').show();
                                         }
-                    });
+                    });*/
 			 });
 	</script>
 	
@@ -58,8 +49,24 @@
 		<p><b>Assigned Status: </b><?php echo $student_data['status']; ?></p>
 		<p><b>Assigned Room: </b><?php echo $student_data['room_type']; ?></p>
 		<p><b>Assigned Remarks: </b><?php echo $student_data['remarks']; ?></p>
+		<p><b>Reports By: </b><?php echo $byLength; ?></p>
+		<p><b>Reports Against: </b><?php echo $againstLength; ?></p>
 		
 	</div>
+		<?php if($byLength>=1):?>
+		<h3 align="center">Reports By This Student</h3>	
+		<?php echo $byReports; ?>
+		<br>
+		<?php endif; ?>
+		<?php if($againstLength>=1):?>
+
+		<br>
+		<h3 align="center">Reports Against This Student</h3>	
+		<?php echo $againstReports; ?>
+		<?php endif; ?>
+
+	
+	
 	<div >
 			<?php if($student_data['dist']!=-1): ?>
 			<?php echo generate_form('Admin_view/setStatus?roll='.$student_data['roll_no'], $form_elem, $form_attr);?>
