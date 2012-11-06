@@ -193,8 +193,42 @@ class Admin_list extends CI_Model{
         else
         	return false;
     }
-
-
+    
+    public function getWrongInfoReports($roll=''){
+	    $this->load->database();
+        $this->db->select('report_id,roll_no,reason');
+        $this->db->from('wrong_info_reports');
+        if($roll!='')
+        	        $this->db->where('roll_no', $roll);
+        $query=$this->db->get();
+        if($query->num_rows >= 1){
+        foreach($query->result() as $row)
+            	$data[] = Array(
+            	'report_id'=>$row->report_id,
+            	'roll_no'=>$row->roll_no,
+            	'reason'=>$row->reason,
+            	'room_type'=>$row->room_type,
+            	);
+            return $data;
+            }
+    }
+    public function getFalseApplicantsReports($roll=''){
+	    $this->load->database();
+        $this->db->select('report_id,roll_no,reason');
+        $this->db->from('false_applicants_reports');
+        if($roll!='')
+        	        $this->db->where('roll_no', $roll);
+        $query=$this->db->get();
+        if($query->num_rows >= 1){
+        foreach($query->result() as $row)
+            	$data[] = Array(
+            	'report_id'=>$row->report_id,
+            	'roll_no'=>$row->roll_no,
+            	'reason'=>$row->reason,
+            	);
+        return $data;
+            }
+    }
 
 
 } ?>
