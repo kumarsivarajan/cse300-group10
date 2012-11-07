@@ -238,7 +238,7 @@ class Welcome extends CI_Controller {
 
 		$data1=$this->student_verification->dbvalidation($roll,$fname);
 		$temparr=$student_data=$this->session->all_userdata();
-		echo "<br>the function<br>";
+		//echo "<br>the function<br>";
 					//print_r($temparr);
 		if(!is_array($data1)){
 					$this->load->view('error_page',$data);
@@ -249,7 +249,7 @@ class Welcome extends CI_Controller {
 			$this->load->view('db_info',$data);
 			}
 			$temparr=$student_data=$this->session->all_userdata();
-		echo "<br>the function ends<br>";
+		//echo "<br>the function ends<br>";
 					//print_r($temparr);
 		
 	}

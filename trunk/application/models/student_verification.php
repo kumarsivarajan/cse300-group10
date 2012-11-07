@@ -238,6 +238,7 @@ class Student_verification extends CI_Model{
 		
 			return $data1;
 	}
+	
 	public function getAddress($key){
 		
 		$this->load->database();
