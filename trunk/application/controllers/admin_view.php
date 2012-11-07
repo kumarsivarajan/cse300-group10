@@ -97,7 +97,7 @@ class Admin_view extends CI_Controller {
 			$data['css']=$cssfiles;
 			$data['top_menu'] = $this->load->view('header', $top_bar, true);
 			$form_elem = Array('Gender'=>Array('input'=>'select','attributes'=>Array('id'=>'gender'),'name'=>Array('name'=>'gender','label'=>'Gender: '),'values'=>Array('Male', 'Female')),'Program'=>Array('input'=>'select','name'=>Array('name'=>'program1','label'=>'Program: '),'values'=>$progList),'room_pref1'=>Array('input'=>'select','attributes'=>Array('id'=>'pref1'),'name'=>Array('name'=>'room_preference1','label'=>'Room Preference 1:'),'values'=>Array('Loading...')),'Submit'=>Array('input'=>'submit','value'=>'Go!','type'=>'submit'));
-			$form_attr=array('id'=>'listForm');
+			$form_attr=array('id'=>'listForm','method'=>'get');
 			$data['form_elem']=$form_elem;
 			$data['form_attr']=$form_attr;
 
@@ -123,6 +123,11 @@ class Admin_view extends CI_Controller {
 		
 		$data['availPref']=$availPref;
 		$data['student_data']=$student_data[0];
+		$prevpage=Array('gender'=>$this->security->xss_clean($this->input->get('gender')),
+						'program1'=>$this->security->xss_clean($this->input->get('program1')),
+						'room_preference1'=>$this->security->xss_clean($this->input->get('room_preference1')));
+		$prevurl=site_url('Admin_view/showlist').'?gender='.$prevpage['gender'].'&program1='.$prevpage['program1'].'&room_preference1='.$prevpage['room_preference1'];
+		$data['prevurl']=$prevurl;
 			$this->load->helper('url');
 			$base_url=base_url();
 			$top_bar['base_url']=$base_url;
@@ -257,11 +262,22 @@ class Admin_view extends CI_Controller {
 
 			$this->table->set_template($tmpl);
 			
-			$this->table->set_heading('Report ID','Person Reported', 'Reason');
+			$this->table->set_heading('Report ID','Person Reported', 'Reason','Action');
 
 			$report_arr=$this->admin_list->getFalseApplicantsReports();
 			//print_r($report_arr);
-			$data['table']=$this->table->generate($report_arr);
+			foreach($report_arr as $row)
+			{
+			//	echo 'hello:';
+	
+			//	print_r($row);
+	//				echo 'world';
+	
+				$this->table->add_row(array($row['report_id'],$row['roll_no'],$row['reason'],'<button onclick="parent.location=\''.site_url('Admin_view/deleteFalseReport').'?rid='.$row['report_id'].'\'">Delete</button>'));
+					
+			
+			}
+			$data['table']=$this->table->generate();
 			
 			$this->load->view('show_report_page',$data);
 	}
@@ -287,11 +303,22 @@ class Admin_view extends CI_Controller {
 
 			$this->table->set_template($tmpl);
 			
-			$this->table->set_heading('Report ID','Reported By', 'Reason');
+			$this->table->set_heading('Report ID','Reported By', 'Reason','Action');
 
 			$report_arr=$this->admin_list->getWrongInfoReports();
 			//print_r($report_arr);
-			$data['table']=$this->table->generate($report_arr);
+			foreach($report_arr as $row)
+			{
+			//	echo 'hello:';
+	
+			//	print_r($row);
+	//				echo 'world';
+	
+				$this->table->add_row(array($row['report_id'],$row['roll_no'],$row['reason'],'<button onclick="parent.location=\''.site_url('Admin_view/deleteWrongReport').'?rid='.$row['report_id'].'\'">Delete</button>'));
+					
+			
+			}
+			$data['table']=$this->table->generate();
 			
 			$this->load->view('show_report_page',$data);
 	}
@@ -303,9 +330,12 @@ class Admin_view extends CI_Controller {
 				$this->load->helper('form');
 			$this->load->model('student_verification');
 		$this->load->model('admin_list');
-		   $gender = $this->security->xss_clean($this->input->post('gender'));
-        $r_pref = $this->security->xss_clean($this->input->post('room_preference1'));
-		$prog = $this->security->xss_clean($this->input->post('program1'));
+		   $gender = $this->security->xss_clean($this->input->get('gender'));
+        $r_pref = $this->security->xss_clean($this->input->get('room_preference1'));
+		$prog = $this->security->xss_clean($this->input->get('program1'));
+		$data['curgen']=$gender;
+		$data['curprog']=$prog;
+		$data['curpref']=$r_pref;
 		echo $gender.':'.$r_pref.':'.$prog.'<br>';
      
 		$table=$this->admin_list->getList();
@@ -317,8 +347,8 @@ class Admin_view extends CI_Controller {
 		$data['m_pref']=$male;
 		$data['f_pref']=$female;
 		
-		$form_elem = Array('Gender'=>Array('input'=>'select','attributes'=>Array('id'=>'gender'),'name'=>Array('name'=>'gender','label'=>'Gender: '),'values'=>Array('Male', 'Female')),'Program'=>Array('input'=>'select','name'=>Array('name'=>'program1','label'=>'Program: '),'values'=>$progList),'room_pref1'=>Array('input'=>'select','attributes'=>Array('id'=>'pref1'),'name'=>Array('name'=>'room_preference1','label'=>'Room Preference 1:'),'values'=>Array('Loading...')),'Submit'=>Array('input'=>'submit','value'=>'Go!','type'=>'submit'));
-			$form_attr=array('id'=>'listForm');
+		$form_elem = Array('Gender'=>Array('input'=>'select','attributes'=>Array('id'=>'gender'),'name'=>Array('name'=>'gender','label'=>'Gender: '),'values'=>Array('Male', 'Female')),'Program'=>Array('input'=>'select','attributes'=>Array('id'=>'program1'),'name'=>Array('name'=>'program1','label'=>'Program: '),'values'=>$progList),'room_pref1'=>Array('input'=>'select','attributes'=>Array('id'=>'pref1'),'name'=>Array('name'=>'room_preference1','label'=>'Room Preference 1:'),'values'=>Array('Loading...')),'Submit'=>Array('input'=>'submit','value'=>'Go!','type'=>'submit'));			
+			$form_attr=array('id'=>'listForm','method'=>'get');
 			$data['form_elem']=$form_elem;
 			$data['form_attr']=$form_attr;
 
@@ -343,7 +373,7 @@ class Admin_view extends CI_Controller {
 			//	print_r($row);
 	//				echo 'world';
 	
-				$this->table->add_row(array($row['f_name'],$row['roll_no'],$row['program'],$row['location'],$row['dist'].' K.M',$row['status'],$row['room_type'],$row['status'],'<button onclick="parent.location=\''.site_url('Admin_view/editApp').'?roll='.$row['roll_no'].'\'">Edit</button>'));
+				$this->table->add_row(array($row['f_name'],$row['roll_no'],$row['program'],$row['location'],$row['dist'].' K.M',$row['status'],$row['room_type'],$row['status'],'<button onclick="parent.location=\''.site_url('Admin_view/editApp').'?roll='.$row['roll_no'].'&gender='.$gender.'&program1='.$prog.'&room_preference1='.$r_pref.'\'">Edit</button>'));
 					
 			
 			}
@@ -358,9 +388,28 @@ class Admin_view extends CI_Controller {
 
 		
 	}
+	public function deleteWrongReport()
+	{
+			$id=$this->security->xss_clean($this->input->get('rid'));
+			if($id!='')
+			{
+						$this->load->model('admin_list');
+						$this->admin_list->deleteWrongReport($id);
+			}	
+			redirect('/Admin_view/getWrongReports/');
+	}
 	
-	
-	
+	public function deleteFalseReport()
+	{
+			$id=$this->security->xss_clean($this->input->get('rid'));
+			if($id!='')
+			{
+						$this->load->model('admin_list');
+						$this->admin_list->deleteFalseReport($id);
+			}	
+						redirect('/Admin_view/getFalseReports/');
+
+	}
 	
 	//Pass change func (to change admin's password) made by Mayank 
 	//Called from "views/admin_manage"

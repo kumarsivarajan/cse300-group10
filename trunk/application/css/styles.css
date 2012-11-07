@@ -234,9 +234,26 @@ div.login_bar_wrapper{
 			text-align: center;
 
 		}
-		.admin-container .admin-contentbar .applicant_info{
-			text-align: center;
-
+		
+		.admin-container .admin-contentbar .applicant{
+			float: left;
+			padding-left: 5px;
+			width: 1200px;
+		}
+		
+		.admin-container .admin-contentbar .applicant .info{
+			float: left;
+			padding-left: 5px;
+			width: 550px;
+		}
+		.admin-container .admin-contentbar .applicant .actions{
+			float: left;
+			padding-left: 5px;
+			width: 550px;
+		}
+		.admin-container .admin-contentbar .reports{
+			float: none;
+			width: 1200px;
 		}
 		
 		.admin-container .showlist-menu{

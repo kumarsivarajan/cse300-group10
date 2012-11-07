@@ -107,7 +107,7 @@ function generate_form($action='',$elements='',$attr=''){
 				$html.=form_input_infield($elem);
 				}
 			else if($elem['input']=="select"){
-				$html.=form_dropdown_formatted($elem['name'], $elem['attributes'], $elem['values']);
+				$html.=form_dropdown_formatted($elem['name'], $elem['attributes'], $elem['values'],$elem['selected']);
 			}
 			else if($elem['input']=="submit"){
 				$html.=form_submit('',$elem['value']);

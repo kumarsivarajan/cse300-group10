@@ -34,8 +34,9 @@
 	<div class="admin-topbar"> <?php echo $top_menu?> </div>
 	<div class="admin-contentbar">
 	<h2 >Manage Application</h2>
-	<button onClick="history.go(-1);return true;" style="left:0;">Go back</button><br />
-	<div class="applicant_info">
+	<button onClick="parent.location='<?php echo $prevurl?>' " style="left:0;">Go back</button><br />
+	<div class="applicant">
+	<div class="info">
 		<p><b>Applicant's First Name:</b> <?php echo $student_data['f_name']; ?> </p>
 		<p><b>Roll No.:</b> <?php echo $student_data['roll_no']; ?></p>
 		<p><b>Program:</b> <?php echo $student_data['program']; ?></p>
@@ -53,7 +54,17 @@
 		<p><b>Reports Against: </b><?php echo $againstLength; ?></p>
 		
 	</div>
+	<div  class="actions">
+			<?php if($student_data['dist']!=-1): ?>
+			<?php echo generate_form('Admin_view/setStatus?roll='.$student_data['roll_no'], $form_elem, $form_attr);?>
+			<?php else: ?>
+			<?php echo "Student Hasn't Verified his distance, yet"; endif; ?>
+			
+		</div>
+	</div>
+		<div class="reports">
 		<?php if($byLength>=1):?>
+		<br>
 		<h3 align="center">Reports By This Student</h3>	
 		<?php echo $byReports; ?>
 		<br>
@@ -63,20 +74,15 @@
 		<br>
 		<h3 align="center">Reports Against This Student</h3>	
 		<?php echo $againstReports; ?>
+		<br>
 		<?php endif; ?>
-
-	
-	
-	<div >
-			<?php if($student_data['dist']!=-1): ?>
-			<?php echo generate_form('Admin_view/setStatus?roll='.$student_data['roll_no'], $form_elem, $form_attr);?>
-			<?php else: ?>
-			<?php echo "Student Hasn't Verified his distance, yet"; endif; ?>
-			
 		</div>
-	
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 	</div>
+	
+	
+	
+	
 </div>
 </body>
 </html>
