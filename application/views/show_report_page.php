@@ -8,11 +8,33 @@
 	<?php foreach($scripts as $script):?>
 	    <script type="text/javascript" src="<?php echo base_url("/application/js/".$script)?>"></script>
 	<?php endforeach; ?>
+	
+		<script>
+				function display_confirm(var url)
+			{
+				var opt=confirm("DO you really want to delete the record ?");
+				//alert(url);
+				if(opt==true)
+				{
+					window.location.href=url
+				}
+				else
+				{
+				
+				}
+			}
+		</script>
+		
 	    <script type="text/javascript" charset="utf-8">
+		
 			$(document).ready(function() {
 				$('#admin_list').dataTable();
 			} );
+			
+		
 		</script>
+		
+		
 	<title>False Submission Report</title>
 </head>
 <body>
