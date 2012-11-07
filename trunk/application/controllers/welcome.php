@@ -64,6 +64,34 @@ class Welcome extends CI_Controller {
 	}
 	function name_rollno()
 	{
+	
+	
+		date_default_timezone_set('India/Kolkata');
+
+		$current_time = time();
+		$deadline_time = mktime(20,33,0,11,7,2012);
+
+//IF THE DEADLINE HAS PASSED, LET USER KNOW…ELSE, DISPLAY THE REGISTRATION FORM
+	if($current_time > $deadline_time) {
+     //message about the form being disabled
+	 	$this->load->helper('url');
+		$base_url = base_url();
+		$cssfiles=Array("styles.css","sidenavigation.css");
+		$data['css']=$cssfiles;
+		$data['form_elem']=$form_elem;
+		$navigation_data['navTab']='apply';
+		$navigation_data['base_url']=$base_url;
+		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
+		//$data['form_attr']=$form_attr;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		$this->load->view('deadline_ended',$data);
+	} 
+		else {
+     //code for the registration form
+
+	
+	
+	
 		$this->load->helper('form');
 		$this->load->model('student_verification');
 		$female=$this->student_verification->getPreferences('F');
@@ -99,6 +127,8 @@ class Welcome extends CI_Controller {
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		
 		$this->load->view('name_rollno',$data);
+		
+		}
 	}
 	
 	
