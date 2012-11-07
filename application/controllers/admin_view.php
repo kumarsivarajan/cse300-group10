@@ -242,7 +242,7 @@ class Admin_view extends CI_Controller {
 			
 				
 	}
-	public function getFalseReports()
+public function getFalseReports()
 	{
 			$this->load->helper('url');
 			$this->load->model('admin_list');
@@ -269,12 +269,26 @@ class Admin_view extends CI_Controller {
 			foreach($report_arr as $row)
 			{
 			//	echo 'hello:';
+			//"\'site_url(\'Admin_view/deleteFalseReport\').\'?rid=\'.$row[\'report_id\'].\'"
 	
 			//	print_r($row);
 	//				echo 'world';
 	
-				$this->table->add_row(array($row['report_id'],$row['roll_no'],$row['reason'],'<button onclick="parent.location=\''.site_url('Admin_view/deleteFalseReport').'?rid='.$row['report_id'].'\'">Delete</button>'));
+				//$this->table->add_row(array($row['report_id'],$row['roll_no'],$row['reason'],'<button onclick="parent.location=\''.site_url('Admin_view/deleteFalseReport').'?rid='.$row['report_id'].'\'">Delete</button>'));
+				$this->table->add_row(array($row['report_id'],$row['roll_no'],$row['reason'],
+				'<html><head><script>function display_confirm(){
+					var opt=confirm("Do you really want to delete ?")
 					
+					if(opt==true)
+					{
+						window.location.href=window.location.href="'.site_url('Admin_view/deleteFalseReport').'?rid='.$row['id'].'"
+					}
+					else
+					{
+					
+					}
+				}</script></head><button onclick="display_confirm()">Delete</button></html>'));
+	
 			
 			}
 			$data['table']=$this->table->generate();
@@ -301,8 +315,10 @@ class Admin_view extends CI_Controller {
 			$this->load->library('table');
 			$tmpl = array ( 'table_open'  => '<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="admin_list">' );
 
+
 			$this->table->set_template($tmpl);
 			
+
 			$this->table->set_heading('Report ID','Reported By', 'Reason','Action');
 
 			$report_arr=$this->admin_list->getWrongInfoReports();
@@ -314,12 +330,25 @@ class Admin_view extends CI_Controller {
 			//	print_r($row);
 	//				echo 'world';
 	
-				$this->table->add_row(array($row['report_id'],$row['roll_no'],$row['reason'],'<button onclick="parent.location=\''.site_url('Admin_view/deleteWrongReport').'?rid='.$row['report_id'].'\'">Delete</button>'));
+				//$this->table->add_row(array($row['report_id'],$row['roll_no'],$row['reason'],'<button onclick="parent.location=\''.site_url('Admin_view/deleteWrongReport').'?rid='.$row['report_id'].'\'">Delete</button>'));
+				$this->table->add_row(array($row['report_id'],$row['roll_no'],$row['reason'],
+				'<html><head><script>function display_confirm(){
+					var opt=confirm("Do you really want to delete ?")
 					
+					if(opt==true)
+					{
+						window.location.href="'.site_url('Admin_view/deleteWrongReport').'?rid='.$row['id'].'"
+					}
+					else
+					{
+					
+					}
+				}</script></head><button onclick="display_confirm()">Delete</button></html>'));
 			
 			}
 			$data['table']=$this->table->generate();
 			
+
 			$this->load->view('show_report_page',$data);
 	}
 			
