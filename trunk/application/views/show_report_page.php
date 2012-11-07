@@ -10,11 +10,11 @@
 	<?php endforeach; ?>
 	
 		<script>
-				function display_confirm(var url)
+				function display_confirm(url)
 			{
 				var opt=confirm("DO you really want to delete the record ?");
 				//alert(url);
-				if(opt==true)
+				if(opt==true&&url!='')
 				{
 					window.location.href=url
 				}
