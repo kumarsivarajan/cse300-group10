@@ -12,9 +12,9 @@ class Admin_list extends CI_Model{
         $this->load->database();
         			$this->load->model('student_verification');
 
-        $gender = $this->security->xss_clean($this->input->post('gender'));
-        $r_pref = $this->security->xss_clean($this->input->post('room_preference1'));
-		$prog = $this->security->xss_clean($this->input->post('program1'));
+        $gender = $this->security->xss_clean($this->input->get('gender'));
+        $r_pref = $this->security->xss_clean($this->input->get('room_preference1'));
+		$prog = $this->security->xss_clean($this->input->get('program1'));
 		echo $gender.':'.$r_pref.':'.$prog.'<br>';
         // Prep the query
         $lefttable='applicants_info_';
@@ -229,6 +229,21 @@ class Admin_list extends CI_Model{
         return $data;
             }
     }
+    public function deleteFalseReport($id=''){
+	    $this->load->database();
+        if($id!='')
+        		$id=$this->security->xss_clean($this->input->get('rid'));
+        $where=Array('report_id'=>$id);
+        $query=$this->db->delete('false_applicants_reports',$where);
+    }
+       public function deleteWrongReport($id=''){
+	    $this->load->database();
+        if($id!='')
+        		$id=$this->security->xss_clean($this->input->get('rid'));
+        $where=Array('report_id'=>$id);
+        $query=$this->db->delete('wrong_info_reports',$where);
+    }
+
 
 
 } ?>

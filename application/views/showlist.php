@@ -29,8 +29,19 @@
 		<?php endforeach ?>
 		
 		 j(document).ready(function(){
-	
 	var genup = document.getElementById("gender");
+	var searchTerm;
+		<?php if($curgen!=''):?>
+
+	searchTerm = <?php echo $curgen; ?>;
+	for(var i = 0; i < genup.length; i++){
+		if(genup.options[i].value == searchTerm){
+		
+			genup.options[i].selected = true;
+			break;
+		}
+	}
+	<?php endif; ?>
 		genup.onchange = updategenPref;
 		genup.onchange();
 		function updategenPref () {
@@ -56,8 +67,34 @@
 			
 			
 				}
-				
+
+			var prefup = document.getElementById("pref1");
+	<?php if($curpref!=''):?>
+
+	searchTerm = <?php echo $curpref; ?>;
 	
+	for(i = 0; i < prefup.length; i++){
+	//alert(prefup.options[i].value);
+		if(prefup.options[i].value == searchTerm){
+			prefup.options[i].selected = true;
+			break;
+		}
+	}
+	<?php endif; ?>
+	<?php if($curprog!=''):?>
+
+	prefup=document.getElementById("program1");
+			searchTerm = <?php echo $curprog; ?>;
+	for(i = 0; i < prefup.length; i++){
+		if(prefup.options[i].value == searchTerm){
+			prefup.options[i].selected = true;
+			break;
+		}
+	}	
+	<?php endif;?>
+				
+				
+				
 				});
 	
 	</script>
