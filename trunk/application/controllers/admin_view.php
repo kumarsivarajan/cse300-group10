@@ -276,20 +276,8 @@ public function getFalseReports()
 	
 				//$this->table->add_row(array($row['report_id'],$row['roll_no'],$row['reason'],'<button onclick="parent.location=\''.site_url('Admin_view/deleteFalseReport').'?rid='.$row['report_id'].'\'">Delete</button>'));
 				$this->table->add_row(array($row['report_id'],$row['roll_no'],$row['reason'],
-				'<html><head><script>function display_confirm(){
-					var opt=confirm("Do you really want to delete ?")
-					
-					if(opt==true)
-					{
-						window.location.href=window.location.href="'.site_url('Admin_view/deleteFalseReport').'?rid='.$row['id'].'"
-					}
-					else
-					{
-					
-					}
-				}</script></head><button onclick="display_confirm()">Delete</button></html>'));
-	
-			
+				'<button onclick="display_confirm(\''.site_url('Admin_view/deleteFalseReport').'?rid='.$row['report_id'].'\')">Delete</button></html>'));
+				
 			}
 			$data['table']=$this->table->generate();
 			
