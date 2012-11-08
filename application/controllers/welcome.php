@@ -549,11 +549,13 @@ class Welcome extends CI_Controller {
 		$this->table->set_template($tmpl);
 		$this->table->set_heading('name', 'Roll No.','Program', 'Location', 'Dist','Status');
 		
-		$query = $this->db->query("SELECT name,rollno,program,location,distance,status FROM allocationlist_boys ");
+		$query = $this->db->query("SELECT name,rollno,program,location,distance,status FROM allocationlist_boys UNION SELECT name,rollno,program,location,distance,status FROM allocationlist_girls");
+		//$query2 = $this->db->query("SELECT name,rollno,program,location,distance,status FROM allocationlist_girls ");
 		
 		
-		
+		//$data['table']=$this->table->generate($query2);
 		$data['table']=$this->table->generate($query);
+		
 		$this->load->view('allocation_list',$data);
 			
 			
