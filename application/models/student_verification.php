@@ -342,9 +342,8 @@ class Student_verification extends CI_Model{
 			$query1=$this->db->get();
 			if($query1->num_rows==1)
 			{
-			$row=$query1->result();
-			return $row[0]->gender;
-				
+				$row=$query1->result();
+				return $row[0]->gender;
 						
 				
 			}
@@ -364,6 +363,27 @@ class Student_verification extends CI_Model{
 			$sql="INSERT INTO wrong_info_reports(roll_no,reason) values(".$this->db->escape($roll).",".$this->db->escape($comment).")";
 			$this->db->query($sql);
 	
+	}
+	
+	public function checkRoll($roll)
+	{
+		$this->load->database();
+		$this->db->select('email');
+		$this->db->from('student_info');
+		$this->db->where('roll_no',$roll);
+		
+		$query=$this->db->get();
+		if($query->num_rows==1)
+		{
+			foreach ($query->result() as $row)
+			{
+				return $row->email;
+			}
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 } ?>

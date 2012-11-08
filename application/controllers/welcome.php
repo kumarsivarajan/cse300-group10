@@ -681,7 +681,7 @@ function format_address_incorrect()
 		
 		$this->load->helper('form');
 		$this->load->model('student_verification');
-		$form_elem=Array('Roll_no'=>Array('input'=>'text','name'=>'roll_no','id'=>'roll_no','type'=>'text','label'=>'Your Roll Number','class'=>'required'),
+		$form_elem=Array('roll_no'=>Array('input'=>'text','name'=>'roll_no','id'=>'roll_no','type'=>'text','label'=>'Your Roll Number','class'=>'required'),
 				'feedback_box'=>Array('input'=>'textarea','name' => 'feedback_box', 'cols' => '40', 'id'=>'report_box', 'class'=>'required','label'=>'Enter feedback', 'defaultValue'=>'enter'),
 				'Submit'=>Array('input'=>'submit','value'=>'Submit','type'=>'submit'));
 		$form_attr=array('id'=>'applyForm');
@@ -703,6 +703,40 @@ function format_address_incorrect()
 	function submit_feedback_form()
 	{
 	
+	}
+	
+	function check_roll()
+	{
+		$this->load->model('student_verification');
+
+		$roll=$_POST['roll_no'];
+		$feedback=$_POST['feedback_box'];
+		$data['roll']=$roll;
+		$data['feedback']=$feedback;
+		//print_r($data);
+		$check=$this->student_verification->checkRoll($roll);
+		
+		$this->load->helper('url');
+		$base_url = base_url();
+		$cssfiles=Array("styles.css","sidenavigation.css");
+		$data['css']=$cssfiles;
+		$data['form_elem']=$form_elem;
+		$navigation_data['navTab']='feedback';
+		$navigation_data['base_url']=$base_url;
+		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
+		$data['form_attr']=$form_attr;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		//print_r($check);
+		if($check!=false)
+		{
+				$data['check']=$check;  //check now contains email id
+				$this->load->view('feedback_success',$data);
+		}
+		else
+		{
+				$this->load->view('feedback_failure',$data);
+		}
+		
 	}
 	
 }

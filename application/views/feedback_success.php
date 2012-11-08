@@ -1,37 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="utf-8"/>
-	<?php foreach($css as $cssfile):?>
-	    <link rel="stylesheet" type="text/css" href="<?php echo base_url("/application/css/".$cssfile);?>"/>
-	<?php endforeach; ?>
-	<?php foreach($scripts as $script):?>
+
+<?php foreach($css as $cssfile):?>
+	    <link rel="stylesheet" type="text/css" href="<?php echo base_url("/application/css/".$cssfile)?>"/>
+	    <?php endforeach;?>
+		
+<?php foreach($scripts as $script):?>
 	    <script type="text/javascript" src="<?php echo base_url("/application/js/".$script)?>"></script>
 	    <?php endforeach; ?>
-	
-	<script type="text/javascript">
+		
+		<script type="text/javascript">
 	var j = jQuery.noConflict();
 
 		 j(document).ready(function(){
 			 j("label").inFieldLabels();
-			 j("#applyForm").validate({
+			 j("#reportForm").validate({
 				 	errorPlacement: function(error,element) {
 					 					j('#errorPanel').show();
                                         }
                     });
 			 });
 	</script>
-	
-	
-	<title>User feedback form</title>
 </head>
 <body>
+
 <div class="container">
+
 	<div class="col1"> <?php echo $content_navigation?> </div>
+	<div class="col2">
+	<h1><center> Feedback Submission Successful !!! </center></h1>
+	<p><center>&nbsp &nbsp You feedback has been successfully received by us. We will get back to you shortly at <b><?php echo $check?></b></center></p>
 	
-	<div class="col2" >
-	<h1><center>Feedback Form</center></h1>
-		<?php echo generate_form('Welcome/check_roll',$form_elem,$form_attr);?>
 	</div>
 	</div>
+
 </body>
+</html>
