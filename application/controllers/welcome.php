@@ -708,6 +708,7 @@ function format_address_incorrect()
 	function check_roll()
 	{
 		$this->load->model('student_verification');
+		$this->load->library('email');
 
 		$roll=$_POST['roll_no'];
 		$feedback=$_POST['feedback_box'];
@@ -726,11 +727,43 @@ function format_address_incorrect()
 		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
 		$data['form_attr']=$form_attr;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
-		//print_r($check);
+		//print_r($feedback);
+		
+		
 		if($check!=false)
 		{
-				$data['check']=$check;  //check now contains email id
-				$this->load->view('feedback_success',$data);
+			$data['check']=$check;  //check now contains email id
+
+			$this->email->from('hosteliiitd@gmail.com'); // change it to yours
+
+		
+			$this->email->to('hosteliiitd@gmail.com'); // change it to yours
+
+			$this->email->subject('Student Feedback');
+			//$urlinfo=site_url('Welcome/address_maps');
+			$message="Hi,\n";
+			$message.="Feedback received from ".$roll."\n\n";
+			$message.="Email id = ".$check."\n\n";
+			$message.="Feedback = ".$feedback;
+			//".$urlinfo."?key=".$key;
+			$this->email->message($message);
+
+			if($this->email->send())
+			{
+			
+
+			}
+			else
+			{
+				show_error($this->email->print_debugger());
+			
+				
+
+			}
+		
+		
+		
+			$this->load->view('feedback_success',$data);
 		}
 		else
 		{
