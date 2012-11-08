@@ -16,8 +16,9 @@
 	<center>
 	Hostel Allocation System - IIIT-D
 	<br>
-	<center>
+	</center>
 	</h1>
+	</div>
 		<div><h2>Please format your address according to the instructions given below</h2></div>
 <div id="text">
 You have modified the address incorrectly. Please format it according to the given instructions only.<br>

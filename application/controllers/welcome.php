@@ -586,6 +586,7 @@ function submit()
 		$this->load->view('Submit_page',$data);	
 	}
 	
+	
 function format_address()
 	{
 		$this->load->helper('url');
@@ -673,6 +674,38 @@ function format_address_incorrect()
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		$this->load->view('format_address_incorrect', $data);
+	}
+
+	function feedback_form()
+	{
+		date_default_timezone_set('India/Kolkata');
+		
+		$current_time = time();
+		$deadline_time = mktime(20,33,0,11,7,2012);
+		$this->load->helper('form');
+		$this->load->model('student_verification');
+		$form_elem=Array('Roll_no'=>Array('input'=>'text','name'=>'roll_no','id'=>'roll_no','type'=>'text','label'=>'Your Roll Number','class'=>'required'),
+				'feedback_box'=>Array('input'=>'textarea','name' => 'feedback_box', 'cols' => '40', 'id'=>'report_box', 'class'=>'required','label'=>'Enter feedback', 'defaultValue'=>'enter'),
+				'Submit'=>Array('input'=>'submit','value'=>'Apply!','type'=>'submit'));
+		$form_attr=array('id'=>'applyForm');
+		
+		$this->load->helper('url');
+		$base_url = base_url();
+		$cssfiles=Array("styles.css","sidenavigation.css");
+		$data['css']=$cssfiles;
+		$data['form_elem']=$form_elem;
+		$navigation_data['navTab']='apply';
+		$navigation_data['base_url']=$base_url;
+		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
+		$data['form_attr']=$form_attr;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		
+		$this->load->view('feedback_form',$data);
+	}
+	
+	function submit_feedback_form()
+	{
+	
 	}
 	
 }
