@@ -744,8 +744,8 @@ function format_address_incorrect()
 			$this->email->subject('Student Feedback');
 			//$urlinfo=site_url('Welcome/address_maps');
 			$message="Hi,\n";
-			$message.="Feedback received from ".$roll."\n\n";
-			$message.="Email id = ".$check."\n\n";
+			$message.="Feedback received from ".$roll."(".$check.")\n\n";
+			//$message.="Email id = ".$check."\n\n";
 			$message.="Feedback = ".$feedback;
 			//".$urlinfo."?key=".$key;
 			$this->email->message($message);
