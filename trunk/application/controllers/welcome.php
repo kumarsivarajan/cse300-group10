@@ -69,7 +69,7 @@ class Welcome extends CI_Controller {
 		date_default_timezone_set('India/Kolkata');
 
 		$current_time = time();
-		$deadline_time = mktime(20,33,0,11,7,2012);
+		$deadline_time = mktime(20,33,0,12,7,2012);
 
 //IF THE DEADLINE HAS PASSED, LET USER KNOW…ELSE, DISPLAY THE REGISTRATION FORM
 	if($current_time > $deadline_time) {
@@ -678,10 +678,7 @@ function format_address_incorrect()
 
 	function feedback_form()
 	{
-		date_default_timezone_set('India/Kolkata');
 		
-		$current_time = time();
-		$deadline_time = mktime(20,33,0,11,7,2012);
 		$this->load->helper('form');
 		$this->load->model('student_verification');
 		$form_elem=Array('Roll_no'=>Array('input'=>'text','name'=>'roll_no','id'=>'roll_no','type'=>'text','label'=>'Your Roll Number','class'=>'required'),
