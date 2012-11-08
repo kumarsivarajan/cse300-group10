@@ -5,6 +5,10 @@
 	<?php foreach($css as $cssfile):?>
 	    <link rel="stylesheet" type="text/css" href="<?php echo base_url("/application/css/".$cssfile);?>"/>
 	<?php endforeach; ?>
+	<?php foreach($scripts as $script):?>
+	    <script type="text/javascript" src="<?php echo base_url("/application/js/".$script)?>"></script>
+	    <?php endforeach; ?>
+	
 	<title>User feedback form</title>
 </head>
 <body>
