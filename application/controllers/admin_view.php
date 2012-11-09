@@ -238,7 +238,7 @@ class Admin_view extends CI_Controller {
 
 			}
 			
-			redirect('Admin_view/showlist');
+			redirect('/Admin_view/showlist/');
 			
 				
 	}
@@ -416,6 +416,58 @@ public function getFalseReports()
 						redirect('/Admin_view/getFalseReports/');
 
 	}
+	public function manageHostel(){
+		$this->config->load('hostel',TRUE);
+		$this->load->model('admin_list');
+
+	$hostelinfo=$this->admin_list->getHostelInfo();
+		$this->load->helper('form');
+			$this->load->helper('url');
+			$base_url=base_url();
+			$top_bar['base_url']=$base_url;
+			$top_bar['curTab']='managehostel';
+			$cssfiles=Array("styles.css","jquery-ui-1.9.1.custom.css");
+			$data['css']=$cssfiles;
+			$data['top_menu'] = $this->load->view('header', $top_bar, true);
+			$form_elem = Array();			
+			
+			foreach ($hostelinfo as $conf=>$value)
+			{	//echo $conf."=".$value."<br>";
+				$input='text';
+				if(!is_array($value)){
+				if(strlen($value)>28){
+					$input='textarea';
+					$form_elem[$conf]=Array('input'=>$input,'name'=>$conf,'id'=>$conf,'type'=>'text','cols'=>20,'label'=>$conf,'rows'=>(strlen($value)/20)+1,'value'=>$value);
+					}
+				else
+				$form_elem[$conf]=Array('input'=>$input,'name'=>$conf,'label'=>$conf,'id'=>$conf,'type'=>'text','value'=>$value,'maxlength'=>28);
+			
+			}
+			}
+			$form_elem['Submit']=Array('input'=>'submit','value'=>'Submit Changes','type'=>'submit');
+			//print_r($form_elem);
+			
+			$form_attr=array('id'=>'manhostelForm','method'=>'post');
+			$data['form_elem']=$form_elem;
+			$data['form_attr']=$form_attr;
+
+			$cssfiles[]="styles.css";
+			$data['css']=$cssfiles;
+			$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery-ui-1.9.1.custom.js');
+		
+			$this->load->view('hostel_manage',$data);
+	}
+	public function managehostelConfig(){
+		$this->load->model('admin_list');
+
+		$newVals=$this->input->post(NULL, TRUE);
+		$split=explode('-', $newVals['deadline']);
+		$newVals['deadline']=$split[2].'-'.$split[1].'-'.$split[0];
+		//print_r($newVals);
+		$this->admin_list->changeHostelInfo($newVals);
+		redirect('/Admin_view/manageHostel/');
+
+		}
 	
 	//Pass change func (to change admin's password) made by Mayank 
 	//Called from "views/admin_manage"

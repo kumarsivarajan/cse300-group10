@@ -10,7 +10,7 @@ function form_input_formatted($data = '', $value = '', $extra = '',$ifBreak=true
     	$suffix="</p>";
     	}
     	if(isset($data['label']))
-    		$prefix=$prefix.$data['label'];
+    		$prefix=$prefix.'<label>'.$data['label'].'</label>';
 		return $prefix."<input "._parse_form_attributes($data, $defaults).$extra." />".$suffix;
 }
 function form_checkbox_formatted($data = '', $value = '', $checked = FALSE, $extra = '')
@@ -63,9 +63,32 @@ function form_input_infield($data = '', $value = '', $extra = '',$ifBreak=true)
     	if(isset($data['instruction']))
     		 $suffix="&nbsp".$data['instruction'].$suffix;
     	if(isset($data['label'])&&isset($data['id']))
-    		$prefix=$prefix."<label for=".$data['id'].">".$data['label']."</label>";
+    		$prefix=$prefix."<label class=\"infield\" for=".$data['id'].">".$data['label']."</label>";
 		return $prefix."<input "._parse_form_attributes($data, $defaults).$extra." />".$suffix;
 }
+function form_textarea_infield($data = '', $value = '', $extra = '')
+	{
+		$defaults = array('name' => (( ! is_array($data)) ? $data : ''), 'cols' => '40', 'rows' => '10');
+
+		$prefix="<p>";
+    	$suffix="</p>";
+		
+		if ( ! is_array($data) OR ! isset($data['value']))
+		{
+			$val = $value;
+		}
+		else
+		{
+			$val = $data['value'];
+			unset($data['value']); // textareas don't use the value attribute
+		}
+
+		if(isset($data['label'])&&isset($data['id']))
+    		$prefix=$prefix."<label class=\"infield\" for=".$data['id'].">".$data['label']."</label>";
+		
+		$name = (is_array($data)) ? $data['name'] : $data;
+		return $prefix."<textarea "._parse_form_attributes($data, $defaults).$extra.">".form_prep($val, $name)."</textarea>".$suffix;
+	}
 
 function form_textarea_formatted($data = '', $value = '', $extra = '')
 	{
@@ -85,7 +108,7 @@ function form_textarea_formatted($data = '', $value = '', $extra = '')
 		}
 
 		if(isset($data['label'])&&isset($data['id']))
-    		$prefix=$prefix."<label for=".$data['id'].">".$data['label']."</label>";
+    		$prefix=$prefix.'<label>'.$data['label'].'</label>';
 		
 		$name = (is_array($data)) ? $data['name'] : $data;
 		return $prefix."<textarea "._parse_form_attributes($data, $defaults).$extra.">".form_prep($val, $name)."</textarea>".$suffix;
@@ -113,6 +136,43 @@ function generate_form($action='',$elements='',$attr=''){
 				$html.=form_submit('',$elem['value']);
 			}
 			else if ($elem['input']=="textarea"){
+				$html.=form_textarea_infield($elem);
+				}
+				
+			else if ($elem['input']=="checkbox"){
+				$html.=form_checkbox_formatted($elem);
+				}
+			
+		
+	}
+	
+	}
+	$html.=form_close();
+
+	return $html;
+}
+function generate_form_nostyle($action='',$elements='',$attr=''){
+		$html='<div id="errorPanel">Fields Marked In Red Must Be Filled!</div>';
+
+	if(!isset($action))
+		return '';
+	if(is_array($attr))
+		$html.=form_open($action,$attr);
+	else
+		$html.=form_open($action);
+	if(is_array($elements)){
+		foreach($elements as $elem){
+			if($elem['input']=="text"){
+				unset($elem['input']);
+				$html.=form_input_formatted($elem);
+				}
+			else if($elem['input']=="select"){
+				$html.=form_dropdown_formatted($elem['name'], $elem['attributes'], $elem['values'],$elem['selected']);
+			}
+			else if($elem['input']=="submit"){
+				$html.=form_submit('',$elem['value']);
+			}
+			else if ($elem['input']=="textarea"){
 				$html.=form_textarea_formatted($elem);
 				}
 				
@@ -128,6 +188,7 @@ function generate_form($action='',$elements='',$attr=''){
 
 	return $html;
 }
+
 function generate_form_nobreak($action='',$elements='',$attr=''){
 		$html='<div id="errorPanel">Fields Marked In Red Must Be Filled!</div>';
 
