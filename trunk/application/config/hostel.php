@@ -44,9 +44,9 @@ $config['org_main_url']	= 'http://www.iiitd.ac.in';
 
 $config['org_mail_url']	= 'http://mail.iiitd.ac.in';
 
-$config['org_contact']	= 'hosteliiitd@gmail.com';
+$config['org_contact_email']	= 'hosteliiitd@gmail.com';
 
-$config['org_contact']	= 'hosteliiitd@gmail.com';
+$config['org_contact_number']	= 'hosteliiitd@gmail.com';
 
 $config['org_logo']	= 'images/ins_logo.png';
 

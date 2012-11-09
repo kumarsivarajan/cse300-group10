@@ -6,7 +6,18 @@ class Admin_list extends CI_Model{
     function __construct(){
         parent::__construct();
     }
-     
+    public function getDeadline(){
+            $this->load->database();
+              $sql='SELECT DATE_FORMAT(deadline, \'%d-%m-%Y\') as deadline FROM (`hostel_info`)';
+		$query=$this->db->query($sql);
+		        if($query->num_rows == 1)
+		        {
+			        $row=$query->result();
+			        return $row[0]->deadline;
+			        
+		        }
+	    
+    }
     public function getList(){
         // grab user input
         $this->load->database();
@@ -243,7 +254,38 @@ class Admin_list extends CI_Model{
         $where=Array('report_id'=>$id);
         $query=$this->db->delete('wrong_info_reports',$where);
     }
+    public function changeHostelInfo($newVals)
+	{
+		$this->load->database();
+		
+		
+		
+		
+		$this->db->update('hostel_info', $newVals);
+		
+	}
 
+    public function getHostelInfo()
+	{
+		$this->load->database();
+		$this->db->from('hostel_info');
+		$this->db->select('*');
 
+		        	$query=$this->db->get();
+
+		 if($query->num_rows == 1)
+		        {
+			        $row=$query->result();
+			        $row[0]->deadline=$this->getReadableDate($row[0]->deadline,'-');
+			        return $row[0];
+			        
+		        }
+
+		
+	}
+	public function getReadableDate($date,$delim){
+		$split=explode($delim, $date);
+		return $split[2].$delim.$split[1].$delim.$split[0];
+	}
 
 } ?>

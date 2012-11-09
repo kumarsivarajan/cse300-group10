@@ -67,9 +67,11 @@ class Welcome extends CI_Controller {
 	
 	
 		date_default_timezone_set('India/Kolkata');
-
+		$this->load->model('admin_list');
+		$data_deadline=$this->admin_list->getDeadline();
+		$splitted_date=explode('-', $data_deadline);
 		$current_time = time();
-		$deadline_time = mktime(20,33,0,12,7,2012);
+		$deadline_time = mktime(0,0,0,(int)$splitted_date[1],(int)$splitted_date[0]+1,(int)$splitted_date[2]);
 
 //IF THE DEADLINE HAS PASSED, LET USER KNOW…ELSE, DISPLAY THE REGISTRATION FORM
 	if($current_time > $deadline_time) {
@@ -337,6 +339,31 @@ class Welcome extends CI_Controller {
 	
 	function address_maps()
 	{
+		date_default_timezone_set('India/Kolkata');
+		$this->load->model('admin_list');
+		$data_deadline=$this->admin_list->getDeadline();
+		echo $data_deadline;
+		$splitted_date=explode('-', $data_deadline);
+		$current_time = time();
+		$deadline_time = mktime(0,0,0,(int)$splitted_date[1],(int)$splitted_date[0],(int)$splitted_date[2]);
+		echo $deadline_time;
+
+//IF THE DEADLINE HAS PASSED, LET USER KNOW…ELSE, DISPLAY THE REGISTRATION FORM
+	if($current_time > $deadline_time) {
+     //message about the form being disabled
+	 	$this->load->helper('url');
+		$base_url = base_url();
+		$cssfiles=Array("styles.css","sidenavigation.css");
+		$data['css']=$cssfiles;
+		$data['form_elem']=$form_elem;
+		$navigation_data['navTab']='apply';
+		$navigation_data['base_url']=$base_url;
+		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
+		//$data['form_attr']=$form_attr;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		$this->load->view('deadline_ended',$data);
+	} 
+		else {
 				$this->load->model('student_verification');
 	
 		$this->load->helper('url');
@@ -453,7 +480,7 @@ class Welcome extends CI_Controller {
 		//echo $data['maps']['marker_0']."ji";
 		// Load our view, passing the map data that has just been created
 		$this->load->view('address_maps_page', $data);
-	
+	}
 	
 	}
 	

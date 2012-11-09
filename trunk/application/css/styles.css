@@ -50,7 +50,7 @@
 		padding-top: 6px
 	}
 	form p { position:relative }
-	label  { position:absolute; 
+	.infield { position:absolute; 
 			top:0; 
 			left:0;
 			font: 13px/20px normal Helvetica, Arial, sans-serif;
@@ -255,7 +255,29 @@ div.login_bar_wrapper{
 			float: none;
 			width: 1200px;
 		}
-		
+			#manhostelForm {
+				width: 440px;
+				clear:both;
+			}
+		#manhostelForm label{
+			float:left; 
+    text-align:right; 
+    width:150px;
+			}
+			
+				}
+				.admin-container .admin-contentbar .centeredBox{ 
+				border:1pt solid black; 
+				margin:10px auto 10px auto; 
+				width:400px; 
+				padding:10px;
+				
+				}
+   
+
+
+
+
 		.admin-container .showlist-menu{
 			position: relative;
 			left: 10px;
