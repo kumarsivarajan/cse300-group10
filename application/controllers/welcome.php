@@ -729,6 +729,24 @@ function format_address_incorrect()
 		$this->load->view('feedback_form',$data);
 	}
 	
+	function Hostel_allocation_policy()
+	{
+		$this->load->helper('url');
+		$base_url = base_url();
+		$cssfiles=Array("styles.css","sidenavigation.css");
+		$data['css']=$cssfiles;
+		$institutename='IIIT-D';
+		$data['ins_name']=$institutename;
+		$navigation_data['navTab']='about';
+		$navigation_data['base_url']=$base_url;
+		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+		
+		$this->load->view('Hostel_allocation_policy',$data);
+	}
+	
+	
+	
+	
 	function submit_feedback_form()
 	{
 	
