@@ -45,6 +45,8 @@ $(document).ready(function(){
  <li ><a class="portfolio <?php if($navTab == "list"){echo " active";}?>" href="<?php echo site_url('Welcome/alloc_list'); ?>" title="Allocation List"><span>Allocation List</span></a></li>
  <li ><a class="about <?php if($navTab == "about"){echo " active";}?>" href="<?php echo site_url('Welcome/about'); ?>" title="About Page"><span>About the System</span></a></li>
   <li ><a class="contact <?php if($navTab == "feedback"){echo " active";}?>" href="<?php echo site_url('Welcome/feedback_form'); ?>" title="Feedback"><span>Feedback Form</span></a></li>
- </div>
+  <li ><a class="contact <?php if($navTab == "faq"){echo " active";}?>" href="<?php echo site_url('Welcome/faq'); ?>" title="FAQ"><span>FAQ</span></a></li>
+
+  </div>
 </div>
  </div>
