@@ -28,6 +28,7 @@
 
 	<div class="col1"> <?php echo $content_navigation?> </div>
 	<div class="col2">
+		<h1><center> Report a Student !!!</center></h1>
 		<?php echo generate_form('Welcome/add_report_to_db',$form_elem,$form_attr);?> 
 		
 		<!--<form action="http://localhost/cse300-group10/index.php/Welcome/add_report_to_db" method="post" accept-charset="utf-8" id="applyForm"><p><label for=roll_report>Roll No. to report</label><input type="text" name="roll_report" value="" id="roll_report" label="Roll No. to report" class="required"  /></p><textarea name="" cols="40" rows="10" id="report_box" name="report_box"></textarea><input type="submit" name="" value="Submit report"  /></form>	
