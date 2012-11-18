@@ -123,13 +123,15 @@
 	
 	div.container{
 		margin: 10px;
-		width: 1200px;
+		min-width: 1200px;
+		width: 100%;
 	}
 		.container .col2{
 			float:left;
 			
 			height:auto;
-			width: 890px;
+			width: 70%%;
+			min-width: 890px;
 			border: 0.5px solid #ffffff;
 			-webkit-box-shadow: 0 0 8px #D0D0D0;
 			box-shadow: 0 0 8px #D0D0D0;
@@ -175,7 +177,9 @@ padding-left: 10px;
 		.container .col1{
 			float:left;
 			height:auto;
-			width: 300px;
+			min-width: 300px;
+						width: auto;
+
 			height: 500px;
 			#background-image: url("../images/page-left.png");
 			border: 0.5px solid #D0D0D0;

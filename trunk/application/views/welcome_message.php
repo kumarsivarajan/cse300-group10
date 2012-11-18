@@ -3,6 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<!--<title>Welcome to Hostel Allocation System - <?php echo $ins_name ?></title>-->
+	<link rel="icon" href="<?php echo base_url(); ?>/favicon.png" type="image/png">
+
 		<?php foreach($css as $cssfile):?>
 	    <link rel="stylesheet" type="text/css" href="<?php echo base_url("/application/css/".$cssfile) ?>"/>
 	    <?php endforeach;?>

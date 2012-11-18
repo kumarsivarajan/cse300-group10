@@ -287,5 +287,12 @@ class Admin_list extends CI_Model{
 		$split=explode($delim, $date);
 		return $split[2].$delim.$split[1].$delim.$split[0];
 	}
+	public function getApplicationHistory($duration){
+		/*$this->load->helper('date');
+		$time = time();
+		$datestring = "Year: %Y Month: %m Day: %d - %h:%i %a";
+
+		echo mdate($datestring, $time);*/
+	}
 
 } ?>
