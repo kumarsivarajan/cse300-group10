@@ -737,7 +737,7 @@ function format_address_incorrect()
 		$data['css']=$cssfiles;
 		$institutename='IIIT-D';
 		$data['ins_name']=$institutename;
-		$navigation_data['navTab']='about';
+		$navigation_data['navTab']='policy';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		
@@ -758,7 +758,7 @@ function format_address_incorrect()
 		$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
 		$data['form_elem']=$form_elem;
-		$navigation_data['navTab']='feedback';
+		$navigation_data['navTab']='faq';
 		$navigation_data['base_url']=$base_url;
 		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
 		$data['form_attr']=$form_attr;
