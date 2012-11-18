@@ -5,6 +5,25 @@ class Student_verification extends CI_Model{
         parent::__construct();
     }
 	
+	public function checkNewAddress($string1, $string2)
+	{
+		$string1=str_replace(',', '' , $string1);
+		$string2=str_replace(',', '' , $string2);
+		
+		//$string1= preg_replace('/[,]/', '', $string1);
+		//$string2= preg_replace('/[,]/', '', $string2);
+		
+		
+		if (strcmp($string1, $string2) == 0)
+			{
+				return true;
+			}
+		else
+			{
+				return false;
+			}
+	}
+	
 	public function getinfo($fname,$lname,$roll)
 	{
 		$this->load->database();
