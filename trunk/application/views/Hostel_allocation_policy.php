@@ -13,7 +13,10 @@
 	<div class="col2">
 	<h1><center>Hostel Allocation Policy<center></h1>
 		<div id="body">		
-			
+		
+	<div id="text">
+		
+	<ul>
 	<li>PhD scholars are allocated single rooms.</li>
 	<li>20% of remaining seats for boys and girls (separately) will be allocated to MTech students.</li>
 	<li>Remaining 80% of seats for boys and girls (separately) will be allocated to BTech students.</br>
@@ -22,7 +25,10 @@
 	<li>Exceptions could be made for students with special needs on a case-by-case basis.</li>
 	</br>
 	
-	Hostel related communications shall be done via only iiitd-hostel@iiitd.ac.in. E-mails sent to any other email id will not be entertained.
+	Hostel related communications shall be done via only  hosteliiitd@gmail.com .E-mails sent to any other email id will not be entertained.
+		
+		
+		</div>
 		</div>
 		
 			<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
