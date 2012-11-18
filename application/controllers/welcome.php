@@ -345,7 +345,7 @@ class Welcome extends CI_Controller {
 		echo $data_deadline;
 		$splitted_date=explode('-', $data_deadline);
 		$current_time = time();
-		$deadline_time = mktime(0,0,0,(int)$splitted_date[1],(int)$splitted_date[0],(int)$splitted_date[2]);
+		$deadline_time = mktime(0,0,0,(int)$splitted_date[1],(int)$splitted_date[0]+1,(int)$splitted_date[2]);
 		echo $deadline_time;
 
 //IF THE DEADLINE HAS PASSED, LET USER KNOW…ELSE, DISPLAY THE REGISTRATION FORM
@@ -576,7 +576,7 @@ class Welcome extends CI_Controller {
 		$this->table->set_template($tmpl);
 		$this->table->set_heading('name', 'Roll No.','Program', 'Location', 'Dist','Status');
 		
-		$query = $this->db->query("SELECT name,rollno,program,location,distance,status FROM allocationlist_boys UNION SELECT name,rollno,program,location,distance,status FROM allocationlist_girls");
+		$query = $this->db->query("SELECT name,rollno,(select program_name from eav_program where program_id=program),location,distance,status FROM allocationlist_boys UNION SELECT name,rollno,(select program_name from eav_program where program_id=program),location,distance,status FROM allocationlist_girls");
 		//$query2 = $this->db->query("SELECT name,rollno,program,location,distance,status FROM allocationlist_girls ");
 		
 		
