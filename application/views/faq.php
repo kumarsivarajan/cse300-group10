@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="<?php echo base_url(); ?>/favicon2.png" type="image/png">
 <meta charset="utf-8"/>
 	<?php foreach($css as $cssfile):?>
 	    <link rel="stylesheet" type="text/css" href="<?php echo base_url("/application/css/".$cssfile);?>"/>
