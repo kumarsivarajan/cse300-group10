@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" href="<?php echo base_url(); ?>/favicon2.png" type="image/png">
+<link rel="icon" href="<?php echo base_url(); ?>favicon2.png" type="image/png">
 	<meta charset="utf-8">
 	<!--<title>Welcome to Hostel Allocation System - <?php echo $ins_name ?></title>-->
 	<link rel="icon" href="<?php echo base_url(); ?>/favicon2.png" type="image/png">
