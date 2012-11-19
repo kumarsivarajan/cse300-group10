@@ -23,7 +23,7 @@
 		
 		Displayed below are some of the frequently asked questions that admins have received. 
 		Please go through them to see if you have a similiar query. 
-		If unable to find a solution to a query that you may have, you can also add your own query on the form given on the left.
+		If you have a query other than the given questions then you can write to us through the feedback form.
 		<br><br>
 			<b>Q. What if I'm not eligible for hostel on distance basis but have Special Reasons for needing a room?</b>
 			<br>
