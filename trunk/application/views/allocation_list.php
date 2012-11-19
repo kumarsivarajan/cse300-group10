@@ -1,6 +1,6 @@
 <html>
 <head>
-	<link rel="icon" href="<?php echo base_url(); ?>favicon2.png" type="image/png">
+	<link rel="icon" href="<?php echo base_url(); ?>favicon3.png" type="image/png">
 <?php foreach($css as $cssfile):?>
 	    <link rel="stylesheet" type="text/css" href="<?php echo base_url("/application/css/".$cssfile)?>"/>
 	    <?php endforeach;?>
