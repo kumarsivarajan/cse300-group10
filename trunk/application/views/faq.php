@@ -1,45 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <link rel="icon" href="<?php echo base_url(); ?>favicon3.png" type="image/png">
-<meta charset="utf-8"/>
+	<meta charset="utf-8"/>
 	<?php foreach($css as $cssfile):?>
 	    <link rel="stylesheet" type="text/css" href="<?php echo base_url("/application/css/".$cssfile);?>"/>
 	<?php endforeach; ?>
-	<?php foreach($scripts as $script):?>
-	    <script type="text/javascript" src="<?php echo base_url("/application/js/".$script)?>"></script>
-	    <?php endforeach; ?>
-	
-	<script type="text/javascript">
-	var j = jQuery.noConflict();
-
-		 j(document).ready(function(){
-			 j("label").inFieldLabels();
-			 j("#applyForm").validate({
-				 	errorPlacement: function(error,element) {
-					 					j('#errorPanel').show();
-                                        }
-                    });
-			 });
-	</script>
-	
-	
-	<title>User feedback form</title>
 </head>
 <body>
+
 <div class="container">
 	<div class="col1"> <?php echo $content_navigation?> </div>
 	
 	<div class="col2" >
 	<h1><center>Frequently Asked Questions</center></h1>  
-	<?php echo generate_form('Welcome/check_roll',$form_elem,$form_attr);?>
-	<div class="instr">
-		<br />
-		<center><b>Some frequently asked questions</b></center>
-		<br />
+	
+		<div id="body">		
 		
-		<div class="instr-note">
+	<div id="text">
+		
+		<!-- <div class="instr-note"> -->
+		
 		Displayed below are some of the frequently asked questions that admins have received. 
 		Please go through them to see if you have a similiar query. 
 		If unable to find a solution to a query that you may have, you can also add your own query on the form given on the left.
