@@ -27,7 +27,7 @@
 		Room Preference1: <b><?php echo $app_info['pref_1'] ;  ?></b><br />
 		Room Preference2: <b><?php echo $app_info['pref_2'] ;  ?></b><br /><br />
 		
-		<button onclick="location.href='<?php echo site_url('Welcome/email_user');?>'">Proceed</button>
+		<button onclick="location.href='<?php echo site_url('Process/email_user');?>'">Proceed</button>
 		&nbsp<button onClick="history.go(-1);return true;">Go back</button><br />
 		</div>
 		</br>

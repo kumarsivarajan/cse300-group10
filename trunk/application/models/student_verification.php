@@ -45,6 +45,7 @@ class Student_verification extends CI_Model{
 			foreach ($query->result() as $row)
 			{
 				$data1=array(
+				'isValidated'=>1,
 				'first_name'=> $row->first_name,
 				'last_name'=> $row->last_name,
 				
@@ -89,6 +90,7 @@ class Student_verification extends CI_Model{
 						echo "roll=".$roll."<br>";
 
 					$data1=array(
+						'isValidated'=>1,
 						'roll_no'=>$roll,
 						'contact'=> $this->security->xss_clean($this->input->post('contact')),
 						'location'=> $this->security->xss_clean($this->input->post('location')),

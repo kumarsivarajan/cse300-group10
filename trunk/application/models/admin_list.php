@@ -287,12 +287,82 @@ class Admin_list extends CI_Model{
 		$split=explode($delim, $date);
 		return $split[2].$delim.$split[1].$delim.$split[0];
 	}
-	public function getApplicationHistory($duration){
-		/*$this->load->helper('date');
-		$time = time();
-		$datestring = "Year: %Y Month: %m Day: %d - %h:%i %a";
+	public function getApplicationHistory(){
+		$this->load->helper('date');
+		
+		$this->load->database();
+		
+		$programs=$this->getPrograms();
+		$ordByProg=Array();
+		foreach($programs as $key=>$value)
+			$ordByProg[$value]=0;
+		$sql='select date_application,program_id from applicants_info_male';
+		$query=$this->db->query($sql);
+		        if($query->num_rows > 0)
+		        {
+			       foreach($query->result() as $row){
+						$key=$programs[$row->program_id];
+						if(isset($ordByProg[$key])&&$row->date_application<'2012-11-23'&&$row->date_application>'2012-11-22')		
+							$ordByProg[$key]++;
+						
+						}	        
+		        }
+		$sql='select date_application,program_id from applicants_info_female';
+		$query=$this->db->query($sql);
+		        if($query->num_rows > 0)
+		        {
+			       foreach($query->result() as $row){
+						$key=$programs[$row->program_id];
+						if(isset($ordByProg[$key]))		
+							$ordByProg[$key]++;
+						
+						}	        
+		        }
+		return $ordByProg;
 
-		echo mdate($datestring, $time);*/
+		}
+	public function getPastTenDates(){
+				$this->load->helper('date');
+
+				$datestring = "%Y-%m-%d";
+				$time = time();
+				
+				
+				$datestring= mdate($datestring, $time);
+				$splitted_date=explode("-", $datestring);
+				$year=(int)$splitted_date[0];
+				$month=(int)$splitted_date[1];
+
+				$day=(int)$splitted_date[2];
+				$dates=Array();
+				$programs=$this->getPrograms();
+				$ordByProg=array();
+				
+				foreach($programs as $key=>$value)
+					$ordByProg[$value]=0;
+				$dates[$year.'-'.$month.'-'.$day]=$ordByProg;
+				for($i=0;$i<9;$i++)
+					if($day-1>0){
+						$day=$day-1;
+						$dates[$year.'-'.$month.'-'.$day]=$ordByProg;
+						
+						}
+					else{
+						if($month-1>0){
+							$month=$month-1;
+							$day=days_in_month($month,$year);
+							
+						}
+						else{
+							$month=12;
+							$year=$year-1;
+							$day=days_in_month($month,$year);
+						}
+						$dates[$year.'-'.$month.'-'.$day]=$ordByProg;
+
+					}
+				return $dates;
 	}
+	
 
 } ?>
