@@ -247,6 +247,11 @@ class Welcome extends CI_Controller {
 					$this->load->view('error_page',$data);
 					
 		}
+		
+		else if($data1=="nosuch")
+		{
+				$this->load->view('already_applied',$data);
+		}
 		else{
 			$data['app_info']=$data1;
 			$this->load->view('db_info',$data);

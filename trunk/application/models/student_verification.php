@@ -113,49 +113,58 @@ class Student_verification extends CI_Model{
 		//print_r($query);
 		if($query->num_rows == 1)
 		{		
-	
-		foreach($query->result() as $row){
-				echo "roll=".$roll.":".$row->f_name."<br>";
-				if(strcasecmp(trim($row->f_name),trim($fname))==0){
-						echo "roll=".$roll."<br>";
+				$this->db->select('roll_no');
+				$this->db->from('applicants_info');
+				$this->db->where('roll_no',$roll);
+				$query2=$this->db->get();
+				if($query->num_rows==1)
+				{
+					return "nosuch";
+				}
+				else
+				{
+						foreach($query->result() as $row){
+								echo "roll=".$roll.":".$row->f_name."<br>";
+								if(strcasecmp(trim($row->f_name),trim($fname))==0){
+										echo "roll=".$roll."<br>";
 
-					$data1=array(
-						'isValidated'=>1,
-						'roll_no'=>$roll,
-						'contact'=> $this->security->xss_clean($this->input->post('contact')),
-						'location'=> $this->security->xss_clean($this->input->post('location')),
-						'pref_1'=>$this->security->xss_clean($this->input->post('room_preference1')),
-						'pref_2'=>$this->security->xss_clean($this->input->post('room_preference2')),
-						'email'=>$row->email,
-						'isvalidated'=>true
-						);
-											$this->session->set_userdata($data1);
+									$data1=array(
+										'isValidated'=>1,
+										'roll_no'=>$roll,
+										'contact'=> $this->security->xss_clean($this->input->post('contact')),
+										'location'=> $this->security->xss_clean($this->input->post('location')),
+										'pref_1'=>$this->security->xss_clean($this->input->post('room_preference1')),
+										'pref_2'=>$this->security->xss_clean($this->input->post('room_preference2')),
+										'email'=>$row->email,
+										'isvalidated'=>true
+										);
+															$this->session->set_userdata($data1);
 
-										//print_r($data1);
+														//print_r($data1);
 
-					$data2=array(
-					'first_name'=> $row->f_name,
-					'last_name'=> $row->l_name,
-				
-					'roll_no'=> $roll,
-					'address'=> $row->address,
-					'email'=>$row->email,
-					'program'=>$row->program,
-					'gender'=>$row->gender,
-					'contact'=> $this->security->xss_clean($this->input->post('contact')),
-						'location'=> $this->security->xss_clean($this->input->post('location')),
-						'pref_1'=>$this->getPrefLabel($this->security->xss_clean($this->input->post('room_preference1'))),
-						'pref_2'=>$this->getPrefLabel($this->security->xss_clean($this->input->post('room_preference2')))
-					);
-					//print_r($data2);
-							$temparr=$student_data=$this->session->all_userdata();
-					//print_r($temparr);
-					return $data2;
+									$data2=array(
+									'first_name'=> $row->f_name,
+									'last_name'=> $row->l_name,
+								
+									'roll_no'=> $roll,
+									'address'=> $row->address,
+									'email'=>$row->email,
+									'program'=>$row->program,
+									'gender'=>$row->gender,
+									'contact'=> $this->security->xss_clean($this->input->post('contact')),
+										'location'=> $this->security->xss_clean($this->input->post('location')),
+										'pref_1'=>$this->getPrefLabel($this->security->xss_clean($this->input->post('room_preference1'))),
+										'pref_2'=>$this->getPrefLabel($this->security->xss_clean($this->input->post('room_preference2')))
+									);
+									//print_r($data2);
+											$temparr=$student_data=$this->session->all_userdata();
+									//print_r($temparr);
+									return $data2;
+								
+								}
+								}
 				
 				}
-				}
-				
-		
 		}
 				return false;
 		
