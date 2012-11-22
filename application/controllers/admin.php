@@ -21,9 +21,9 @@ class Admin extends CI_Controller {
 	public function index($message="")
 	{
 		$this->load->helper('form');
-		$this->load->library('session');
 		$this->load->helper('url');
-
+		$this->load->library('session');
+	
 		if($this->session->userdata('validated')){
             redirect('admin_view');
         }

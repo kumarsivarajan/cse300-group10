@@ -31,10 +31,13 @@ class Admin_view extends CI_Controller {
 	public function index()
 	{
 			$this->load->helper('url');
+			$this->load->model('admin_list');
+			//print_r($this->admin_list->getApplicationHistory());
+			//print_r($this->admin_list->getDateApplication());
 			$base_url=base_url();
 			$top_bar['base_url']=$base_url;
 			$top_bar['curTab']='home';
-			
+	
 			$cssfiles[]="styles.css";
 			$data['css']=$cssfiles;
 			$data['top_menu'] = $this->load->view('header', $top_bar, true);
@@ -43,7 +46,7 @@ class Admin_view extends CI_Controller {
 			$data['css']=$cssfiles;
 			$data['scripts']=Array('jquery.js','graphs/highcharts.js','graphs/modules/exporting.js');
 			$this->load->view('admin_home',$data);
-
+			
 		
 
 	}

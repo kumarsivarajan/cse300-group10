@@ -2,6 +2,7 @@
 
 class Welcome extends CI_Controller {
 
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -257,7 +258,7 @@ class Welcome extends CI_Controller {
 	}
 	
 	
-	function email_user()
+	/*function email_user()
 	{
 		
 		$this->load->model('student_verification');
@@ -335,7 +336,7 @@ class Welcome extends CI_Controller {
 
 		}
 
-	}
+	}*/
 	
 	function address_maps()
 	{
@@ -387,7 +388,7 @@ class Welcome extends CI_Controller {
 		$this->session->set_userdata($data1);
 		$this->session->set_userdata('refered_from',site_url('Welcome/address_maps').'?key='.$key ); 
 		$this->session->set_userdata('isDistance',1); 
-
+		$this->session->set_userdata('isValidated',1); 
 		$fname=$data1['first_name'];
 		$lname=$data1['last_name'];
 		$roll=$data1['roll_no'];
@@ -484,7 +485,7 @@ class Welcome extends CI_Controller {
 	
 	}
 	
-	function report_address()
+	/*function report_address()
 	{
 		$this->load->helper('form');
 		
@@ -539,13 +540,22 @@ class Welcome extends CI_Controller {
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		$this->load->view('final_report_addr',$data);
 	}
-	
+	*/
 	function setDistance(){
+		//Couldn't get the AJAX to work, checking here itself.
+    		$this->load->helper('url');
 		$this->load->library('session');
+
+        if(! $this->session->userdata('isValidated')){
+	        	return 0;
+        }
+    
 		$dist=$_GET['dist'];
 		if($this->session->userdata('isDistance')==1){
 			$this->session->set_userdata('distance', $dist);
 			$this->session->set_userdata('isDistance',0);
+			
+		echo "Success";
 		}
 		
 	}
@@ -592,9 +602,9 @@ class Welcome extends CI_Controller {
 	
 	
 	
-	
-function submit()
+/*function submit()
 	{
+
 			$this->load->model('student_verification');
 
 				$this->load->helper('url');
@@ -615,70 +625,28 @@ function submit()
 		$this->load->view('Submit_page',$data);	
 	}
 	
-	
+	*/
 function format_address()
 	{
+					$this->load->library('session');
+	$this->load->helper('form');
+	
 		$this->load->helper('url');
 		$base_url = base_url();
-		
-		$key=$_GET["key"];
-		//echo $key;
-		$this->load->database();
-		
-		$cssfiles=Array("styles.css","sidenavigation.css");
+		$address=str_replace(",", "", $this->session->userdata('address')) ;
+		$form_elem=Array('address_box'=>Array('input'=>'textarea','name' => 'address_box', 'onclick'=>'InsertText();' , 'cols' => '40', 'id'=>'address_box', 'class'=>'required','readonly'=>'readonly', 'defaultValue'=>$address,'value'=>$address),
+				'Submit'=>Array('input'=>'submit','value'=>'Submit','type'=>'submit'));
+		$form_attr=array('id'=>'applyForm');
+		$data['form_elem']=$form_elem;
+	$cssfiles=Array("styles.css","sidenavigation.css");
 		$data['css']=$cssfiles;
-		$institutename='IIIT-D';
-		$this->load->database();
-		
-		$this->db->select('first_name, last_name, roll_no, address, email');
-		$this->db->from('student_info');
-		$this->db->where('random',$key);
-		
-		$query=$this->db->get();
-		
-		if($query->num_rows == 1)
-		{
-			foreach ($query->result() as $row)
-			{
-				$data1=array(
-						'first_name'=> $row->first_name,
-						'last_name'=> $row->last_name,
-						'roll_no'=> $row->roll_no,
-						'address'=> $row->address,
-						'email'=>$row->email,
-						'isvalidated'=>true
-				);
-		
-		
-			}
-		}
-		else
-		{
-			$this->load->view('wrong_link');
-			return;
-		}
-		
-		$data['roll']=$data1['roll_no'];
-		$data['distance']=-1;
-		//$this->session->set_userdata($data);
-		//$this->session->set_userdata('refered_from',site_url('Welcome/address_maps').'?key='.$key );
-		//$this->session->set_userdata('isDistance',1);
-		
-		$fname=$data1['first_name'];
-		$lname=$data1['last_name'];
-		$roll=$data1['roll_no'];
-		$address=$data1['address'];
-		$email=$data1['email'];
-		
-		
-		//$address = '1059 Vikas Kunj Vikas Puri New Delhi-110018';
-		$data['address'] = $address;
-		$data['ins_name']=$institutename;
+		$data['scripts']=Array('jquery.js','jquery.infieldlabel.js','jquery.validate.js');
+		$data['address']=$address;
 		$navigation_data['navTab']='about';
 		$navigation_data['base_url']=$base_url;
 		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
 		
-		$this->load->view('format_address',$data);
+		$this->load->view('format_add',$data);
 	}
 
 function format_address_incorrect()

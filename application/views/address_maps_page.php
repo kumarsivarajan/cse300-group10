@@ -49,8 +49,8 @@
 		<center><p><b><big>If you have some issue with the shown address please click Report otherwise submit</big></b></p></center>
 		<center>
 		
-		<button onclick="location.href='<?php echo site_url('Welcome/submit');?>'">Proceed</button>
-		<button onclick="location.href='<?php echo site_url('Welcome/report_address');?>'">Report</button>
+		<button onclick="location.href='<?php echo site_url('Process/submit');?>'">Proceed</button>
+		<button onclick="location.href='<?php echo site_url('Process/report_address');?>'">Report</button>
 		<br />
 		<br />
 		

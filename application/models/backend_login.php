@@ -13,7 +13,6 @@ class Backend_login extends CI_Model{
         $this->load->database();
         $username = $this->security->xss_clean($this->input->post('UserName'));
         $password = $this->security->xss_clean($this->input->post('Password'));
-         
         // Prep the query
         $this->db->where('uid', $username);
         $this->db->where('pwd', $password);
