@@ -34,6 +34,7 @@ class Admin_view extends CI_Controller {
 			$this->load->model('admin_list');
 			//print_r($this->admin_list->getApplicationHistory());
 			//print_r($this->admin_list->getDateApplication());
+			
 			$base_url=base_url();
 			$top_bar['base_url']=$base_url;
 			$top_bar['curTab']='home';

@@ -23,7 +23,37 @@ class Student_verification extends CI_Model{
 				return false;
 			}
 	}
-	
+	public function alreadyVerified($roll){
+				$this->load->database();
+			$this->db->select('isverified');
+			
+			$this->db->from('applicants_info_male');
+			$this->db->where('roll_no',$roll);
+			$query=$this->db->get();
+		        if($query->num_rows == 1)
+		        {
+			       $row=$query->result();
+			 
+			       if($row[0]->isverified==''||$row[0]->isverified==0)
+			       			return 0;
+			       	else
+			       		return 1;	           }
+		        else{
+			        $this->db->from('applicants_info_female');
+			        $query=$this->db->get();
+		        if($query->num_rows == 1)
+		        {
+			       $row=$query->result();
+			       if($row[0]->isverified==''||$row[0]->isverified==0)
+			       			return 0;
+			       	else
+			       		return 1;	        
+		        }
+		        else
+		        	return -1;
+		    
+		        }
+	}
 	public function getinfo($fname,$lname,$roll)
 	{
 		$this->load->database();
