@@ -326,9 +326,9 @@ class Student_verification extends CI_Model{
 				$target_table="applicants_info_female";
 			else
 				$target_table="applicants_info_male";
-			$sql = "UPDATE ".$target_table." SET distance_km=".$dist." WHERE roll_no='".$roll."'";
+			$sql = "UPDATE ".$target_table." SET distance_km=".$dist." , isverified=true WHERE roll_no='".$roll."'";
 			$this->db->query($sql);
-
+			
 
 	}
 
