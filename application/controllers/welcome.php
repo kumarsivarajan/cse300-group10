@@ -370,122 +370,143 @@ class Welcome extends CI_Controller {
 		$this->load->view('deadline_ended',$data);
 	} 
 		else {
-				$this->load->model('student_verification');
-	
-		$this->load->helper('url');
-		$this->load->library('session');
+							$this->load->model('student_verification');
+						
+							$this->load->helper('url');
+							$this->load->library('session');
 
-		$this->load->helper('date');
-		$time = time();
-		$base_url = base_url();
-		
-		$key=$_GET["key"];
-		//echo $key;
-		
-		$data1=$this->student_verification->getAddress($key);
-		if(!is_array($data1))
-			return;
-		//DATA to be used for plotting purposes
-		
-		$data['roll']=$data1['roll_no'];
-		$data1['distance']=-1;
-		$data['distance']=-1;
-		$this->session->set_userdata($data1);
-		$this->session->set_userdata('refered_from',site_url('Welcome/address_maps').'?key='.$key ); 
-		$this->session->set_userdata('isDistance',1); 
-		$this->session->set_userdata('isValidated',1); 
-		$fname=$data1['first_name'];
-		$lname=$data1['last_name'];
-		$roll=$data1['roll_no'];
-		$address=$data1['address'];
-		$email=$data1['email'];
-		
-		
-		
-		
-		date_default_timezone_set('Asia/Calcutta');
-		
-		$format = 'DATE_RFC822';
-		$datestring = standard_date($format,$time);
-		$data['date']=$datestring;
-		$navigation_data['navTab']='apply';
-		$navigation_data['base_url']=$base_url;
-		$cssfiles=Array("styles.css","sidenavigation.css");
-		$data['scripts']=Array('jquery.js');
-		
-		
-		
-		$data['css']=$cssfiles;
-		$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
-		//$this->load->view('maps_page',$data);
-		
-		$this->load->library('googlemaps');
-		$config['center'] = 'Indraprastha Institute of Information Technology, Delhi';
-		$config['zoom']=10;
-		$config['directions'] = TRUE;
-		//remove house no
-		$addsplit=explode( ',',$address);
-				$data['address']=$address;
+							$this->load->helper('date');
+							
+							
 
-		//print_r($addsplit);
-		$address='';
-		//echo count($addsplit)."<br>";
+							
+							
+							
+							$time = time();
+							$base_url = base_url();
+							
+							$key=$_GET["key"];
+							//echo $key;
+							
+							$data1=$this->student_verification->getAddress($key);
+							if(!is_array($data1))
+								return;
+							//DATA to be used for plotting purposes
+							
+							$data['roll']=$data1['roll_no'];
+							$data1['distance']=-1;
+							$data['distance']=-1;
+							$this->session->set_userdata($data1);
+							$this->session->set_userdata('refered_from',site_url('Welcome/address_maps').'?key='.$key ); 
+							$this->session->set_userdata('isDistance',1); 
+							$this->session->set_userdata('isValidated',1); 
+							$fname=$data1['first_name'];
+							$lname=$data1['last_name'];
+							$roll=$data1['roll_no'];
+							$address=$data1['address'];
+							$email=$data1['email'];
+							
+							
+							
+							$isverified=$this->student_verification->alreadyVerified($roll);
+							
+							if($isverified==-1)
+							{
+								$this->load->view('error_page',$data);
+							}
+							else if($isverified==1)
+							{
+								$this->load->view('already_applied',$data);
+							}
 
-		for($i=0;$i<count($addsplit);$i++){
-			//	echo $addsplit[$i]."<br>";
+							else
+							{
+							
+								date_default_timezone_set('Asia/Calcutta');
+								
+								$format = 'DATE_RFC822';
+								$datestring = standard_date($format,$time);
+								$data['date']=$datestring;
+								$navigation_data['navTab']='apply';
+								$navigation_data['base_url']=$base_url;
+								$cssfiles=Array("styles.css","sidenavigation.css");
+								$data['scripts']=Array('jquery.js');
+								
+								
+								
+								$data['css']=$cssfiles;
+								$data['content_navigation'] = $this->load->view('navigation_bar', $navigation_data, true);
+								//$this->load->view('maps_page',$data);
+								
+								$this->load->library('googlemaps');
+								$config['center'] = 'Indraprastha Institute of Information Technology, Delhi';
+								$config['zoom']=10;
+								$config['directions'] = TRUE;
+								//remove house no
+								$addsplit=explode( ',',$address);
+										$data['address']=$address;
 
-			if($i==count($addsplit)-1)
-			$address.=$addsplit[$i];
-			else if($i!=0)
-			$address.=$addsplit[$i].',';
-			}
+								//print_r($addsplit);
+								$address='';
+								//echo count($addsplit)."<br>";
 
-		$data['fname']=$fname;
-		$data['lname']=$lname;
-		$data['address']=$address;
-		
-		$config['directionsStart'] = $address;
-		$config['directionsEnd'] = 'Indraprastha Institute of Information Technology, Delhi';
-		$config['directionsDivID'] = 'directionsDiv';
-		$this->googlemaps->initialize($config);
-		
-		$marker = array();
-		$marker['position'] = 'Indraprastha Institute of Information Technology, Delhi';
-		$marker['title']='Indraprastha Institute of Information Technology, Delhi';
-		
-		$marker['infowindow_content'] = 'Institute : IIIT-D Okhla';
-		$this->googlemaps->add_marker($marker);
-		
-		$marker = array();
-		$marker['position'] = $address;
-		$marker['animation'] = 'DROP';
-		$marker['draggable'] = TRUE;
-		//$marker['title']='Vikas Kunj';
-		$marker['infowindow_content'] = 'Your Address: '.$address;
-		$marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
-		$this->googlemaps->add_marker($marker);
-		
-		
-		
-		// 30km radius
-		$circle = array();
-		$circle['center'] = 'Indraprastha Institute of Information Technology, Delhi';
-		$circle['radius'] = '30000';
-		$this->googlemaps->add_circle($circle);
-		
-		$circle = array();
-		$circle['center'] = $address;
-		$circle['radius'] = '1000';
-		$circle['fillColor']='blue';
-		$this->googlemaps->add_circle($circle);
-		
-		//echo $my_lat."hello";
-		
-		$data['map'] = $this->googlemaps->create_map();
-		
-		//echo $data['maps']['marker_0']."ji";
-		// Load our view, passing the map data that has just been created
-		$this->load->view('address_maps_page', $data);
+								for($i=0;$i<count($addsplit);$i++){
+									//	echo $addsplit[$i]."<br>";
+
+									if($i==count($addsplit)-1)
+									$address.=$addsplit[$i];
+									else if($i!=0)
+									$address.=$addsplit[$i].',';
+									}
+
+								$data['fname']=$fname;
+								$data['lname']=$lname;
+								$data['address']=$address;
+								
+								$config['directionsStart'] = $address;
+								$config['directionsEnd'] = 'Indraprastha Institute of Information Technology, Delhi';
+								$config['directionsDivID'] = 'directionsDiv';
+								$this->googlemaps->initialize($config);
+								
+								$marker = array();
+								$marker['position'] = 'Indraprastha Institute of Information Technology, Delhi';
+								$marker['title']='Indraprastha Institute of Information Technology, Delhi';
+								
+								$marker['infowindow_content'] = 'Institute : IIIT-D Okhla';
+								$this->googlemaps->add_marker($marker);
+								
+								$marker = array();
+								$marker['position'] = $address;
+								$marker['animation'] = 'DROP';
+								$marker['draggable'] = TRUE;
+								//$marker['title']='Vikas Kunj';
+								$marker['infowindow_content'] = 'Your Address: '.$address;
+								$marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+								$this->googlemaps->add_marker($marker);
+								
+								
+								
+								// 30km radius
+								$circle = array();
+								$circle['center'] = 'Indraprastha Institute of Information Technology, Delhi';
+								$circle['radius'] = '30000';
+								$this->googlemaps->add_circle($circle);
+								
+								$circle = array();
+								$circle['center'] = $address;
+								$circle['radius'] = '1000';
+								$circle['fillColor']='blue';
+								$this->googlemaps->add_circle($circle);
+								
+								//echo $my_lat."hello";
+								
+								$data['map'] = $this->googlemaps->create_map();
+								
+								//echo $data['maps']['marker_0']."ji";
+								// Load our view, passing the map data that has just been created
+								$this->load->view('address_maps_page', $data);
+							
+							}
 	}
 	
 	}
