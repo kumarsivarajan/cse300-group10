@@ -296,73 +296,80 @@ class Admin_list extends CI_Model{
 		$ordByProg=Array();
 		foreach($programs as $key=>$value)
 			$ordByProg[$value]=0;
-		$sql='select date_application,program_id from applicants_info_male';
+		$master_array=array();
+		$sql='select DATE_FORMAT(date_application,\'%d-%m-%Y\') as date_application,program_id from applicants_info_male';
 		$query=$this->db->query($sql);
 		        if($query->num_rows > 0)
 		        {
 			       foreach($query->result() as $row){
-						$key=$programs[$row->program_id];
-						if(isset($ordByProg[$key])&&$row->date_application<'2012-11-23'&&$row->date_application>'2012-11-22')		
-							$ordByProg[$key]++;
+			       			$master_array[]=$row;
 						
 						}	        
 		        }
-		$sql='select date_application,program_id from applicants_info_female';
+		$sql='select DATE_FORMAT(date_application,\'%d-%m-%Y\') as date_application,program_id from applicants_info_female';
 		$query=$this->db->query($sql);
 		        if($query->num_rows > 0)
 		        {
 			       foreach($query->result() as $row){
-						$key=$programs[$row->program_id];
-						if(isset($ordByProg[$key]))		
-							$ordByProg[$key]++;
-						
+							$master_array[]=$row;
+	
 						}	        
 		        }
-		return $ordByProg;
+		//print_r($ordByProg);
+		$lastTenDays=getPastDates(10);
+		foreach($lastTenDays as $aday=>$array){
+			$lastTenDays[$aday]=$ordByProg;
+			foreach($lastTenDays[$aday] as $prog=>$num)
+				{
+				//echo $prog;
+				$lastTenDays[$aday][$prog]=$this->getDateAppCount($aday,$master_array,$prog);
+				}
+		}
+		return $lastTenDays;
 
 		}
-	public function getPastTenDates(){
-				$this->load->helper('date');
-
-				$datestring = "%Y-%m-%d";
-				$time = time();
+	public function getDateAppCount($date,$records,$program){
+		$split_date=explode("-",$date);
+		$programs=$this->getPrograms();
+		$program_id=-1;
+		foreach($programs as $key=>$value){
+			if($value==$program)
+				$program_id=$key;
+		}
+		if(count($split_date)!=3 || !is_array($records) || $program_id==-1)
+			return null;
+		$count=0;
+		foreach($records as $record){
+			//echo '<br>'.$record->date_application.':'.$date.';'.$record->program_id.':'.$program_id;
+				if(dateEquals($record->date_application,$date)&&$record->program_id==$program_id)
+				{
+					$count++;
+				//	echo 'matched';
+				}	
 				
-				
-				$datestring= mdate($datestring, $time);
-				$splitted_date=explode("-", $datestring);
-				$year=(int)$splitted_date[0];
-				$month=(int)$splitted_date[1];
-
-				$day=(int)$splitted_date[2];
-				$dates=Array();
-				$programs=$this->getPrograms();
-				$ordByProg=array();
-				
-				foreach($programs as $key=>$value)
-					$ordByProg[$value]=0;
-				$dates[$year.'-'.$month.'-'.$day]=$ordByProg;
-				for($i=0;$i<9;$i++)
-					if($day-1>0){
-						$day=$day-1;
-						$dates[$year.'-'.$month.'-'.$day]=$ordByProg;
-						
-						}
-					else{
-						if($month-1>0){
-							$month=$month-1;
-							$day=days_in_month($month,$year);
-							
-						}
-						else{
-							$month=12;
-							$year=$year-1;
-							$day=days_in_month($month,$year);
-						}
-						$dates[$year.'-'.$month.'-'.$day]=$ordByProg;
-
-					}
-				return $dates;
+		}		
+		return $count;
+		
 	}
-	
+	public function getProgAppCount(){
+		$this->load->database();
+
+		$programs=$this->getPrograms();
+		$statsbyprog=Array();
+		foreach($programs as $key=>$value)
+		{	
+			$this->db->from('applicants_info_male');
+			$this->db->select('roll_no');
+			$this->db->where('program_id', $key);
+
+			$query=$this->db->get();
+			$male=$query->num_rows;
+			$this->db->from('applicants_info_male');
+			$query=$this->db->get();
+
+			$statsbyprog[$value]=$male + $query->num_rows;
+		}
+		return $statsbyprog;
+	}	
 
 } ?>

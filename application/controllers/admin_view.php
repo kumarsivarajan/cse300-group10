@@ -32,9 +32,36 @@ class Admin_view extends CI_Controller {
 	{
 			$this->load->helper('url');
 			$this->load->model('admin_list');
-			//print_r($this->admin_list->getApplicationHistory());
-			//print_r($this->admin_list->getDateApplication());
+			$datestring='[';
+			$programstring=Array();
+			$programs=$this->admin_list->getPrograms();
+			foreach($programs as $key=>$value){
+				$programstring[$value]='[';
+				$statsbyprog[$value]=0;
+				}
 			
+			$daylist=$this->admin_list->getApplicationHistory();
+			foreach($daylist as $day=>$prog)
+			{
+				$datestring.="'".$day."',";
+				foreach($prog as $pname=>$apps){
+					$programstring[$pname].=$apps.",";
+					$statsbyprog[$pname]++;
+				}	
+				
+						
+			}
+			$datestring.=']';
+			$month = "F";
+			$time = time();
+			$month= date($month, $time);
+			foreach($programstring as $string=>$value)
+				$programstring[$string].=']';
+			$data['datestring']=$datestring;
+			$data['programstring']=$programstring;
+			$data['month']=$month;
+			$data['statsbyprog']= $this->admin_list->getProgAppCount();
+		//	echo $datestring;
 			$base_url=base_url();
 			$top_bar['base_url']=$base_url;
 			$top_bar['curTab']='home';

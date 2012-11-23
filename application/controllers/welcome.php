@@ -449,12 +449,15 @@ class Welcome extends CI_Controller {
 								//print_r($addsplit);
 								$address='';
 								//echo count($addsplit)."<br>";
-
 								for($i=0;$i<count($addsplit);$i++){
 									//	echo $addsplit[$i]."<br>";
 
-									if($i==count($addsplit)-1)
-									$address.=$addsplit[$i];
+									if($i==count($addsplit)-1){
+										$addsplit1=explode('-',$addsplit[$i]);
+										$address.=$addsplit1[0];
+									
+									
+									}
 									else if($i!=0)
 									$address.=$addsplit[$i].',';
 									}

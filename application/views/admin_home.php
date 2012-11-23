@@ -31,10 +31,9 @@ $(function () {
             },
             xAxis: {
             title: {
-                    text: 'September'
+                    text: <?php echo "'".$month."'"; ?>
                 },
-                categories: ['11', '12', '13', '14',
-                    '15', '16', '17', '18', '19', '20']
+                categories: <?php echo $datestring ?>
             },
             yAxis: {
                 title: {
@@ -60,16 +59,11 @@ $(function () {
                 y: 100,
                 borderWidth: 0
             },
-            series: [{
-                name: 'Btech',
-                data: [7, 6, 9, 14, 18, 21, 25, 26, 23, 18]
-            }, {
-                name: 'Mtech',
-                data: [0, 0, 5, 11, 17, 22, 24, 24, 20, 14]
-            }, {
-                name: 'Phd',
-                data: [0, 0, 3, 0, 1, 1, 1, 0, 2, 0]
-            }]
+            series: [
+            
+            <?php foreach($programstring as $programs=>$apps)
+            	echo "{ name:'".$programs."', data:".$apps."}," ?>
+            	]
         });
     });
     
@@ -84,10 +78,13 @@ $(function () {
 	<!-- This where you write you code-->
 	<div class="info">
 	<h2> Applications</h2>
-		Total:220<br>
-		<div class="phd">PhD:30</div>
-		<div class="btech">BTech:100</div>
-		<div class="mtech">MTech:90</div>
+	<?php 
+		$total=0;
+		foreach($statsbyprog as $prog=>$num){
+			echo '<div class="'.$prog.'">'.$prog.':'.$num.'</div>';
+			$total+=$num;
+			}
+			echo 'Total:'.$total.'<br>'; ?>
 	</div>
 	<div id="container"></div>
 	
