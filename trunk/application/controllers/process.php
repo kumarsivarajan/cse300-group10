@@ -99,7 +99,7 @@ class Process extends CI_Controller {
 		$message="Hi,\n";
 		$message.="It seems you had applied for hostel room at IIIT-Delhi, We received the the application from you on ".$date_app."\n";
 		$message.="Verify your hostel application by clicking on this link:-
-		".$urlinfo."?key=".$key;
+		14.139.56.179:8090/index.php/Welcome/address_maps?key=".$key;
 		$this->email->message($message);
  
 		if($this->email->send())
